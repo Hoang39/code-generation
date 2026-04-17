@@ -1,0 +1,1502 @@
+[
+    {
+        "task_id": "HumanEval/0",
+        "task_name": "has_close_elements",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    # Logic: Iterate through the list of numbers, comparing each pair to see if their difference is less than the threshold.\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if abs(numbers[i] - numbers[j]) < threshold:\n                return True\n    return False\n```",
+                "extracted": "from typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    # Logic: Iterate through the list of numbers, comparing each pair to see if their difference is less than the threshold.\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if abs(numbers[i] - numbers[j]) < threshold:\n                return True\n    return False",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 30.675287008285522
+    },
+    {
+        "task_id": "HumanEval/1",
+        "task_name": "separate_paren_groups",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    # Logic: Split the string by spaces, then iterate through each group to remove nested parentheses and collect them.\n    return [group for group in paren_string.split() if not any('()' in g for g in group.split())]\n```",
+                "extracted": "from typing import List\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    # Logic: Split the string by spaces, then iterate through each group to remove nested parentheses and collect them.\n    return [group for group in paren_string.split() if not any('()' in g for g in group.split())]",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 12.24648928642273
+    },
+    {
+        "task_id": "HumanEval/2",
+        "task_name": "truncate_number",
+        "samples": [
+            {
+                "raw": "```python\ndef truncate_number(number: float) -> float:\n    # Logic: Return the decimal part of the given positive floating point number.\n    return number - int(number)\n```",
+                "extracted": "def truncate_number(number: float) -> float:\n    # Logic: Return the decimal part of the given positive floating point number.\n    return number - int(number)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 9.774453163146973
+    },
+    {
+        "task_id": "HumanEval/3",
+        "task_name": "below_zero",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef below_zero(operations: List[int]) -> bool:\n    \"\"\"Detect if at any point the balance of account falls below zero, and at that point function should return True.\n    >>> below_zero([1, 2, 3])\n    False\n    >>> below_zero([1, 2, -4, 5])\n    True\n    \"\"\"\n    # Logic: Iterate through each operation in the list. If an operation is negative, return True immediately.\n    for op in operations:\n        if op < 0:\n            return True\n    return False\n```",
+                "extracted": "from typing import List\n\ndef below_zero(operations: List[int]) -> bool:\n    \"\"\"Detect if at any point the balance of account falls below zero, and at that point function should return True.\n    >>> below_zero([1, 2, 3])\n    False\n    >>> below_zero([1, 2, -4, 5])\n    True\n    \"\"\"\n    # Logic: Iterate through each operation in the list. If an operation is negative, return True immediately.\n    for op in operations:\n        if op < 0:\n            return True\n    return False",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 24.85330104827881
+    },
+    {
+        "task_id": "HumanEval/4",
+        "task_name": "mean_absolute_deviation",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\"For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n    # Logic: Calculate the mean of the numbers, then compute the absolute differences,\n    # sum them up, and divide by the count to get the Mean Absolute Deviation.\n    mean = sum(numbers) / len(numbers)\n    return sum(abs(x - mean) for x in numbers) / len(numbers)\n```",
+                "extracted": "from typing import List\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\"For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n    # Logic: Calculate the mean of the numbers, then compute the absolute differences,\n    # sum them up, and divide by the count to get the Mean Absolute Deviation.\n    mean = sum(numbers) / len(numbers)\n    return sum(abs(x - mean) for x in numbers) / len(numbers)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 22.177401542663574
+    },
+    {
+        "task_id": "HumanEval/5",
+        "task_name": "intersperse",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    \"\"\" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'.\n    >>> intersperse([], 4)\n    []\n    >>> intersperse([1, 2, 3], 4)\n    [1, 4, 2, 4, 3]\n    \"\"\"\n    # Logic: Iterate through the list and insert delimeter between each pair of consecutive elements.\n    result = []\n    for i in range(len(numbers)):\n        result.append(numbers[i])\n        if i < len(numbers) - 1:\n            result.append(delimiter)\n    return result\n```",
+                "extracted": "from typing import List\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    \"\"\" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'.\n    >>> intersperse([], 4)\n    []\n    >>> intersperse([1, 2, 3], 4)\n    [1, 4, 2, 4, 3]\n    \"\"\"\n    # Logic: Iterate through the list and insert delimeter between each pair of consecutive elements.\n    result = []\n    for i in range(len(numbers)):\n        result.append(numbers[i])\n        if i < len(numbers) - 1:\n            result.append(delimiter)\n    return result",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 18.370517253875732
+    },
+    {
+        "task_id": "HumanEval/6",
+        "task_name": "parse_nested_parens",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    # Logic: Iterate through each group of parentheses, calculate the depth of nesting for each group,\n    # and store the maximum depth in a list.\n    max_depths = []\n    current_depth = 0\n    for char in paren_string:\n        if char == '(':\n            current_depth += 1\n            max_depths.append(current_depth)\n        elif char == ')':\n            current_depth -= 1\n    return max_depths\n```",
+                "extracted": "from typing import List\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    # Logic: Iterate through each group of parentheses, calculate the depth of nesting for each group,\n    # and store the maximum depth in a list.\n    max_depths = []\n    current_depth = 0\n    for char in paren_string:\n        if char == '(':\n            current_depth += 1\n            max_depths.append(current_depth)\n        elif char == ')':\n            current_depth -= 1\n    return max_depths",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 18.584298849105835
+    },
+    {
+        "task_id": "HumanEval/7",
+        "task_name": "filter_by_substring",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    # Logic: Filter the list of strings to include only those that contain the given substring.\n    return [s for s in strings if substring in s]\n```",
+                "extracted": "from typing import List\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    # Logic: Filter the list of strings to include only those that contain the given substring.\n    return [s for s in strings if substring in s]",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 13.3511483669281
+    },
+    {
+        "task_id": "HumanEval/8",
+        "task_name": "sum_product",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List, Tuple\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    # Logic: Calculate the sum of all integers in the list and the product of all integers.\n    if not numbers:\n        return (0, 1)\n    \n    total_sum = sum(numbers)\n    total_product = 1\n    for num in numbers:\n        total_product *= num\n    \n    return (total_sum, total_product)\n```",
+                "extracted": "from typing import List, Tuple\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    # Logic: Calculate the sum of all integers in the list and the product of all integers.\n    if not numbers:\n        return (0, 1)\n    \n    total_sum = sum(numbers)\n    total_product = 1\n    for num in numbers:\n        total_product *= num\n    \n    return (total_sum, total_product)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 18.009153604507446
+    },
+    {
+        "task_id": "HumanEval/9",
+        "task_name": "rolling_max",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List, Tuple\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" Generate a list of rolling maximum element found until given moment in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n    # Logic: Use a stack to keep track of the maximum elements found so far.\n    max_stack = []\n    rolling_maxes = []\n\n    for num in numbers:\n        while max_stack and max_stack[-1] < num:\n            max_stack.pop()\n        max_stack.append(num)\n        rolling_maxes.append(max_stack[0])\n\n    return rolling_maxes\n```",
+                "extracted": "from typing import List, Tuple\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" Generate a list of rolling maximum element found until given moment in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n    # Logic: Use a stack to keep track of the maximum elements found so far.\n    max_stack = []\n    rolling_maxes = []\n\n    for num in numbers:\n        while max_stack and max_stack[-1] < num:\n            max_stack.pop()\n        max_stack.append(num)\n        rolling_maxes.append(max_stack[0])\n\n    return rolling_maxes",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 25.3625431060791
+    },
+    {
+        "task_id": "HumanEval/10",
+        "task_name": "make_palindrome",
+        "samples": [
+            {
+                "raw": "```python\ndef is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    # Logic: Check if the input string reads the same forwards and backwards.\n    return string == string[::-1]\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n    'catac'\n    \"\"\"\n    # Logic: Find the longest palindrome suffix and prepend the reverse of the prefix to it.\n    for i in range(len(string), 0, -1):\n        if string[:i] == string[:i][::-1]:\n            return string + string[:i][::-1]\n```",
+                "extracted": "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    # Logic: Check if the input string reads the same forwards and backwards.\n    return string == string[::-1]\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n    'catac'\n    \"\"\"\n    # Logic: Find the longest palindrome suffix and prepend the reverse of the prefix to it.\n    for i in range(len(string), 0, -1):\n        if string[:i] == string[:i][::-1]:\n            return string + string[:i][::-1]",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 28.14887261390686
+    },
+    {
+        "task_id": "HumanEval/11",
+        "task_name": "string_xor",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef string_xor(a: str, b: str) -> str:\n    # Logic: Perform binary XOR on two strings of equal length consisting only of 1s and 0s.\n    result = ''.join('1' if a[i] != b[i] else '0' for i in range(len(a)))\n    return result\n```",
+                "extracted": "from typing import List\n\ndef string_xor(a: str, b: str) -> str:\n    # Logic: Perform binary XOR on two strings of equal length consisting only of 1s and 0s.\n    result = ''.join('1' if a[i] != b[i] else '0' for i in range(len(a)))\n    return result",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 13.725792169570923
+    },
+    {
+        "task_id": "HumanEval/12",
+        "task_name": "longest",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List, Optional\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n    # Logic: Iterate through the list, keeping track of the longest string found so far. If multiple strings have the same length,\n    # return the first one encountered.\n    if not strings:\n        return None\n    longest_string = strings[0]\n    for s in strings[1:]:\n        if len(s) > len(longest_string):\n            longest_string = s\n    return longest_string\n```",
+                "extracted": "from typing import List, Optional\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n    # Logic: Iterate through the list, keeping track of the longest string found so far. If multiple strings have the same length,\n    # return the first one encountered.\n    if not strings:\n        return None\n    longest_string = strings[0]\n    for s in strings[1:]:\n        if len(s) > len(longest_string):\n            longest_string = s\n    return longest_string",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 23.426794052124023
+    },
+    {
+        "task_id": "HumanEval/13",
+        "task_name": "greatest_common_divisor",
+        "samples": [
+            {
+                "raw": "```python\ndef greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\"Return the greatest common divisor of two integers a and b.\"\"\"\n    # Logic: Use Euclid's algorithm to find the greatest common divisor.\n    while b != 0:\n        a, b = b, a % b\n    return a\n```",
+                "extracted": "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\"Return the greatest common divisor of two integers a and b.\"\"\"\n    # Logic: Use Euclid's algorithm to find the greatest common divisor.\n    while b != 0:\n        a, b = b, a % b\n    return a",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 13.526426553726196
+    },
+    {
+        "task_id": "HumanEval/14",
+        "task_name": "all_prefixes",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef all_prefixes(string: str) -> List[str]:\n    # Logic: Generate all prefixes of the input string from shortest to longest.\n    return [string[:i+1] for i in range(len(string))]\n```",
+                "extracted": "from typing import List\n\ndef all_prefixes(string: str) -> List[str]:\n    # Logic: Generate all prefixes of the input string from shortest to longest.\n    return [string[:i+1] for i in range(len(string))]",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 11.793941259384155
+    },
+    {
+        "task_id": "HumanEval/15",
+        "task_name": "string_sequence",
+        "samples": [
+            {
+                "raw": "```python\ndef string_sequence(n: int) -> str:\n    # Logic: Generate a space-delimited string of numbers from 0 to n inclusive.\n    return ' '.join(str(i) for i in range(n + 1))\n```",
+                "extracted": "def string_sequence(n: int) -> str:\n    # Logic: Generate a space-delimited string of numbers from 0 to n inclusive.\n    return ' '.join(str(i) for i in range(n + 1))",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 11.058587074279785
+    },
+    {
+        "task_id": "HumanEval/16",
+        "task_name": "count_distinct_characters",
+        "samples": [
+            {
+                "raw": "```python\ndef count_distinct_characters(string: str) -> int:\n    # Logic: Convert the string to lowercase, remove duplicates by converting it to a set, and then get the length of the set.\n    return len(set(string.lower()))\n```",
+                "extracted": "def count_distinct_characters(string: str) -> int:\n    # Logic: Convert the string to lowercase, remove duplicates by converting it to a set, and then get the length of the set.\n    return len(set(string.lower()))",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 11.030678272247314
+    },
+    {
+        "task_id": "HumanEval/17",
+        "task_name": "parse_music",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n    # Logic: Split the input string by spaces, then map each note to its corresponding beat duration,\n    # and finally convert the list of beats to integers.\n    return [int(note * 4 if '|' in note else int(note)) for note in music_string.split()]\n```",
+                "extracted": "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n    # Logic: Split the input string by spaces, then map each note to its corresponding beat duration,\n    # and finally convert the list of beats to integers.\n    return [int(note * 4 if '|' in note else int(note)) for note in music_string.split()]",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 20.837363243103027
+    },
+    {
+        "task_id": "HumanEval/18",
+        "task_name": "how_many_times",
+        "samples": [
+            {
+                "raw": "```python\ndef how_many_times(string: str, substring: str) -> int:\n    \"\"\"Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> how_many_times('', 'a')\n    0\n    >>> how_many_times('aaa', 'a')\n    3\n    >>> how_many_times('aaaa', 'aa')\n    3\n    \"\"\"\n    # Logic: Iterate through the string, checking for occurrences of the substring. Count overlaps by comparing each occurrence with the next.\n    count = 0\n    start = 0\n    while True:\n        start = string.find(substring, start)\n        if start == -1:\n            break\n        count += 1\n        start += 1  # Move to the next character after the found substring to allow for overlapping matches.\n    return count\n```",
+                "extracted": "def how_many_times(string: str, substring: str) -> int:\n    \"\"\"Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> how_many_times('', 'a')\n    0\n    >>> how_many_times('aaa', 'a')\n    3\n    >>> how_many_times('aaaa', 'aa')\n    3\n    \"\"\"\n    # Logic: Iterate through the string, checking for occurrences of the substring. Count overlaps by comparing each occurrence with the next.\n    count = 0\n    start = 0\n    while True:\n        start = string.find(substring, start)\n        if start == -1:\n            break\n        count += 1\n        start += 1  # Move to the next character after the found substring to allow for overlapping matches.\n    return count",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 27.060449600219727
+    },
+    {
+        "task_id": "HumanEval/19",
+        "task_name": "sort_numbers",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\"Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n    # Logic: Convert the input string into a list of integers, sort them, and then join them back into a string.\n    return ' '.join(str(num) for num in sorted(map(int, numbers.split())))\n```",
+                "extracted": "from typing import List\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\"Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n    # Logic: Convert the input string into a list of integers, sort them, and then join them back into a string.\n    return ' '.join(str(num) for num in sorted(map(int, numbers.split())))",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 23.16092586517334
+    },
+    {
+        "task_id": "HumanEval/20",
+        "task_name": "find_closest_elements",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List, Tuple\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\"From a supplied list of numbers (of length at least two) select and return two that are the closest to each other and return them in order (smaller number, larger number).\n    \n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])\n    (2.0, 2.2)\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n    (2.0, 2.0)\n    \"\"\"\n    # Logic: Sort the list to easily find the closest elements, then select the two adjacent elements.\n    numbers.sort()\n    return numbers[1], numbers[-2]\n```",
+                "extracted": "from typing import List, Tuple\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\"From a supplied list of numbers (of length at least two) select and return two that are the closest to each other and return them in order (smaller number, larger number).\n    \n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])\n    (2.0, 2.2)\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n    (2.0, 2.0)\n    \"\"\"\n    # Logic: Sort the list to easily find the closest elements, then select the two adjacent elements.\n    numbers.sort()\n    return numbers[1], numbers[-2]",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 26.05831289291382
+    },
+    {
+        "task_id": "HumanEval/21",
+        "task_name": "rescale_to_unit",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\"Given list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1.\n    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])\n    [0.0, 0.25, 0.5, 0.75, 1.0]\n    \"\"\"\n    # Logic: Calculate the minimum and maximum values in the list, then apply a linear transformation.\n    min_val = min(numbers)\n    max_val = max(numbers)\n    return [(x - min_val) / (max_val - min_val) for x in numbers]\n```",
+                "extracted": "from typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\"Given list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1.\n    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])\n    [0.0, 0.25, 0.5, 0.75, 1.0]\n    \"\"\"\n    # Logic: Calculate the minimum and maximum values in the list, then apply a linear transformation.\n    min_val = min(numbers)\n    max_val = max(numbers)\n    return [(x - min_val) / (max_val - min_val) for x in numbers]",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 17.660704851150513
+    },
+    {
+        "task_id": "HumanEval/22",
+        "task_name": "filter_integers",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    # Logic: Filter the list to include only integers.\n    return [value for value in values if isinstance(value, int)]\n```",
+                "extracted": "from typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    # Logic: Filter the list to include only integers.\n    return [value for value in values if isinstance(value, int)]",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 8.449594974517822
+    },
+    {
+        "task_id": "HumanEval/23",
+        "task_name": "strlen",
+        "samples": [
+            {
+                "raw": "```python\ndef strlen(string: str) -> int:\n    # Logic: Return the length of the given string, which is an integer representing the number of characters in the string.\n    return len(string)\n```",
+                "extracted": "def strlen(string: str) -> int:\n    # Logic: Return the length of the given string, which is an integer representing the number of characters in the string.\n    return len(string)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 6.907283544540405
+    },
+    {
+        "task_id": "HumanEval/24",
+        "task_name": "largest_divisor",
+        "samples": [
+            {
+                "raw": "```python\ndef largest_divisor(n: int) -> int:\n    # Logic: Iterate from n-1 down to 1, checking for divisibility.\n    for i in range(n - 1, 0, -1):\n        if n % i == 0:\n            return i\n```\n\nThis solution iterates backward from `n-1` to 1, checking each number to see if it divides `n` evenly. The first number that satisfies this condition is the largest divisor of `n`, which is returned by the function.",
+                "extracted": "def largest_divisor(n: int) -> int:\n    # Logic: Iterate from n-1 down to 1, checking for divisibility.\n    for i in range(n - 1, 0, -1):\n        if n % i == 0:\n            return i",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 11.565256834030151
+    },
+    {
+        "task_id": "HumanEval/25",
+        "task_name": "factorize",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef factorize(n: int) -> List[int]:\n    \"\"\" Return list of prime factors of given integer in the order from smallest to largest.\n    Each of the factors should be listed number of times corresponding to how many times it appeares in factorization.\n    Input number should be equal to the product of all factors\n    >>> factorize(8)\n    [2, 2, 2]\n    >>> factorize(25)\n    [5, 5]\n    >>> factorize(70)\n    [2, 5, 7]\n    \"\"\"\n    # Logic: Use trial division to find prime factors.\n    factors = []\n    divisor = 2\n    while n > 1:\n        while n % divisor == 0:\n            factors.append(divisor)\n            n //= divisor\n        divisor += 1\n    return factors\n```",
+                "extracted": "from typing import List\n\ndef factorize(n: int) -> List[int]:\n    \"\"\" Return list of prime factors of given integer in the order from smallest to largest.\n    Each of the factors should be listed number of times corresponding to how many times it appeares in factorization.\n    Input number should be equal to the product of all factors\n    >>> factorize(8)\n    [2, 2, 2]\n    >>> factorize(25)\n    [5, 5]\n    >>> factorize(70)\n    [2, 5, 7]\n    \"\"\"\n    # Logic: Use trial division to find prime factors.\n    factors = []\n    divisor = 2\n    while n > 1:\n        while n % divisor == 0:\n            factors.append(divisor)\n            n //= divisor\n        divisor += 1\n    return factors",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 18.122233867645264
+    },
+    {
+        "task_id": "HumanEval/26",
+        "task_name": "remove_duplicates",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" Remove all elements that occur more than once from a list while preserving the original order of elements.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n    # Logic: Use a set to keep track of seen numbers and filter out duplicates.\n    seen = set()\n    result = []\n    for num in numbers:\n        if num not in seen:\n            seen.add(num)\n            result.append(num)\n    return result\n```",
+                "extracted": "from typing import List\n\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" Remove all elements that occur more than once from a list while preserving the original order of elements.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n    # Logic: Use a set to keep track of seen numbers and filter out duplicates.\n    seen = set()\n    result = []\n    for num in numbers:\n        if num not in seen:\n            seen.add(num)\n            result.append(num)\n    return result",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 13.105382204055786
+    },
+    {
+        "task_id": "HumanEval/27",
+        "task_name": "flip_case",
+        "samples": [
+            {
+                "raw": "```python\ndef flip_case(string: str) -> str:\n    # Logic: Iterate through each character in the string, flipping its case if it's lowercase or uppercase.\n    return ''.join(char.swapcase() for char in string)\n```",
+                "extracted": "def flip_case(string: str) -> str:\n    # Logic: Iterate through each character in the string, flipping its case if it's lowercase or uppercase.\n    return ''.join(char.swapcase() for char in string)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 7.418621301651001
+    },
+    {
+        "task_id": "HumanEval/28",
+        "task_name": "concatenate",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef concatenate(strings: List[str]) -> str:\n    # Logic: Concatenate all strings in the list into one string.\n    return ''.join(strings)\n```",
+                "extracted": "from typing import List\n\ndef concatenate(strings: List[str]) -> str:\n    # Logic: Concatenate all strings in the list into one string.\n    return ''.join(strings)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 7.763934135437012
+    },
+    {
+        "task_id": "HumanEval/29",
+        "task_name": "filter_by_prefix",
+        "samples": [
+            {
+                "raw": "```python\nfrom typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    # Logic: Filter the list of strings to include only those that start with the given prefix.\n    return [s for s in strings if s.startswith(prefix)]\n```",
+                "extracted": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    # Logic: Filter the list of strings to include only those that start with the given prefix.\n    return [s for s in strings if s.startswith(prefix)]",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 9.612485408782959
+    },
+    {
+        "task_id": "HumanEval/30",
+        "task_name": "get_positive",
+        "samples": [
+            {
+                "raw": "```python\ndef get_positive(l: list):\n    # Logic: Return a new list containing only positive numbers from the input list.\n    return [num for num in l if num > 0]\n```",
+                "extracted": "def get_positive(l: list):\n    # Logic: Return a new list containing only positive numbers from the input list.\n    return [num for num in l if num > 0]",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 9.361383438110352
+    },
+    {
+        "task_id": "HumanEval/31",
+        "task_name": "is_prime",
+        "samples": [
+            {
+                "raw": "```python\ndef is_prime(n):\n    # Logic: Check if a number is prime by testing divisibility from 2 up to the square root of n.\n    if n <= 1:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n```",
+                "extracted": "def is_prime(n):\n    # Logic: Check if a number is prime by testing divisibility from 2 up to the square root of n.\n    if n <= 1:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 14.964038133621216
+    },
+    {
+        "task_id": "HumanEval/32",
+        "task_name": "find_zero",
+        "samples": [
+            {
+                "raw": "```python\nimport math\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" \n    xs are coefficients of a polynomial.\n    find_zero finds x such that poly(x) = 0.\n    find_zero returns only one zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x\n    -0.5\n    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3\n    1.0\n    \"\"\"\n    # Logic: Iterate through the coefficients in reverse order, starting from the highest degree.\n    for i in range(len(xs) - 1, -1, -1):\n        if xs[i] != 0:\n            # Calculate the root using the quadratic formula and check if it is a zero of the polynomial.\n            discriminant = math.sqrt(xs[i]**2 - 4 * xs[0] * xs[-1])\n            roots = [(-xs[i] + discriminant) / (2 * xs[0]), (-xs[i] - discriminant) / (2 * xs[0])]\n            # Return the first zero found.\n            return roots[0]\n    # If no root is found, return None or handle it as per requirements.\n    return None\n```",
+                "extracted": "import math\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" \n    xs are coefficients of a polynomial.\n    find_zero finds x such that poly(x) = 0.\n    find_zero returns only one zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x\n    -0.5\n    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3\n    1.0\n    \"\"\"\n    # Logic: Iterate through the coefficients in reverse order, starting from the highest degree.\n    for i in range(len(xs) - 1, -1, -1):\n        if xs[i] != 0:\n            # Calculate the root using the quadratic formula and check if it is a zero of the polynomial.\n            discriminant = math.sqrt(xs[i]**2 - 4 * xs[0] * xs[-1])\n            roots = [(-xs[i] + discriminant) / (2 * xs[0]), (-xs[i] - discriminant) / (2 * xs[0])]\n            # Return the first zero found.\n            return roots[0]\n    # If no root is found, return None or handle it as per requirements.\n    return None",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 71.08963775634766
+    },
+    {
+        "task_id": "HumanEval/33",
+        "task_name": "sort_third",
+        "samples": [
+            {
+                "raw": "```python\ndef sort_third(l: list):\n    \"\"\"\n    This function takes a list l and returns a list l' such that\n    l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal\n    to the values of the corresponding indicies of l, but sorted.\n    \n    Examples:\n    >>> sort_third([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_third([5, 6, 3, 4, 8, 9, 2])\n    [2, 6, 3, 4, 8, 9, 5]\n    \"\"\"\n    # Logic: Iterate through the list and collect elements at indices divisible by three.\n    third_elements = [l[i] for i in range(len(l)) if i % 3 == 0]\n    \n    # Sort the collected elements.\n    sorted_third_elements = sorted(third_elements)\n    \n    # Create a new list to store the result.\n    result = []\n    \n    # Iterate through the original list and replace elements at indices divisible by three with the sorted values.\n    for i in range(len(l)):\n        if i % 3 == 0:\n            result.append(sorted_third_elements.pop(0))\n        else:\n            result.append(l[i])\n    \n    return result\n```",
+                "extracted": "def sort_third(l: list):\n    \"\"\"\n    This function takes a list l and returns a list l' such that\n    l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal\n    to the values of the corresponding indicies of l, but sorted.\n    \n    Examples:\n    >>> sort_third([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_third([5, 6, 3, 4, 8, 9, 2])\n    [2, 6, 3, 4, 8, 9, 5]\n    \"\"\"\n    # Logic: Iterate through the list and collect elements at indices divisible by three.\n    third_elements = [l[i] for i in range(len(l)) if i % 3 == 0]\n    \n    # Sort the collected elements.\n    sorted_third_elements = sorted(third_elements)\n    \n    # Create a new list to store the result.\n    result = []\n    \n    # Iterate through the original list and replace elements at indices divisible by three with the sorted values.\n    for i in range(len(l)):\n        if i % 3 == 0:\n            result.append(sorted_third_elements.pop(0))\n        else:\n            result.append(l[i])\n    \n    return result",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 42.611098766326904
+    },
+    {
+        "task_id": "HumanEval/34",
+        "task_name": "unique",
+        "samples": [
+            {
+                "raw": "```python\ndef unique(l: list) -> list:\n    # Logic: Convert the list to a set to remove duplicates, then sort it.\n    return sorted(list(set(l)))\n```",
+                "extracted": "def unique(l: list) -> list:\n    # Logic: Convert the list to a set to remove duplicates, then sort it.\n    return sorted(list(set(l)))",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 12.580170154571533
+    },
+    {
+        "task_id": "HumanEval/35",
+        "task_name": "max_element",
+        "samples": [
+            {
+                "raw": "```python\ndef max_element(l: list):\n    \"\"\"\n    Return the maximum element in the list.\n    \n    Examples:\n    >>> max_element([1, 2, 3])\n    3\n    >>> max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])\n    123\n    \"\"\"\n    # Logic: Iterate through the list to find the maximum element.\n    return max(l)\n```",
+                "extracted": "def max_element(l: list):\n    \"\"\"\n    Return the maximum element in the list.\n    \n    Examples:\n    >>> max_element([1, 2, 3])\n    3\n    >>> max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])\n    123\n    \"\"\"\n    # Logic: Iterate through the list to find the maximum element.\n    return max(l)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 20.4371440410614
+    },
+    {
+        "task_id": "HumanEval/36",
+        "task_name": "fizz_buzz",
+        "samples": [
+            {
+                "raw": "```python\ndef fizz_buzz(n: int) -> int:\n    # Logic: Count occurrences of digit 7 in numbers less than n divisible by 11 or 13.\n    count = 0\n    for i in range(1, n):\n        if i % 11 == 0 or i % 13 == 0:\n            count += str(i).count('7')\n    return count\n```",
+                "extracted": "def fizz_buzz(n: int) -> int:\n    # Logic: Count occurrences of digit 7 in numbers less than n divisible by 11 or 13.\n    count = 0\n    for i in range(1, n):\n        if i % 11 == 0 or i % 13 == 0:\n            count += str(i).count('7')\n    return count",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 14.097601175308228
+    },
+    {
+        "task_id": "HumanEval/37",
+        "task_name": "sort_even",
+        "samples": [
+            {
+                "raw": "```python\ndef sort_even(l: list) -> list:\n    \"\"\"\n    This function takes a list l and returns a list l' such that\n    l' is identical to l in the odd indicies, while its values at the even indicies are equal\n    to the values of the even indicies of l, but sorted.\n    \n    Examples:\n    >>> sort_even([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_even([5, 6, 3, 4])\n    [3, 6, 5, 4]\n    \"\"\"\n    # Logic: Create a copy of the list to avoid modifying the original.\n    sorted_even = l[:]\n    \n    # Sort the even-indexed elements in-place.\n    for i in range(1, len(sorted_even), 2):\n        sorted_even[i] = sorted(sorted_even[i:])\n    \n    return sorted_even\n```",
+                "extracted": "def sort_even(l: list) -> list:\n    \"\"\"\n    This function takes a list l and returns a list l' such that\n    l' is identical to l in the odd indicies, while its values at the even indicies are equal\n    to the values of the even indicies of l, but sorted.\n    \n    Examples:\n    >>> sort_even([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_even([5, 6, 3, 4])\n    [3, 6, 5, 4]\n    \"\"\"\n    # Logic: Create a copy of the list to avoid modifying the original.\n    sorted_even = l[:]\n    \n    # Sort the even-indexed elements in-place.\n    for i in range(1, len(sorted_even), 2):\n        sorted_even[i] = sorted(sorted_even[i:])\n    \n    return sorted_even",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 24.528296947479248
+    },
+    {
+        "task_id": "HumanEval/38",
+        "task_name": "decode_cyclic",
+        "samples": [
+            {
+                "raw": "```python\ndef encode_cyclic(s: str) -> str:\n    \"\"\"\n    Returns an encoded string by cycling groups of three characters.\n    \n    >>> encode_cyclic('hello world')\n    'hll-elo wrl-d'\n    >>> encode_cyclic('abcdefg')\n    'abc-defg'\n    >>> encode_cyclic('')\n    ''\n    \"\"\"\n    # Logic: Split the string into groups of three characters. If a group has fewer than 3 characters, cycle it.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # Cycle elements in each group. Unless the group has fewer than 3 characters.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    Takes an encoded string produced by encode_cyclic function and returns the original string.\n    \n    >>> decode_cyclic('hll-elo wrl-d')\n    'hello world'\n    >>> decode_cyclic('abc-defg')\n    'abcdefg'\n    >>> decode_cyclic('')\n    ''\n    \"\"\"\n    # Logic: Split the encoded string into groups of three characters. If a group has fewer than 3 characters, cycle it.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # Cycle elements in each group. Unless the group has fewer than 3 characters.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n```",
+                "extracted": "def encode_cyclic(s: str) -> str:\n    \"\"\"\n    Returns an encoded string by cycling groups of three characters.\n    \n    >>> encode_cyclic('hello world')\n    'hll-elo wrl-d'\n    >>> encode_cyclic('abcdefg')\n    'abc-defg'\n    >>> encode_cyclic('')\n    ''\n    \"\"\"\n    # Logic: Split the string into groups of three characters. If a group has fewer than 3 characters, cycle it.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # Cycle elements in each group. Unless the group has fewer than 3 characters.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    Takes an encoded string produced by encode_cyclic function and returns the original string.\n    \n    >>> decode_cyclic('hll-elo wrl-d')\n    'hello world'\n    >>> decode_cyclic('abc-defg')\n    'abcdefg'\n    >>> decode_cyclic('')\n    ''\n    \"\"\"\n    # Logic: Split the encoded string into groups of three characters. If a group has fewer than 3 characters, cycle it.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # Cycle elements in each group. Unless the group has fewer than 3 characters.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 44.252447843551636
+    },
+    {
+        "task_id": "HumanEval/39",
+        "task_name": "prime_fib",
+        "samples": [
+            {
+                "raw": "```python\ndef prime_fib(n: int) -> int:\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n    \n    Examples:\n    >>> prime_fib(1)\n    2\n    >>> prime_fib(2)\n    3\n    >>> prime_fib(3)\n    5\n    >>> prime_fib(4)\n    13\n    >>> prime_fib(5)\n    89\n    \"\"\"\n    # Logic: Implement the logic to find the n-th Fibonacci number that is also prime.\n    pass\n```",
+                "extracted": "def prime_fib(n: int) -> int:\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n    \n    Examples:\n    >>> prime_fib(1)\n    2\n    >>> prime_fib(2)\n    3\n    >>> prime_fib(3)\n    5\n    >>> prime_fib(4)\n    13\n    >>> prime_fib(5)\n    89\n    \"\"\"\n    # Logic: Implement the logic to find the n-th Fibonacci number that is also prime.\n    pass",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 19.8578782081604
+    },
+    {
+        "task_id": "HumanEval/40",
+        "task_name": "triples_sum_to_zero",
+        "samples": [
+            {
+                "raw": "```python\ndef triples_sum_to_zero(l: list) -> bool:\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three distinct elements in the list that\n    sum to zero, and False otherwise.\n\n    >>> triples_sum_to_zero([1, 3, 5, 0])\n    False\n    >>> triples_sum_to_zero([1, 3, -2, 1])\n    True\n    >>> triples_sum_to_zero([1, 2, 3, 7])\n    False\n    >>> triples_sum_to_zero([2, 4, -5, 3, 9, 7])\n    True\n    >>> triples_sum_to_zero([1])\n    False\n    \"\"\"\n    # Logic: Iterate through the list with three nested loops to check all possible triplets.\n    for i in range(len(l)):\n        for j in range(i + 1, len(l)):\n            for k in range(j + 1, len(l)):\n                if l[i] + l[j] + l[k] == 0:\n                    return True\n    return False\n```",
+                "extracted": "def triples_sum_to_zero(l: list) -> bool:\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three distinct elements in the list that\n    sum to zero, and False otherwise.\n\n    >>> triples_sum_to_zero([1, 3, 5, 0])\n    False\n    >>> triples_sum_to_zero([1, 3, -2, 1])\n    True\n    >>> triples_sum_to_zero([1, 2, 3, 7])\n    False\n    >>> triples_sum_to_zero([2, 4, -5, 3, 9, 7])\n    True\n    >>> triples_sum_to_zero([1])\n    False\n    \"\"\"\n    # Logic: Iterate through the list with three nested loops to check all possible triplets.\n    for i in range(len(l)):\n        for j in range(i + 1, len(l)):\n            for k in range(j + 1, len(l)):\n                if l[i] + l[j] + l[k] == 0:\n                    return True\n    return False",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 28.253844261169434
+    },
+    {
+        "task_id": "HumanEval/41",
+        "task_name": "car_race_collision",
+        "samples": [
+            {
+                "raw": "```python\ndef car_race_collision(n: int) -> int:\n    \"\"\"\n    # Logic: The number of collisions in a straight road with n cars moving left to right and n cars moving right to left is simply n^2.\n    >>> car_race_collision(3)\n    9\n    >>> car_race_collision(1)\n    1\n    \"\"\"\n    return n ** 2\n```",
+                "extracted": "def car_race_collision(n: int) -> int:\n    \"\"\"\n    # Logic: The number of collisions in a straight road with n cars moving left to right and n cars moving right to left is simply n^2.\n    >>> car_race_collision(3)\n    9\n    >>> car_race_collision(1)\n    1\n    \"\"\"\n    return n ** 2",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 16.361366271972656
+    },
+    {
+        "task_id": "HumanEval/42",
+        "task_name": "incr_list",
+        "samples": [
+            {
+                "raw": "```python\ndef incr_list(l: list) -> list:\n    # Logic: Increment each element in the list by 1.\n    return [x + 1 for x in l]\n```",
+                "extracted": "def incr_list(l: list) -> list:\n    # Logic: Increment each element in the list by 1.\n    return [x + 1 for x in l]",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 10.578331708908081
+    },
+    {
+        "task_id": "HumanEval/43",
+        "task_name": "pairs_sum_to_zero",
+        "samples": [
+            {
+                "raw": "```python\ndef pairs_sum_to_zero(l):\n    \"\"\"\n    pairs_sum_to_zero takes a list of integers as an input.\n    it returns True if there are two distinct elements in the list that\n    sum to zero, and False otherwise.\n    \n    # Logic: Iterate through the list using two pointers. For each element,\n             check if its negative counterpart exists in the remaining part of the list.\n             If found, return True. If no such pair is found after checking all possible pairs,\n             return False.\n    \"\"\"\n    l.sort()  # Sort the list to make it easier to find pairs\n    left, right = 0, len(l) - 1\n    \n    while left < right:\n        current_sum = l[left] + l[right]\n        if current_sum == 0:\n            return True\n        elif current_sum < 0:\n            left += 1\n        else:\n            right -= 1\n            \n    return False\n```",
+                "extracted": "def pairs_sum_to_zero(l):\n    \"\"\"\n    pairs_sum_to_zero takes a list of integers as an input.\n    it returns True if there are two distinct elements in the list that\n    sum to zero, and False otherwise.\n    \n    # Logic: Iterate through the list using two pointers. For each element,\n             check if its negative counterpart exists in the remaining part of the list.\n             If found, return True. If no such pair is found after checking all possible pairs,\n             return False.\n    \"\"\"\n    l.sort()  # Sort the list to make it easier to find pairs\n    left, right = 0, len(l) - 1\n    \n    while left < right:\n        current_sum = l[left] + l[right]\n        if current_sum == 0:\n            return True\n        elif current_sum < 0:\n            left += 1\n        else:\n            right -= 1\n            \n    return False",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 32.13498401641846
+    },
+    {
+        "task_id": "HumanEval/44",
+        "task_name": "change_base",
+        "samples": [
+            {
+                "raw": "```python\ndef change_base(x: int, base: int) -> str:\n    # Logic: Convert the integer x to the specified base using a loop and string concatenation.\n    if base < 2 or base > 9:\n        raise ValueError(\"Base must be between 2 and 9.\")\n    \n    result = \"\"\n    while x > 0:\n        remainder = x % base\n        result = str(remainder) + result\n        x //= base\n    \n    return result\n```",
+                "extracted": "def change_base(x: int, base: int) -> str:\n    # Logic: Convert the integer x to the specified base using a loop and string concatenation.\n    if base < 2 or base > 9:\n        raise ValueError(\"Base must be between 2 and 9.\")\n    \n    result = \"\"\n    while x > 0:\n        remainder = x % base\n        result = str(remainder) + result\n        x //= base\n    \n    return result",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 18.529533624649048
+    },
+    {
+        "task_id": "HumanEval/45",
+        "task_name": "triangle_area",
+        "samples": [
+            {
+                "raw": "```python\ndef triangle_area(a, h):\n    # Logic: Calculate the area of a triangle using the formula 0.5 * base * height.\n    return 0.5 * a * h\n```",
+                "extracted": "def triangle_area(a, h):\n    # Logic: Calculate the area of a triangle using the formula 0.5 * base * height.\n    return 0.5 * a * h",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 8.543937921524048
+    },
+    {
+        "task_id": "HumanEval/46",
+        "task_name": "fib4",
+        "samples": [
+            {
+                "raw": "```python\ndef fib4(n: int) -> int:\n    # Logic: Implement the Fibonacci sequence up to n without recursion.\n    if n == 0 or n == 1:\n        return 0\n    elif n == 2:\n        return 2\n    else:\n        a, b, c, d = 0, 0, 2, 0\n        for _ in range(3, n + 1):\n            a, b, c, d = b, c, d, a + b + c + d\n        return d\n```",
+                "extracted": "def fib4(n: int) -> int:\n    # Logic: Implement the Fibonacci sequence up to n without recursion.\n    if n == 0 or n == 1:\n        return 0\n    elif n == 2:\n        return 2\n    else:\n        a, b, c, d = 0, 0, 2, 0\n        for _ in range(3, n + 1):\n            a, b, c, d = b, c, d, a + b + c + d\n        return d",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 21.285387754440308
+    },
+    {
+        "task_id": "HumanEval/47",
+        "task_name": "median",
+        "samples": [
+            {
+                "raw": "```python\ndef median(l: list):\n    \"\"\"\n    Return the median of elements in the list l.\n    \n    Examples:\n    >>> median([3, 1, 2, 4, 5])\n    3\n    >>> median([-10, 4, 6, 1000, 10, 20])\n    15.0\n    \"\"\"\n    # Logic: Sort the list and return the middle element if the length is odd,\n    # or the average of the two middle elements if the length is even.\n    l.sort()\n    n = len(l)\n    if n % 2 == 1:\n        return l[n // 2]\n    else:\n        return (l[n // 2 - 1] + l[n // 2]) / 2\n```",
+                "extracted": "def median(l: list):\n    \"\"\"\n    Return the median of elements in the list l.\n    \n    Examples:\n    >>> median([3, 1, 2, 4, 5])\n    3\n    >>> median([-10, 4, 6, 1000, 10, 20])\n    15.0\n    \"\"\"\n    # Logic: Sort the list and return the middle element if the length is odd,\n    # or the average of the two middle elements if the length is even.\n    l.sort()\n    n = len(l)\n    if n % 2 == 1:\n        return l[n // 2]\n    else:\n        return (l[n // 2 - 1] + l[n // 2]) / 2",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 21.37826156616211
+    },
+    {
+        "task_id": "HumanEval/48",
+        "task_name": "is_palindrome",
+        "samples": [
+            {
+                "raw": "```python\ndef is_palindrome(text: str) -> bool:\n    \"\"\"\n    Checks if given string is a palindrome.\n    \n    # Logic: Compare characters from the start and end moving towards the center,\n             ignoring case differences. Return True if all characters match, False otherwise.\n    \"\"\"\n    # Normalize the text by removing spaces and converting to lowercase\n    normalized_text = text.replace(\" \", \"\").lower()\n    \n    # Check for palindrome by comparing characters from both ends\n    left, right = 0, len(normalized_text) - 1\n    while left < right:\n        if normalized_text[left] != normalized_text[right]:\n            return False\n        left += 1\n        right -= 1\n    \n    return True\n```",
+                "extracted": "def is_palindrome(text: str) -> bool:\n    \"\"\"\n    Checks if given string is a palindrome.\n    \n    # Logic: Compare characters from the start and end moving towards the center,\n             ignoring case differences. Return True if all characters match, False otherwise.\n    \"\"\"\n    # Normalize the text by removing spaces and converting to lowercase\n    normalized_text = text.replace(\" \", \"\").lower()\n    \n    # Check for palindrome by comparing characters from both ends\n    left, right = 0, len(normalized_text) - 1\n    while left < right:\n        if normalized_text[left] != normalized_text[right]:\n            return False\n        left += 1\n        right -= 1\n    \n    return True",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 19.276894092559814
+    },
+    {
+        "task_id": "HumanEval/49",
+        "task_name": "modp",
+        "samples": [
+            {
+                "raw": "```python\ndef modp(n: int, p: int) -> int:\n    # Logic: Calculate 2^n modulo p using exponentiation by squaring for efficiency.\n    result = 1\n    base = 2 % p\n    while n > 0:\n        if n % 2 == 1:\n            result = (result * base) % p\n        n //= 2\n        base = (base * base) % p\n    return result\n```",
+                "extracted": "def modp(n: int, p: int) -> int:\n    # Logic: Calculate 2^n modulo p using exponentiation by squaring for efficiency.\n    result = 1\n    base = 2 % p\n    while n > 0:\n        if n % 2 == 1:\n            result = (result * base) % p\n        n //= 2\n        base = (base * base) % p\n    return result",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 16.96024441719055
+    },
+    {
+        "task_id": "HumanEval/50",
+        "task_name": "decode_shift",
+        "samples": [
+            {
+                "raw": "```python\ndef encode_shift(s: str) -> str:\n    \"\"\"\n    Encodes a string by shifting every character by 5 in the alphabet.\n    \n    Parameters:\n    s (str): The input string to be encoded.\n    \n    Returns:\n    str: The encoded string.\n    \n    Examples:\n    >>> encode_shift('abc')\n    'fgh'\n    >>> encode_shift('xyz')\n    'bcd'\n    \"\"\"\n    # Logic: Shift each character in the string by 5 positions in the alphabet.\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\ndef decode_shift(s: str) -> str:\n    \"\"\"\n    Decodes a string that was encoded with the encode_shift function.\n    \n    Parameters:\n    s (str): The input string to be decoded.\n    \n    Returns:\n    str: The decoded string.\n    \n    Examples:\n    >>> decode_shift('fgh')\n    'abc'\n    >>> decode_shift('bcd')\n    'xyz'\n    \"\"\"\n    # Logic: Shift each character in the encoded string by -5 positions in the alphabet.\n    return \"\".join([chr(((ord(ch) - 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n```",
+                "extracted": "def encode_shift(s: str) -> str:\n    \"\"\"\n    Encodes a string by shifting every character by 5 in the alphabet.\n    \n    Parameters:\n    s (str): The input string to be encoded.\n    \n    Returns:\n    str: The encoded string.\n    \n    Examples:\n    >>> encode_shift('abc')\n    'fgh'\n    >>> encode_shift('xyz')\n    'bcd'\n    \"\"\"\n    # Logic: Shift each character in the string by 5 positions in the alphabet.\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\ndef decode_shift(s: str) -> str:\n    \"\"\"\n    Decodes a string that was encoded with the encode_shift function.\n    \n    Parameters:\n    s (str): The input string to be decoded.\n    \n    Returns:\n    str: The decoded string.\n    \n    Examples:\n    >>> decode_shift('fgh')\n    'abc'\n    >>> decode_shift('bcd')\n    'xyz'\n    \"\"\"\n    # Logic: Shift each character in the encoded string by -5 positions in the alphabet.\n    return \"\".join([chr(((ord(ch) - 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 31.26641535758972
+    },
+    {
+        "task_id": "HumanEval/51",
+        "task_name": "remove_vowels",
+        "samples": [
+            {
+                "raw": "```python\ndef remove_vowels(text):\n    \"\"\"\n    remove_vowels is a function that takes string and returns string without vowels.\n    >>> remove_vowels('')\n    ''\n    >>> remove_vowels(\"abcdef\\nghijklm\")\n    'bcdf\\nghjklm'\n    >>> remove_vowels('abcdef')\n    'bcdf'\n    >>> remove_vowels('aaaaa')\n    ''\n    >>> remove_vowels('aaBAA')\n    'B'\n    >>> remove_vowels('zbcd')\n    'zbcd'\n    \"\"\"\n    # Logic: Iterate through each character in the string, and if it is not a vowel, append it to the result.\n    return ''.join(char for char in text if char.lower() not in 'aeiou')",
+                "extracted": "```python\ndef remove_vowels(text):\n    \"\"\"\n    remove_vowels is a function that takes string and returns string without vowels.\n    >>> remove_vowels('')\n    ''\n    >>> remove_vowels(\"abcdef\\nghijklm\")\n    'bcdf\\nghjklm'\n    >>> remove_vowels('abcdef')\n    'bcdf'\n    >>> remove_vowels('aaaaa')\n    ''\n    >>> remove_vowels('aaBAA')\n    'B'\n    >>> remove_vowels('zbcd')\n    'zbcd'\n    \"\"\"\n    # Logic: Iterate through each character in the string, and if it is not a vowel, append it to the result.\n    return ''.join(char for char in text if char.lower() not in 'aeiou')",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 22.965381145477295
+    },
+    {
+        "task_id": "HumanEval/52",
+        "task_name": "below_threshold",
+        "samples": [
+            {
+                "raw": "```python\ndef below_threshold(l: list, t: int) -> bool:\n    # Logic: Check if all numbers in the list are less than the given threshold.\n    return all(x < t for x in l)\n```",
+                "extracted": "def below_threshold(l: list, t: int) -> bool:\n    # Logic: Check if all numbers in the list are less than the given threshold.\n    return all(x < t for x in l)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 11.071617126464844
+    },
+    {
+        "task_id": "HumanEval/53",
+        "task_name": "add",
+        "samples": [
+            {
+                "raw": "```python\ndef add(x: int, y: int) -> int:\n    # Logic: Add two integers x and y.\n    return x + y\n```",
+                "extracted": "def add(x: int, y: int) -> int:\n    # Logic: Add two integers x and y.\n    return x + y",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 9.230664014816284
+    },
+    {
+        "task_id": "HumanEval/54",
+        "task_name": "same_chars",
+        "samples": [
+            {
+                "raw": "```python\ndef same_chars(s0: str, s1: str) -> bool:\n    \"\"\"\n    Check if two words have the same characters.\n    \n    # Logic: Convert both strings to sets of characters and compare them. If they are equal, return True; otherwise, return False.\n    \"\"\"\n    return set(s0) == set(s1)\n```",
+                "extracted": "def same_chars(s0: str, s1: str) -> bool:\n    \"\"\"\n    Check if two words have the same characters.\n    \n    # Logic: Convert both strings to sets of characters and compare them. If they are equal, return True; otherwise, return False.\n    \"\"\"\n    return set(s0) == set(s1)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 15.669203996658325
+    },
+    {
+        "task_id": "HumanEval/55",
+        "task_name": "fib",
+        "samples": [
+            {
+                "raw": "```python\ndef fib(n: int) -> int:\n    # Logic: Implement Fibonacci sequence using recursion.\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fib(n-1) + fib(n-2)\n```",
+                "extracted": "def fib(n: int) -> int:\n    # Logic: Implement Fibonacci sequence using recursion.\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fib(n-1) + fib(n-2)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 10.62178635597229
+    },
+    {
+        "task_id": "HumanEval/56",
+        "task_name": "correct_bracketing",
+        "samples": [
+            {
+                "raw": "```python\ndef correct_bracketing(brackets: str) -> bool:\n    # Logic: Iterate through each character in the string, tracking the balance of opening and closing brackets.\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False  # Found a closing bracket without a matching opening one.\n    return balance == 0  # All brackets are correctly matched and balanced.\n```",
+                "extracted": "def correct_bracketing(brackets: str) -> bool:\n    # Logic: Iterate through each character in the string, tracking the balance of opening and closing brackets.\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False  # Found a closing bracket without a matching opening one.\n    return balance == 0  # All brackets are correctly matched and balanced.",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 15.868011474609375
+    },
+    {
+        "task_id": "HumanEval/57",
+        "task_name": "monotonic",
+        "samples": [
+            {
+                "raw": "```python\ndef monotonic(l: list) -> bool:\n    # Logic: Check if the list is monotonically increasing or decreasing by comparing each element with its predecessor.\n    increasing = decreasing = True\n    \n    for i in range(1, len(l)):\n        if l[i] > l[i - 1]:\n            decreasing = False\n        elif l[i] < l[i - 1]:\n            increasing = False\n            \n    return increasing or decreasing\n```",
+                "extracted": "def monotonic(l: list) -> bool:\n    # Logic: Check if the list is monotonically increasing or decreasing by comparing each element with its predecessor.\n    increasing = decreasing = True\n    \n    for i in range(1, len(l)):\n        if l[i] > l[i - 1]:\n            decreasing = False\n        elif l[i] < l[i - 1]:\n            increasing = False\n            \n    return increasing or decreasing",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 15.101463794708252
+    },
+    {
+        "task_id": "HumanEval/58",
+        "task_name": "common",
+        "samples": [
+            {
+                "raw": "```python\ndef common(l1: list, l2: list) -> list:\n    \"\"\"Return sorted unique common elements for two lists.\n    >>> common([1, 4, 3, 34, 653, 2, 5], [5, 7, 1, 5, 9, 653, 121])\n    [1, 5, 653]\n    >>> common([5, 3, 2, 8], [3, 2])\n    [2, 3]\n\n    # Logic: Use set intersection to find common elements, then convert and sort the result.\n    return sorted(list(set(l1) & set(l2)))\n```",
+                "extracted": "def common(l1: list, l2: list) -> list:\n    \"\"\"Return sorted unique common elements for two lists.\n    >>> common([1, 4, 3, 34, 653, 2, 5], [5, 7, 1, 5, 9, 653, 121])\n    [1, 5, 653]\n    >>> common([5, 3, 2, 8], [3, 2])\n    [2, 3]\n\n    # Logic: Use set intersection to find common elements, then convert and sort the result.\n    return sorted(list(set(l1) & set(l2)))",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 28.956390380859375
+    },
+    {
+        "task_id": "HumanEval/59",
+        "task_name": "largest_prime_factor",
+        "samples": [
+            {
+                "raw": "```python\ndef largest_prime_factor(n: int):\n    \"\"\"\n    Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    \n    Examples:\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    # Logic: Start with the smallest prime number (2) and divide n by it until it's no longer divisible, then move to the next prime number.\n    factor = 2\n    while factor * factor <= n:\n        if n % factor == 0:\n            n //= factor\n        else:\n            factor += 1\n    # If n is a prime number greater than 2, it will be the largest prime factor.\n    return n if n > 2 else factor\n```",
+                "extracted": "def largest_prime_factor(n: int):\n    \"\"\"\n    Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    \n    Examples:\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    # Logic: Start with the smallest prime number (2) and divide n by it until it's no longer divisible, then move to the next prime number.\n    factor = 2\n    while factor * factor <= n:\n        if n % factor == 0:\n            n //= factor\n        else:\n            factor += 1\n    # If n is a prime number greater than 2, it will be the largest prime factor.\n    return n if n > 2 else factor",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 28.62050747871399
+    },
+    {
+        "task_id": "HumanEval/60",
+        "task_name": "sum_to_n",
+        "samples": [
+            {
+                "raw": "```python\ndef sum_to_n(n: int) -> int:\n    # Logic: Calculate the sum of numbers from 1 to n using the formula for the sum of an arithmetic series.\n    return n * (n + 1) // 2\n```",
+                "extracted": "def sum_to_n(n: int) -> int:\n    # Logic: Calculate the sum of numbers from 1 to n using the formula for the sum of an arithmetic series.\n    return n * (n + 1) // 2",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 16.94341015815735
+    },
+    {
+        "task_id": "HumanEval/61",
+        "task_name": "correct_bracketing",
+        "samples": [
+            {
+                "raw": "```python\ndef correct_bracketing(brackets: str) -> bool:\n    # Logic: Iterate through each character in the string, tracking the balance of opening and closing brackets.\n    balance = 0\n    for char in brackets:\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance < 0:\n            return False  # A closing bracket appears before an opening one.\n    return balance == 0  # All opening brackets must have a corresponding closing bracket.\n```",
+                "extracted": "def correct_bracketing(brackets: str) -> bool:\n    # Logic: Iterate through each character in the string, tracking the balance of opening and closing brackets.\n    balance = 0\n    for char in brackets:\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance < 0:\n            return False  # A closing bracket appears before an opening one.\n    return balance == 0  # All opening brackets must have a corresponding closing bracket.",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 25.546216011047363
+    },
+    {
+        "task_id": "HumanEval/62",
+        "task_name": "derivative",
+        "samples": [
+            {
+                "raw": "```python\ndef derivative(xs: list) -> list:\n    # Logic: Calculate the derivative of a polynomial given its coefficients.\n    # The derivative of a polynomial ax^n is anx^(n-1).\n    # We iterate through the coefficients, multiply each by its corresponding power,\n    # and collect the results in a new list.\n    return [i * xs[i] for i in range(1, len(xs))]\n```",
+                "extracted": "def derivative(xs: list) -> list:\n    # Logic: Calculate the derivative of a polynomial given its coefficients.\n    # The derivative of a polynomial ax^n is anx^(n-1).\n    # We iterate through the coefficients, multiply each by its corresponding power,\n    # and collect the results in a new list.\n    return [i * xs[i] for i in range(1, len(xs))]",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 20.950662851333618
+    },
+    {
+        "task_id": "HumanEval/63",
+        "task_name": "fibfib",
+        "samples": [
+            {
+                "raw": "```python\ndef fibfib(n: int) -> int:\n    # Logic: Implement the Fibonacci-Fibonacci sequence using dynamic programming to avoid redundant calculations.\n    if n == 0 or n == 1:\n        return 0\n    elif n == 2:\n        return 1\n    \n    a, b, c = 0, 0, 1\n    for _ in range(3, n + 1):\n        a, b, c = b, c, a + b + c\n    \n    return c\n```",
+                "extracted": "def fibfib(n: int) -> int:\n    # Logic: Implement the Fibonacci-Fibonacci sequence using dynamic programming to avoid redundant calculations.\n    if n == 0 or n == 1:\n        return 0\n    elif n == 2:\n        return 1\n    \n    a, b, c = 0, 0, 1\n    for _ in range(3, n + 1):\n        a, b, c = b, c, a + b + c\n    \n    return c",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 18.86684823036194
+    },
+    {
+        "task_id": "HumanEval/64",
+        "task_name": "vowels_count",
+        "samples": [
+            {
+                "raw": "```python\ndef vowels_count(s):\n    \"\"\"\n    Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    >>> vowels_count(\"abcde\")\n    2\n    >>> vowels_count(\"ACEDY\")\n    3\n    \"\"\"\n    # Logic: Initialize a counter for vowels. Iterate through each character in the string.\n    # Check if the character is a vowel (a, e, i, o, u) or 'y' at the end of the word.\n    # Increment the counter accordingly and return the total count.\n    vowels = set('aeiou')\n    count = 0\n    for char in s:\n        if char.lower() in vowels:\n            count += 1\n        elif char == 'y' and len(s) > 1 and s[-2].lower() not in vowels:\n            count += 1\n    return count\n```",
+                "extracted": "def vowels_count(s):\n    \"\"\"\n    Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    >>> vowels_count(\"abcde\")\n    2\n    >>> vowels_count(\"ACEDY\")\n    3\n    \"\"\"\n    # Logic: Initialize a counter for vowels. Iterate through each character in the string.\n    # Check if the character is a vowel (a, e, i, o, u) or 'y' at the end of the word.\n    # Increment the counter accordingly and return the total count.\n    vowels = set('aeiou')\n    count = 0\n    for char in s:\n        if char.lower() in vowels:\n            count += 1\n        elif char == 'y' and len(s) > 1 and s[-2].lower() not in vowels:\n            count += 1\n    return count",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 26.429930448532104
+    },
+    {
+        "task_id": "HumanEval/65",
+        "task_name": "circular_shift",
+        "samples": [
+            {
+                "raw": "```python\ndef circular_shift(x: int, shift: int) -> str:\n    # Logic: Convert the integer x to a string, perform the circular shift based on the shift value,\n    # and return the result as a string. If shift > number of digits, reverse the digits.\n    num_str = str(x)\n    if shift >= len(num_str):\n        return num_str[::-1]\n    else:\n        shifted_str = num_str[-shift:] + num_str[:-shift]\n        return shifted_str\n```",
+                "extracted": "def circular_shift(x: int, shift: int) -> str:\n    # Logic: Convert the integer x to a string, perform the circular shift based on the shift value,\n    # and return the result as a string. If shift > number of digits, reverse the digits.\n    num_str = str(x)\n    if shift >= len(num_str):\n        return num_str[::-1]\n    else:\n        shifted_str = num_str[-shift:] + num_str[:-shift]\n        return shifted_str",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 16.081379413604736
+    },
+    {
+        "task_id": "HumanEval/66",
+        "task_name": "digitSum",
+        "samples": [
+            {
+                "raw": "```python\ndef digitSum(s):\n    # Logic: Iterate through each character in the string, check if it is an uppercase letter,\n    # convert it to its ASCII value using ord(), and add it to the sum if it is.\n    return sum(ord(c) for c in s if c.isupper())\n```",
+                "extracted": "def digitSum(s):\n    # Logic: Iterate through each character in the string, check if it is an uppercase letter,\n    # convert it to its ASCII value using ord(), and add it to the sum if it is.\n    return sum(ord(c) for c in s if c.isupper())",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 18.21847629547119
+    },
+    {
+        "task_id": "HumanEval/67",
+        "task_name": "fruit_distribution",
+        "samples": [
+            {
+                "raw": "```python\ndef fruit_distribution(s: str, n: int) -> int:\n    # Logic: Split the input string by ' apples and ', extract the number of apples,\n    # subtract it from the total number of fruits to find the number of mangoes.\n    return n - sum(map(int, s.split(' apples and ')[0].split()))\n```",
+                "extracted": "def fruit_distribution(s: str, n: int) -> int:\n    # Logic: Split the input string by ' apples and ', extract the number of apples,\n    # subtract it from the total number of fruits to find the number of mangoes.\n    return n - sum(map(int, s.split(' apples and ')[0].split()))",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 25.01842951774597
+    },
+    {
+        "task_id": "HumanEval/68",
+        "task_name": "pluck",
+        "samples": [
+            {
+                "raw": "```python\ndef pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n\n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    # Logic: Iterate through the array to find the smallest even value and its index.\n    smallest_even = float('inf')\n    smallest_index = -1\n    \n    for i, node in enumerate(arr):\n        if node % 2 == 0 and node < smallest_even:\n            smallest_even = node\n            smallest_index = i\n            \n    return [smallest_even, smallest_index] if smallest_index != -1 else []\n```",
+                "extracted": "def pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n\n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n    # Logic: Iterate through the array to find the smallest even value and its index.\n    smallest_even = float('inf')\n    smallest_index = -1\n    \n    for i, node in enumerate(arr):\n        if node % 2 == 0 and node < smallest_even:\n            smallest_even = node\n            smallest_index = i\n            \n    return [smallest_even, smallest_index] if smallest_index != -1 else []",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 49.4172260761261
+    },
+    {
+        "task_id": "HumanEval/69",
+        "task_name": "search",
+        "samples": [
+            {
+                "raw": "```python\ndef search(lst):\n    '''\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than \n    zero, and has a frequency greater than or equal to the value of the integer itself. \n    The frequency of an integer is the number of times it appears in the list.\n    If no such a value exist, return -1.\n    Examples:\n        search([4, 1, 2, 2, 3, 1]) == 2\n        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3\n        search([5, 5, 4, 4, 4]) == -1\n    '''\n    # Logic: Iterate through the list to find the greatest integer with a frequency greater than or equal to its value.\n    for i in range(1, max(lst) + 1):\n        if lst.count(i) >= i:\n            return i\n    return -1\n```",
+                "extracted": "def search(lst):\n    '''\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than \n    zero, and has a frequency greater than or equal to the value of the integer itself. \n    The frequency of an integer is the number of times it appears in the list.\n    If no such a value exist, return -1.\n    Examples:\n        search([4, 1, 2, 2, 3, 1]) == 2\n        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3\n        search([5, 5, 4, 4, 4]) == -1\n    '''\n    # Logic: Iterate through the list to find the greatest integer with a frequency greater than or equal to its value.\n    for i in range(1, max(lst) + 1):\n        if lst.count(i) >= i:\n            return i\n    return -1",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 31.901466369628906
+    },
+    {
+        "task_id": "HumanEval/70",
+        "task_name": "strange_sort_list",
+        "samples": [
+            {
+                "raw": "```python\ndef strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    >>> strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    >>> strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    >>> strange_sort_list([]) == []\n    '''\n    # Logic: Sort the list in ascending order and then reverse it to achieve the strange sorting effect.\n    return sorted(lst)[::-1] if lst else []",
+                "extracted": "```python\ndef strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    >>> strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    >>> strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    >>> strange_sort_list([]) == []\n    '''\n    # Logic: Sort the list in ascending order and then reverse it to achieve the strange sorting effect.\n    return sorted(lst)[::-1] if lst else []",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 21.19096827507019
+    },
+    {
+        "task_id": "HumanEval/71",
+        "task_name": "triangle_area",
+        "samples": [
+            {
+                "raw": "```python\ndef triangle_area(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    '''\n    # Logic: Check if the sides form a valid triangle, then calculate and return the area.\n    if not (a + b > c and a + c > b and b + c > a):\n        return -1\n    s = (a + b + c) / 2\n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    return round(area, 2)\n```",
+                "extracted": "def triangle_area(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle. \n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater \n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    '''\n    # Logic: Check if the sides form a valid triangle, then calculate and return the area.\n    if not (a + b > c and a + c > b and b + c > a):\n        return -1\n    s = (a + b + c) / 2\n    area = (s * (s - a) * (s - b) * (s - c)) ** 0.5\n    return round(area, 2)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 26.40536069869995
+    },
+    {
+        "task_id": "HumanEval/72",
+        "task_name": "will_it_fly",
+        "samples": [
+            {
+                "raw": "```python\ndef will_it_fly(q: list, w: int) -> bool:\n    # Logic: Check if the list q is balanced (palindromic) and if the sum of its elements is less than or equal to w.\n    return q == q[::-1] and sum(q) <= w\n```",
+                "extracted": "def will_it_fly(q: list, w: int) -> bool:\n    # Logic: Check if the list q is balanced (palindromic) and if the sum of its elements is less than or equal to w.\n    return q == q[::-1] and sum(q) <= w",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 19.241193294525146
+    },
+    {
+        "task_id": "HumanEval/73",
+        "task_name": "smallest_change",
+        "samples": [
+            {
+                "raw": "```python\ndef smallest_change(arr):\n    \"\"\"\n    Given an array arr of integers, find the minimum number of elements that need to be changed to make the array palindromic.\n    \n    Parameters:\n    arr (list): The input list of integers.\n    \n    Returns:\n    int: The minimum number of changes required.\n    \n    Examples:\n    smallest_change([1,2,3,5,4,7,9,6]) == 4\n    smallest_change([1, 2, 3, 4, 3, 2, 2]) == 1\n    smallest_change([1, 2, 3, 2, 1]) == 0\n    \"\"\"\n    # Logic: Initialize pointers for the start and end of the array.\n    left, right = 0, len(arr) - 1\n    \n    changes = 0\n    \n    while left < right:\n        if arr[left] != arr[right]:\n            changes += 1\n        left += 1\n        right -= 1\n    \n    return changes\n```",
+                "extracted": "def smallest_change(arr):\n    \"\"\"\n    Given an array arr of integers, find the minimum number of elements that need to be changed to make the array palindromic.\n    \n    Parameters:\n    arr (list): The input list of integers.\n    \n    Returns:\n    int: The minimum number of changes required.\n    \n    Examples:\n    smallest_change([1,2,3,5,4,7,9,6]) == 4\n    smallest_change([1, 2, 3, 4, 3, 2, 2]) == 1\n    smallest_change([1, 2, 3, 2, 1]) == 0\n    \"\"\"\n    # Logic: Initialize pointers for the start and end of the array.\n    left, right = 0, len(arr) - 1\n    \n    changes = 0\n    \n    while left < right:\n        if arr[left] != arr[right]:\n            changes += 1\n        left += 1\n        right -= 1\n    \n    return changes",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 27.417341947555542
+    },
+    {
+        "task_id": "HumanEval/74",
+        "task_name": "total_match",
+        "samples": [
+            {
+                "raw": "```python\ndef total_match(lst1, lst2):\n    # Logic: Compare the lengths of the two lists. Return the list with fewer characters or the first list if they are equal.\n    return lst1 if len(lst1) <= len(lst2) else lst2\n```",
+                "extracted": "def total_match(lst1, lst2):\n    # Logic: Compare the lengths of the two lists. Return the list with fewer characters or the first list if they are equal.\n    return lst1 if len(lst1) <= len(lst2) else lst2",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 16.386772632598877
+    },
+    {
+        "task_id": "HumanEval/75",
+        "task_name": "is_multiply_prime",
+        "samples": [
+            {
+                "raw": "```python\ndef is_multiply_prime(a):\n    # Logic: Check if the given number is the multiplication of 3 prime numbers.\n    # Edge case: The input must be less than 100.\n    if a >= 100:\n        return False\n    \n    count = 0\n    for i in range(2, int(a**0.5) + 1):\n        if a % i == 0:\n            count += 1\n            while a % i == 0:\n                a //= i\n    if a > 2:\n        count += 1\n    \n    return count == 3\n```",
+                "extracted": "def is_multiply_prime(a):\n    # Logic: Check if the given number is the multiplication of 3 prime numbers.\n    # Edge case: The input must be less than 100.\n    if a >= 100:\n        return False\n    \n    count = 0\n    for i in range(2, int(a**0.5) + 1):\n        if a % i == 0:\n            count += 1\n            while a % i == 0:\n                a //= i\n    if a > 2:\n        count += 1\n    \n    return count == 3",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 19.456765174865723
+    },
+    {
+        "task_id": "HumanEval/76",
+        "task_name": "is_simple_power",
+        "samples": [
+            {
+                "raw": "```python\ndef is_simple_power(x: int, n: int) -> bool:\n    \"\"\"Your task is to write a function that returns true if a number x is a simple\n    power of n and false in other cases.\n    x is a simple power of n if n**int=x\n    For example:\n    is_simple_power(1, 4) => True\n    is_simple_power(2, 2) => True\n    is_simple_power(8, 2) => True\n    is_simple_power(3, 2) => False\n    is_simple_power(3, 1) => False\n    is_simple_power(5, 3) => False\n    \"\"\"\n    # Logic: Check if x can be expressed as n raised to an integer power.\n    if x <= 0 or n <= 0:\n        return False\n    if x == 1:\n        return True\n    while x % n == 0:\n        x //= n\n    return x == 1\n```",
+                "extracted": "def is_simple_power(x: int, n: int) -> bool:\n    \"\"\"Your task is to write a function that returns true if a number x is a simple\n    power of n and false in other cases.\n    x is a simple power of n if n**int=x\n    For example:\n    is_simple_power(1, 4) => True\n    is_simple_power(2, 2) => True\n    is_simple_power(8, 2) => True\n    is_simple_power(3, 2) => False\n    is_simple_power(3, 1) => False\n    is_simple_power(5, 3) => False\n    \"\"\"\n    # Logic: Check if x can be expressed as n raised to an integer power.\n    if x <= 0 or n <= 0:\n        return False\n    if x == 1:\n        return True\n    while x % n == 0:\n        x //= n\n    return x == 1",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 23.64633345603943
+    },
+    {
+        "task_id": "HumanEval/77",
+        "task_name": "iscube",
+        "samples": [
+            {
+                "raw": "Problem:\n\nWrite a function that takes an integer `a` and returns True if this integer is a cube of some integer number.\nNote: you may assume the input is always valid.\nExamples:\n- iscube(1) ==> True\n- iscube(2) ==> False\n- iscube(-1) ==> True\n- iscube(64) ==> True\n- iscube(0) ==> True\n- iscube(180) ==> False\n\n# Logic: \nTo determine if a number is a cube, we can take the cube root of the number and check if it's an integer. If the cube root is an integer, then the original number is a cube.\n\n```python\ndef is_cube(a):\n    # Logic: Calculate the cube root of the input number and check if it's an integer.\n    cube_root = round(a ** (1/3))\n    return cube_root ** 3 == a\n```\n\nThis function works as follows:\n- It calculates the cube root of `a` using the exponentiation operator `**`.\n- The `round()` function is used to round the result to the nearest integer.\n- Finally, it checks if the cube of this rounded value equals the original number `a`. If they are equal, then `a` is a cube; otherwise, it is not.",
+                "extracted": "def is_cube(a):\n    # Logic: Calculate the cube root of the input number and check if it's an integer.\n    cube_root = round(a ** (1/3))\n    return cube_root ** 3 == a",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 26.93476939201355
+    },
+    {
+        "task_id": "HumanEval/78",
+        "task_name": "hex_key",
+        "samples": [
+            {
+                "raw": "Problem:\nGiven a hexadecimal number as a string, count the number of prime digits in it. Prime digits are 2, 3, 5, 7, B (decimal 11), D (decimal 13).\n\nSolution:\n\n```python\ndef hex_key(num):\n    # Logic: Iterate through each character in the input string.\n    # Check if the character is a prime digit and count it.\n    return sum(1 for char in num if char in {'2', '3', '5', '7', 'B', 'D'})\n```",
+                "extracted": "def hex_key(num):\n    # Logic: Iterate through each character in the input string.\n    # Check if the character is a prime digit and count it.\n    return sum(1 for char in num if char in {'2', '3', '5', '7', 'B', 'D'})",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 22.427623748779297
+    },
+    {
+        "task_id": "HumanEval/79",
+        "task_name": "decimal_to_binary",
+        "samples": [
+            {
+                "raw": "```python\ndef decimal_to_binary(decimal):\n    \"\"\"\n    Convert a given decimal number to its binary representation as a string.\n\n    The function returns a string where each character represents a binary digit ('0' or '1').\n    The returned string will have two additional characters at the beginning and end, 'db', to help with formatting.\n\n    Examples:\n    >>> decimal_to_binary(15)   # returns \"db1111db\"\n    >>> decimal_to_binary(32)   # returns \"db100000db\"\n    \"\"\"\n    # Logic: Convert the decimal number to binary, remove the '0b' prefix, and format with 'db'.\n    return f\"db{bin(decimal)[2:].zfill(len(bin(decimal)) - 2)}db\"\n```",
+                "extracted": "def decimal_to_binary(decimal):\n    \"\"\"\n    Convert a given decimal number to its binary representation as a string.\n\n    The function returns a string where each character represents a binary digit ('0' or '1').\n    The returned string will have two additional characters at the beginning and end, 'db', to help with formatting.\n\n    Examples:\n    >>> decimal_to_binary(15)   # returns \"db1111db\"\n    >>> decimal_to_binary(32)   # returns \"db100000db\"\n    \"\"\"\n    # Logic: Convert the decimal number to binary, remove the '0b' prefix, and format with 'db'.\n    return f\"db{bin(decimal)[2:].zfill(len(bin(decimal)) - 2)}db\"",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 23.489893913269043
+    },
+    {
+        "task_id": "HumanEval/80",
+        "task_name": "is_happy",
+        "samples": [
+            {
+                "raw": "```python\ndef is_happy(s):\n    \"\"\"\n    Check if a string is happy or not.\n    \n    A string is considered happy if its length is at least 3 and every 3 consecutive letters are distinct.\n    \n    Parameters:\n    s (str): The input string to check.\n    \n    Returns:\n    bool: True if the string is happy, False otherwise.\n    \"\"\"\n    # Logic: Check the length of the string and ensure every 3 consecutive characters are unique.\n    if len(s) < 3:\n        return False\n    for i in range(len(s) - 2):\n        if s[i] == s[i + 1] or s[i] == s[i + 2]:\n            return False\n    return True\n```",
+                "extracted": "def is_happy(s):\n    \"\"\"\n    Check if a string is happy or not.\n    \n    A string is considered happy if its length is at least 3 and every 3 consecutive letters are distinct.\n    \n    Parameters:\n    s (str): The input string to check.\n    \n    Returns:\n    bool: True if the string is happy, False otherwise.\n    \"\"\"\n    # Logic: Check the length of the string and ensure every 3 consecutive characters are unique.\n    if len(s) < 3:\n        return False\n    for i in range(len(s) - 2):\n        if s[i] == s[i + 1] or s[i] == s[i + 2]:\n            return False\n    return True",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 28.10970115661621
+    },
+    {
+        "task_id": "HumanEval/81",
+        "task_name": "numerical_letter_grade",
+        "samples": [
+            {
+                "raw": "```python\ndef numerical_letter_grade(grades):\n    # Logic: Convert each GPA to its corresponding letter grade based on the provided table.\n    letter_grades = []\n    for gpa in grades:\n        if gpa == 4.0:\n            letter_grades.append('A+')\n        elif gpa > 3.7:\n            letter_grades.append('A')\n        elif gpa > 3.3:\n            letter_grades.append('A-')\n        elif gpa > 3.0:\n            letter_grades.append('B+')\n        elif gpa > 2.7:\n            letter_grades.append('B')\n        elif gpa > 2.3:\n            letter_grades.append('B-')\n        elif gpa > 2.0:\n            letter_grades.append('C+')\n        elif gpa > 1.7:\n            letter_grades.append('C')\n        elif gpa > 1.3:\n            letter_grades.append('C-')\n        elif gpa > 1.0:\n            letter_grades.append('D+')\n        elif gpa > 0.7:\n            letter_grades.append('D')\n        elif gpa > 0.0:\n            letter_grades.append('D-')\n        else:\n            letter_grades.append('E')\n    return letter_grades\n```",
+                "extracted": "def numerical_letter_grade(grades):\n    # Logic: Convert each GPA to its corresponding letter grade based on the provided table.\n    letter_grades = []\n    for gpa in grades:\n        if gpa == 4.0:\n            letter_grades.append('A+')\n        elif gpa > 3.7:\n            letter_grades.append('A')\n        elif gpa > 3.3:\n            letter_grades.append('A-')\n        elif gpa > 3.0:\n            letter_grades.append('B+')\n        elif gpa > 2.7:\n            letter_grades.append('B')\n        elif gpa > 2.3:\n            letter_grades.append('B-')\n        elif gpa > 2.0:\n            letter_grades.append('C+')\n        elif gpa > 1.7:\n            letter_grades.append('C')\n        elif gpa > 1.3:\n            letter_grades.append('C-')\n        elif gpa > 1.0:\n            letter_grades.append('D+')\n        elif gpa > 0.7:\n            letter_grades.append('D')\n        elif gpa > 0.0:\n            letter_grades.append('D-')\n        else:\n            letter_grades.append('E')\n    return letter_grades",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 47.42972946166992
+    },
+    {
+        "task_id": "HumanEval/82",
+        "task_name": "prime_length",
+        "samples": [
+            {
+                "raw": "```python\ndef prime_length(string):\n    # Logic: Check if the length of the string is a prime number.\n    def is_prime(n):\n        \"\"\"Helper function to check if a number is prime.\"\"\"\n        if n <= 1:\n            return False\n        for i in range(2, int(n**0.5) + 1):\n            if n % i == 0:\n                return False\n        return True\n\n    # Logic: Check the length of the string and determine if it's a prime number.\n    return is_prime(len(string))\n```",
+                "extracted": "def prime_length(string):\n    # Logic: Check if the length of the string is a prime number.\n    def is_prime(n):\n        \"\"\"Helper function to check if a number is prime.\"\"\"\n        if n <= 1:\n            return False\n        for i in range(2, int(n**0.5) + 1):\n            if n % i == 0:\n                return False\n        return True\n\n    # Logic: Check the length of the string and determine if it's a prime number.\n    return is_prime(len(string))",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 21.27970004081726
+    },
+    {
+        "task_id": "HumanEval/83",
+        "task_name": "starts_one_ends",
+        "samples": [
+            {
+                "raw": "```python\ndef starts_one_ends(n):\n    \"\"\"\n    Given a positive integer n, return the count of the numbers of n-digit\n    positive integers that start or end with 1.\n    \n    Examples:\n    >>> starts_one_ends(1)\n    1\n    >>> starts_one_ends(2)\n    19\n    >>> starts_one_ends(3)\n    180\n    \"\"\"\n    # Logic: Calculate the count of numbers starting or ending with 1 for n-digit integers.\n    if n == 1:\n        return 1\n    else:\n        return 18 * (10 ** (n - 2))\n```",
+                "extracted": "def starts_one_ends(n):\n    \"\"\"\n    Given a positive integer n, return the count of the numbers of n-digit\n    positive integers that start or end with 1.\n    \n    Examples:\n    >>> starts_one_ends(1)\n    1\n    >>> starts_one_ends(2)\n    19\n    >>> starts_one_ends(3)\n    180\n    \"\"\"\n    # Logic: Calculate the count of numbers starting or ending with 1 for n-digit integers.\n    if n == 1:\n        return 1\n    else:\n        return 18 * (10 ** (n - 2))",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 16.404146432876587
+    },
+    {
+        "task_id": "HumanEval/84",
+        "task_name": "solve",
+        "samples": [
+            {
+                "raw": "```python\ndef solve(N):\n    # Logic: Convert the integer N to binary, sum its digits, and format the result as a string of binary numbers.\n    binary_sum = bin(sum(int(digit) for digit in str(N)))[2:]\n    return binary_sum\n```",
+                "extracted": "def solve(N):\n    # Logic: Convert the integer N to binary, sum its digits, and format the result as a string of binary numbers.\n    binary_sum = bin(sum(int(digit) for digit in str(N)))[2:]\n    return binary_sum",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 14.63031816482544
+    },
+    {
+        "task_id": "HumanEval/85",
+        "task_name": "add",
+        "samples": [
+            {
+                "raw": "```python\ndef add(lst):\n    # Logic: Sum up all even elements that are at odd indices in the list.\n    return sum(x for i, x in enumerate(lst) if i % 2 == 1 and x % 2 == 0)\n```",
+                "extracted": "def add(lst):\n    # Logic: Sum up all even elements that are at odd indices in the list.\n    return sum(x for i, x in enumerate(lst) if i % 2 == 1 and x % 2 == 0)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 10.566002130508423
+    },
+    {
+        "task_id": "HumanEval/86",
+        "task_name": "anti_shuffle",
+        "samples": [
+            {
+                "raw": "```python\ndef anti_shuffle(s):\n    \"\"\"\n    Write a function that takes a string and returns an ordered version of it.\n    Ordered version of string, is a string where all words (separated by space)\n    are replaced by a new word where all the characters arranged in\n    ascending order based on ascii value.\n    Note: You should keep the order of words and blank spaces in the sentence.\n\n    For example:\n    anti_shuffle('Hi') returns 'Hi'\n    anti_shuffle('hello') returns 'ehllo'\n    anti_shuffle('Hello World!!!') returns 'Hello !!!Wdlor'\n    \"\"\"\n    # Logic: Split the string into words, sort each word's characters, and then join them back together.\n    return ' '.join(sorted(word) for word in s.split())\n```",
+                "extracted": "def anti_shuffle(s):\n    \"\"\"\n    Write a function that takes a string and returns an ordered version of it.\n    Ordered version of string, is a string where all words (separated by space)\n    are replaced by a new word where all the characters arranged in\n    ascending order based on ascii value.\n    Note: You should keep the order of words and blank spaces in the sentence.\n\n    For example:\n    anti_shuffle('Hi') returns 'Hi'\n    anti_shuffle('hello') returns 'ehllo'\n    anti_shuffle('Hello World!!!') returns 'Hello !!!Wdlor'\n    \"\"\"\n    # Logic: Split the string into words, sort each word's characters, and then join them back together.\n    return ' '.join(sorted(word) for word in s.split())",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 22.09189200401306
+    },
+    {
+        "task_id": "HumanEval/87",
+        "task_name": "get_row",
+        "samples": [
+            {
+                "raw": "```python\ndef get_row(lst, x):\n    \"\"\"\n    Given a 2-dimensional data as a nested lists,\n    find integers x in the list, and return list of tuples,\n    [(x1, y1), (x2, y2) ...] such that each tuple is a coordinate - (row, columns),\n    starting with 0.\n    \n    Examples:\n    get_row([\n      [1,2,3,4,5,6],\n      [1,2,3,4,1,6],\n      [1,2,3,4,5,1]\n    ], 1) == [(0, 0), (1, 4), (1, 0), (2, 5), (2, 0)]\n    get_row([], 1) == []\n    get_row([[], [1], [1, 2, 3]], 3) == [(2, 2)]\n    \n    # Logic: Iterate through each row of the list. For each row, check if x is in the row.\n    # If found, append a tuple (row index, column index) to the result list.\n    # Sort the result list by rows in ascending order and columns in descending order for each row.\n    \"\"\"\n    result = []\n    for i, row in enumerate(lst):\n        if x in row:\n            result.append((i, row.index(x)))\n    \n    # Sort the result list by rows in ascending order and columns in descending order for each row\n    result.sort(key=lambda item: (item[0], -item[1][0]))\n    \n    return result\n```",
+                "extracted": "def get_row(lst, x):\n    \"\"\"\n    Given a 2-dimensional data as a nested lists,\n    find integers x in the list, and return list of tuples,\n    [(x1, y1), (x2, y2) ...] such that each tuple is a coordinate - (row, columns),\n    starting with 0.\n    \n    Examples:\n    get_row([\n      [1,2,3,4,5,6],\n      [1,2,3,4,1,6],\n      [1,2,3,4,5,1]\n    ], 1) == [(0, 0), (1, 4), (1, 0), (2, 5), (2, 0)]\n    get_row([], 1) == []\n    get_row([[], [1], [1, 2, 3]], 3) == [(2, 2)]\n    \n    # Logic: Iterate through each row of the list. For each row, check if x is in the row.\n    # If found, append a tuple (row index, column index) to the result list.\n    # Sort the result list by rows in ascending order and columns in descending order for each row.\n    \"\"\"\n    result = []\n    for i, row in enumerate(lst):\n        if x in row:\n            result.append((i, row.index(x)))\n    \n    # Sort the result list by rows in ascending order and columns in descending order for each row\n    result.sort(key=lambda item: (item[0], -item[1][0]))\n    \n    return result",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 56.600703954696655
+    },
+    {
+        "task_id": "HumanEval/88",
+        "task_name": "sort_array",
+        "samples": [
+            {
+                "raw": "```python\ndef sort_array(array):\n    \"\"\"\n    Given an array of non-negative integers, return a copy of the given array after sorting,\n    you will sort the given array in ascending order if the sum( first index value, last index value) is odd,\n    or sort it in descending order if the sum( first index value, last index value) is even.\n\n    Note:\n    * don't change the given array.\n    * If the sum of the first and last elements is odd, sort the array in ascending order.\n    * If the sum of the first and last elements is even, sort the array in descending order.\n\n    Examples:\n    * sort_array([]) => []\n    * sort_array([5]) => [5]\n    * sort_array([2, 4, 3, 0, 1, 5]) => [0, 1, 2, 3, 4, 5]\n    * sort_array([2, 4, 3, 0, 1, 5, 6]) => [6, 5, 4, 3, 2, 1, 0]\n    \"\"\"\n    if not array:\n        return []\n    \n    # Logic: Determine the sorting order based on the sum of the first and last elements.\n    if (array[0] + array[-1]) % 2 == 0:\n        sorted_array = sorted(array, reverse=True)\n    else:\n        sorted_array = sorted(array)\n    \n    return sorted_array\n```",
+                "extracted": "def sort_array(array):\n    \"\"\"\n    Given an array of non-negative integers, return a copy of the given array after sorting,\n    you will sort the given array in ascending order if the sum( first index value, last index value) is odd,\n    or sort it in descending order if the sum( first index value, last index value) is even.\n\n    Note:\n    * don't change the given array.\n    * If the sum of the first and last elements is odd, sort the array in ascending order.\n    * If the sum of the first and last elements is even, sort the array in descending order.\n\n    Examples:\n    * sort_array([]) => []\n    * sort_array([5]) => [5]\n    * sort_array([2, 4, 3, 0, 1, 5]) => [0, 1, 2, 3, 4, 5]\n    * sort_array([2, 4, 3, 0, 1, 5, 6]) => [6, 5, 4, 3, 2, 1, 0]\n    \"\"\"\n    if not array:\n        return []\n    \n    # Logic: Determine the sorting order based on the sum of the first and last elements.\n    if (array[0] + array[-1]) % 2 == 0:\n        sorted_array = sorted(array, reverse=True)\n    else:\n        sorted_array = sorted(array)\n    \n    return sorted_array",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 48.4221134185791
+    },
+    {
+        "task_id": "HumanEval/89",
+        "task_name": "encrypt",
+        "samples": [
+            {
+                "raw": "# Logic: Implement an encryption function that rotates the alphabet by two places for each character in the input string. The function should handle uppercase, lowercase letters, and non-alphabet characters as they are.",
+                "extracted": "# Logic: Implement an encryption function that rotates the alphabet by two places for each character in the input string. The function should handle uppercase, lowercase letters, and non-alphabet characters as they are.",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 13.104334354400635
+    },
+    {
+        "task_id": "HumanEval/90",
+        "task_name": "next_smallest",
+        "samples": [
+            {
+                "raw": "```python\ndef next_smallest(lst):\n    \"\"\"\n    You are given a list of integers.\n    Write a function next_smallest() that returns the 2nd smallest element of the list.\n    Return None if there is no such element.\n    \n    # Logic: Sort the list and return the second element if it exists, otherwise return None.\n    \"\"\"\n    if len(lst) < 2:\n        return None\n    lst.sort()\n    return lst[1] if lst[0] != lst[1] else None\n```",
+                "extracted": "def next_smallest(lst):\n    \"\"\"\n    You are given a list of integers.\n    Write a function next_smallest() that returns the 2nd smallest element of the list.\n    Return None if there is no such element.\n    \n    # Logic: Sort the list and return the second element if it exists, otherwise return None.\n    \"\"\"\n    if len(lst) < 2:\n        return None\n    lst.sort()\n    return lst[1] if lst[0] != lst[1] else None",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 18.167078018188477
+    },
+    {
+        "task_id": "HumanEval/91",
+        "task_name": "is_bored",
+        "samples": [
+            {
+                "raw": "```python\ndef is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. A boredom is a sentence that starts with the word \"I\".\n    Sentences are delimited by '.', '?' or '!'.\n    \n    For example:\n    >>> is_bored(\"Hello world\")\n    0\n    >>> is_bored(\"The sky is blue. The sun is shining. I love this weather\")\n    1\n    \"\"\"\n    # Logic: Count sentences starting with \"I\" and return the count.\n    boredom_count = sum(1 for sentence in S.split('.') if sentence.startswith('I'))\n    return boredom_count\n```",
+                "extracted": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. A boredom is a sentence that starts with the word \"I\".\n    Sentences are delimited by '.', '?' or '!'.\n    \n    For example:\n    >>> is_bored(\"Hello world\")\n    0\n    >>> is_bored(\"The sky is blue. The sun is shining. I love this weather\")\n    1\n    \"\"\"\n    # Logic: Count sentences starting with \"I\" and return the count.\n    boredom_count = sum(1 for sentence in S.split('.') if sentence.startswith('I'))\n    return boredom_count",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 19.10621190071106
+    },
+    {
+        "task_id": "HumanEval/92",
+        "task_name": "any_int",
+        "samples": [
+            {
+                "raw": "```python\ndef any_int(x: int, y: int, z: int) -> bool:\n    # Logic: Check if all inputs are integers and if one of them is equal to the sum of the other two.\n    return isinstance(x, int) and isinstance(y, int) and isinstance(z, int) and (x + y == z or x + z == y or y + z == x)\n```",
+                "extracted": "def any_int(x: int, y: int, z: int) -> bool:\n    # Logic: Check if all inputs are integers and if one of them is equal to the sum of the other two.\n    return isinstance(x, int) and isinstance(y, int) and isinstance(z, int) and (x + y == z or x + z == y or y + z == x)",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 15.152352333068848
+    },
+    {
+        "task_id": "HumanEval/93",
+        "task_name": "encode",
+        "samples": [
+            {
+                "raw": "```python\ndef encode(message):\n    \"\"\"\n    Write a function that takes a message, and encodes in such a \n    way that it swaps case of all letters, replaces all vowels in \n    the message with the letter that appears 2 places ahead of that \n    vowel in the english alphabet. \n    Assume only letters. \n    \n    Examples:\n    >>> encode('test')\n    'TGST'\n    >>> encode('This is a message')\n    'tHKS KS C MGSSCGG'\n    \"\"\"\n    # Logic: Convert the message to lowercase, replace vowels with the letter 2 places ahead in the alphabet.\n    encoded_message = ''\n    for char in message:\n        if char.isalpha():\n            base = ord('a') if char.islower() else ord('A')\n            new_char = chr((ord(char) - base + 2) % 26 + base)\n            encoded_message += new_char\n        else:\n            encoded_message += char\n    return encoded_message\n```",
+                "extracted": "def encode(message):\n    \"\"\"\n    Write a function that takes a message, and encodes in such a \n    way that it swaps case of all letters, replaces all vowels in \n    the message with the letter that appears 2 places ahead of that \n    vowel in the english alphabet. \n    Assume only letters. \n    \n    Examples:\n    >>> encode('test')\n    'TGST'\n    >>> encode('This is a message')\n    'tHKS KS C MGSSCGG'\n    \"\"\"\n    # Logic: Convert the message to lowercase, replace vowels with the letter 2 places ahead in the alphabet.\n    encoded_message = ''\n    for char in message:\n        if char.isalpha():\n            base = ord('a') if char.islower() else ord('A')\n            new_char = chr((ord(char) - base + 2) % 26 + base)\n            encoded_message += new_char\n        else:\n            encoded_message += char\n    return encoded_message",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 27.030592441558838
+    },
+    {
+        "task_id": "HumanEval/94",
+        "task_name": "skjkasdkd",
+        "samples": [
+            {
+                "raw": "```python\ndef skjkasdkd(lst):\n    # Logic: Iterate through the list, check for prime numbers, sum their digits, and return the largest sum.\n    def is_prime(n):\n        if n <= 1:\n            return False\n        for i in range(2, int(n**0.5) + 1):\n            if n % i == 0:\n                return False\n        return True\n\n    max_sum = 0\n    for num in lst:\n        if is_prime(num):\n            digit_sum = sum(int(digit) for digit in str(num))\n            max_sum = max(max_sum, digit_sum)\n\n    return max_sum\n```",
+                "extracted": "def skjkasdkd(lst):\n    # Logic: Iterate through the list, check for prime numbers, sum their digits, and return the largest sum.\n    def is_prime(n):\n        if n <= 1:\n            return False\n        for i in range(2, int(n**0.5) + 1):\n            if n % i == 0:\n                return False\n        return True\n\n    max_sum = 0\n    for num in lst:\n        if is_prime(num):\n            digit_sum = sum(int(digit) for digit in str(num))\n            max_sum = max(max_sum, digit_sum)\n\n    return max_sum",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 24.963987350463867
+    },
+    {
+        "task_id": "HumanEval/95",
+        "task_name": "check_dict_case",
+        "samples": [
+            {
+                "raw": "```python\ndef check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    # Logic: Iterate through the dictionary keys, checking if they are strings and their case matches the expected case.\n    if not dict:\n        return False\n    lower_case = all(isinstance(key, str) and key.islower() for key in dict)\n    upper_case = all(isinstance(key, str) and key.isupper() for key in dict)\n    return lower_case or upper_case\n```",
+                "extracted": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    # Logic: Iterate through the dictionary keys, checking if they are strings and their case matches the expected case.\n    if not dict:\n        return False\n    lower_case = all(isinstance(key, str) and key.islower() for key in dict)\n    upper_case = all(isinstance(key, str) and key.isupper() for key in dict)\n    return lower_case or upper_case",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 30.14150309562683
+    },
+    {
+        "task_id": "HumanEval/96",
+        "task_name": "count_up_to",
+        "samples": [
+            {
+                "raw": "```python\ndef count_up_to(n):\n    # Logic: Implement a function that takes an non-negative integer and returns an array of the first n integers that are prime numbers and less than n.\n    if n <= 1:\n        return []\n    \n    def is_prime(num):\n        \"\"\"Check if a number is prime.\"\"\"\n        if num < 2:\n            return False\n        for i in range(2, int(math.sqrt(num)) + 1):\n            if num % i == 0:\n                return False\n        return True\n    \n    primes = []\n    for i in range(2, n):\n        if is_prime(i):\n            primes.append(i)\n    \n    return primes[:n]\n```",
+                "extracted": "def count_up_to(n):\n    # Logic: Implement a function that takes an non-negative integer and returns an array of the first n integers that are prime numbers and less than n.\n    if n <= 1:\n        return []\n    \n    def is_prime(num):\n        \"\"\"Check if a number is prime.\"\"\"\n        if num < 2:\n            return False\n        for i in range(2, int(math.sqrt(num)) + 1):\n            if num % i == 0:\n                return False\n        return True\n    \n    primes = []\n    for i in range(2, n):\n        if is_prime(i):\n            primes.append(i)\n    \n    return primes[:n]",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 19.006606340408325
+    },
+    {
+        "task_id": "HumanEval/97",
+        "task_name": "multiply",
+        "samples": [
+            {
+                "raw": "```python\ndef multiply(a, b):\n    # Logic: Calculate the product of the unit digits of two integers.\n    # Edge case: If either number is negative, the result should be 0.\n    if a < 0 or b < 0:\n        return 0\n    # Extract the last digit of each number and multiply them.\n    return (a % 10) * (b % 10)\n```",
+                "extracted": "def multiply(a, b):\n    # Logic: Calculate the product of the unit digits of two integers.\n    # Edge case: If either number is negative, the result should be 0.\n    if a < 0 or b < 0:\n        return 0\n    # Extract the last digit of each number and multiply them.\n    return (a % 10) * (b % 10)",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 12.809800624847412
+    },
+    {
+        "task_id": "HumanEval/98",
+        "task_name": "count_upper",
+        "samples": [
+            {
+                "raw": "Problem:\nGiven a string `s`, count the number of uppercase vowels in even indices.\n\nFor example:\n- `count_upper('aBCdEf')` returns 1\n- `count_upper('abcdefg')` returns 0\n- `count_upper('dBBE')` returns 0\n\nCode:\n```python\ndef count_upper(s):\n    \"\"\"\n    # Logic: Iterate through the string, checking each character at even indices.\n    # If it's an uppercase vowel (A, E, I, O, U), increment a counter.\n    # Return the total count of such characters.\n    \"\"\"\n    vowels = 'AEIOU'\n    count = 0\n    for i in range(0, len(s), 2):\n        if s[i] in vowels:\n            count += 1\n    return count\n```",
+                "extracted": "def count_upper(s):\n    \"\"\"\n    # Logic: Iterate through the string, checking each character at even indices.\n    # If it's an uppercase vowel (A, E, I, O, U), increment a counter.\n    # Return the total count of such characters.\n    \"\"\"\n    vowels = 'AEIOU'\n    count = 0\n    for i in range(0, len(s), 2):\n        if s[i] in vowels:\n            count += 1\n    return count",
+                "passed": true
+            }
+        ],
+        "correct_count": 1,
+        "n": 1,
+        "pass@k": 1.0,
+        "time_taken": 16.98835039138794
+    },
+    {
+        "task_id": "HumanEval/99",
+        "task_name": "closest_integer",
+        "samples": [
+            {
+                "raw": "```python\ndef closest_integer(value):\n    '''\n    Create a function that takes a value (string) representing a number\n    and returns the closest integer to it. If the number is equidistant\n    from two integers, round it away from zero.\n\n    Examples\n    >>> closest_integer(\"10\")\n    10\n    >>> closest_integer(\"15.3\")\n    15\n\n    Note:\n    Rounding away from zero means that if the given number is equidistant\n    from two integers, the one you should return is the one that is the\n    farthest from zero. For example closest_integer(\"14.5\") should\n    return 15 and closest_integer(\"-14.5\") should return -15.\n    '''\n    # Logic: Convert the string to a float, use round() with the second argument set to 0 for rounding away from zero,\n    # then convert back to an integer.\n    return int(round(float(value), 0))\n```",
+                "extracted": "def closest_integer(value):\n    '''\n    Create a function that takes a value (string) representing a number\n    and returns the closest integer to it. If the number is equidistant\n    from two integers, round it away from zero.\n\n    Examples\n    >>> closest_integer(\"10\")\n    10\n    >>> closest_integer(\"15.3\")\n    15\n\n    Note:\n    Rounding away from zero means that if the given number is equidistant\n    from two integers, the one you should return is the one that is the\n    farthest from zero. For example closest_integer(\"14.5\") should\n    return 15 and closest_integer(\"-14.5\") should return -15.\n    '''\n    # Logic: Convert the string to a float, use round() with the second argument set to 0 for rounding away from zero,\n    # then convert back to an integer.\n    return int(round(float(value), 0))",
+                "passed": false
+            }
+        ],
+        "correct_count": 0,
+        "n": 1,
+        "pass@k": 0.0,
+        "time_taken": 25.84577488899231
+    }
+]
