@@ -1,6 +1,12 @@
 ZERO_SHOT_PROMPT = """You are an expert Python programmer. Write the implementation for the following problem.
 Do not output anything else but the code block.
 
+Requirements:
+- Output only a single Python code block.
+- Include all necessary imports explicitly (e.g., from typing import List, Optional, etc.).
+- Do not assume any helper functions exist — define everything you use.
+- The solution must be self-contained and executable.
+
 Problem:
 {prompt}
 
@@ -9,6 +15,12 @@ Code:
 
 FEW_SHOT_PROMPT = """You are an expert Python programmer. You will be provided some examples, and then a problem to solve.
 Do not output anything else but the code block.
+
+Requirements:
+- Output only a single Python code block.
+- Include all necessary imports explicitly (e.g., from typing import List, Optional, etc.).
+- Do not assume any helper functions exist — define everything you use.
+- The solution must be self-contained and executable.
 
 Example 1:
 Problem:
@@ -24,14 +36,14 @@ def add(a, b):
 
 Example 2:
 Problem:
-def is_even(n):
-    \"\"\"Check if a number is even.\"\"\"
+def is_palindrome(s: str) -> bool:
+    \"\"\"Check if a string is a palindrome.\"\"\"
 
 Code:
 ```python
-def is_even(n):
-    \"\"\"Check if a number is even.\"\"\"
-    return n % 2 == 0
+def is_palindrome(s: str) -> bool:
+    \"\"\"Check if a string is a palindrome.\"\"\"
+    return s == s[::-1]
 ```
 
 Problem:
@@ -141,9 +153,9 @@ Code:
 
 # Dictionary to manage all templates
 PROMPT_TEMPLATES = {
-    # "zero_shot": ZERO_SHOT_PROMPT,
-    # "few_shot": FEW_SHOT_PROMPT,
-    # "cot": COT_PROMPT,
+    "zero_shot": ZERO_SHOT_PROMPT,
+    "few_shot": FEW_SHOT_PROMPT,
+    "cot": COT_PROMPT,
     # "hybrid": HYBRID_PROMPT,
-    "optimized": OPTIMIZED_PROMPT
+    # "optimized": OPTIMIZED_PROMPT
 }
