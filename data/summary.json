@@ -1,0 +1,10 @@
+{
+    "qwen_base/humaneval/zero_shot": 0.7317073170731707,
+    "qwen_base/humaneval/few_shot": 0.7682926829268293,
+    "qwen_base/humaneval_plus/zero_shot": 0.6890243902439024,
+    "qwen_base/humaneval_plus/few_shot": 0.6951219512195121,
+    "qwen_instruct/humaneval/zero_shot": 0.8414634146341463,
+    "qwen_instruct/humaneval/few_shot": 0.8780487804878049,
+    "qwen_instruct/humaneval_plus/zero_shot": 0.7926829268292683,
+    "qwen_instruct/humaneval_plus/few_shot": 0.823170731707317
+}
