@@ -1,0 +1,44 @@
+{
+  "citation": "",
+  "description": "",
+  "features": {
+    "id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "input": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "output": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "domain": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "generation_algorithm": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "llm_judgement": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "unit_tests": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "tests_execution_status": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "average_test_score": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": ""
+}
