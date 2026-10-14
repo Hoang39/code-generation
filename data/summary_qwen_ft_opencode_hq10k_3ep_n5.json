@@ -1,0 +1,8 @@
+{
+    "qwen_ft_opencode_hq10k_3ep_epoch1/humaneval/few_shot": 0.7865853658536586,
+    "qwen_ft_opencode_hq10k_3ep_epoch1/humaneval_plus/few_shot": 0.7353658536585364,
+    "qwen_ft_opencode_hq10k_3ep_epoch2/humaneval/few_shot": 0.774390243902439,
+    "qwen_ft_opencode_hq10k_3ep_epoch2/humaneval_plus/few_shot": 0.7182926829268292,
+    "qwen_ft_opencode_hq10k_3ep_epoch3/humaneval/few_shot": 0.7597560975609757,
+    "qwen_ft_opencode_hq10k_3ep_epoch3/humaneval_plus/few_shot": 0.7060975609756096
+}
