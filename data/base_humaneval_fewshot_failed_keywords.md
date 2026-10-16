@@ -1,0 +1,40 @@
+# Keyword các bài HumanEval sai của model base (few-shot)
+
+- HumanEval/20 `find_closest_elements`: closest element
+- HumanEval/26 `remove_duplicates`: remove_duplicate
+- HumanEval/32 `find_zero`: polynomial, find_zero
+- HumanEval/38 `decode_cyclic`: cycling
+- HumanEval/39 `prime_fib`: prime_fib
+- HumanEval/50 `decode_shift`: shift
+- HumanEval/54 `same_chars`: same character
+- HumanEval/67 `fruit_distribution`: distribution
+- HumanEval/76 `is_simple_power`: power
+- HumanEval/77 `iscube`: cube
+- HumanEval/83 `starts_one_ends`: n-digit, start or end
+- HumanEval/90 `next_smallest`: next smallest
+- HumanEval/91 `is_bored`: bore
+- HumanEval/93 `encode`: swaps
+- HumanEval/100 `make_a_pile`: pile, stones
+- HumanEval/101 `words_string`: split the string
+- HumanEval/108 `count_nums`: sum of digits
+- HumanEval/115 `max_fill`: rectangular grid, buckets
+- HumanEval/118 `get_closest_vowel`: closest vowel, two consonants
+- HumanEval/120 `maximum`: maximum k
+- HumanEval/122 `add_elements`: first k
+- HumanEval/125 `split_words`: split
+- HumanEval/126 `is_sorted`: is_sorted
+- HumanEval/127 `intersection`: intersection
+- HumanEval/129 `minPath`: minPath, min path
+- HumanEval/130 `tri`: Tribonacci
+- HumanEval/132 `is_nested`: subsequence of brackets
+- HumanEval/137 `compare_one`: compare
+- HumanEval/139 `special_factorial`: brazilian_factorial, special factorial, n! \* (n-1)!
+- HumanEval/140 `fix_spaces`: all consecutive spaces
+- HumanEval/141 `file_name_check`: file's name
+- HumanEval/142 `sum_squares`: sum of square
+- HumanEval/145 `order_by_points`: order_by_point, order by point
+- HumanEval/151 `double_the_difference`: sum of squares
+- HumanEval/158 `find_max`: find max
+- HumanEval/159 `eat`: carrots
+- HumanEval/160 `do_algebra`: algebra operations
+- HumanEval/163 `generate_integers`: even digits
