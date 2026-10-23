@@ -1,0 +1,2904 @@
+{
+ "HumanEval/6": {
+  "entry_point": "parse_nested_parens",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "(()()) ((())) () ((())()())"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     ""
+    ]
+   ],
+   "solution": "from typing import List\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n    return [max([len(p) for p in group.split('()')]) for group in paren_string.split(' ')]",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "from typing import List\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n    def max_depth(s: str) -> int:\n        depth = 0\n        max_depth = 0\n        for char in s:\n            if char == '(':\n                depth += 1\n                max_depth = max(max_depth, depth)\n            elif char == ')':\n                depth -= 1\n        return max_depth\n\n    return [max_depth(group) for group in paren_string.split()]"
+  }
+ },
+ "HumanEval/9": {
+  "entry_point": "rolling_max",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [
+    [
+     []
+    ]
+   ],
+   "plus_fail_tests": [],
+   "solution": "from typing import List, Tuple\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n    max_so_far = numbers[0]\n    rolling_max_list = []\n    for number in numbers:\n        if number > max_so_far:\n            max_so_far = number\n        rolling_max_list.append(max_so_far)\n    return rolling_max_list",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "from typing import List, Tuple\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n    if not numbers:\n        return []\n    \n    max_so_far = numbers[0]\n    rolling_max_list = [max_so_far]\n    \n    for num in numbers[1:]:\n        max_so_far = max(max_so_far, num)\n        rolling_max_list.append(max_so_far)\n    \n    return rolling_max_list"
+  }
+ },
+ "HumanEval/10": {
+  "entry_point": "make_palindrome",
+  "group": "v3_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    return string == string[::-1]\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n    'catac'\n    \"\"\"\n    if is_palindrome(string):\n        return string\n    for i in range(len(string)):\n        if is_palindrome(string[i:]):\n            return string + string[:i][::-1]\n    return string + string[::-1]",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "x"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "race"
+    ]
+   ],
+   "solution": "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    return string == string[::-1]\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n    'catac'\n    \"\"\"\n    if not string:\n        return string\n\n    for i in range(len(string), -1, -1):\n        if is_palindrome(string[i:]):\n            return string + string[:i][::-1]\n\n    return string + string[::-1]"
+  }
+ },
+ "HumanEval/13": {
+  "entry_point": "greatest_common_divisor",
+  "group": "base_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     540,
+     541
+    ]
+   ],
+   "solution": "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two integers a and b\n    >>> greatest_common_divisor(3, 5)\n    1\n    >>> greatest_common_divisor(25, 15)\n    5\n    \"\"\"\n    if a == 0:\n        return b\n    if b == 0:\n        return a\n    if a == b:\n        return a\n    if a > b:\n        return greatest_common_divisor(a - b, b)\n    return greatest_common_divisor(a, b - a)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two integers a and b\n    >>> greatest_common_divisor(3, 5)\n    1\n    >>> greatest_common_divisor(25, 15)\n    5\n    \"\"\"\n    while b != 0:\n        a, b = b, a % b\n    return a"
+  }
+ },
+ "HumanEval/15": {
+  "entry_point": "string_sequence",
+  "group": "both",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     1000000
+    ]
+   ],
+   "solution": "def string_sequence(n: int) -> str:\n    \"\"\" Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    >>> string_sequence(0)\n    '0'\n    >>> string_sequence(5)\n    '0 1 2 3 4 5'\n    \"\"\"\n    return ' '.join(str(i) for i in range(n + 1))",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     1000000
+    ]
+   ],
+   "solution": "def string_sequence(n: int) -> str:\n    \"\"\" Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    >>> string_sequence(0)\n    '0'\n    >>> string_sequence(5)\n    '0 1 2 3 4 5'\n    \"\"\"\n    return ' '.join(str(i) for i in range(n + 1))"
+  }
+ },
+ "HumanEval/19": {
+  "entry_point": "sort_numbers",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "three"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "four eight two"
+    ]
+   ],
+   "solution": "from typing import List\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n    numbers = numbers.split()\n    numbers = [int(number) for number in numbers]\n    numbers.sort()\n    numbers = [str(number) for number in numbers]\n    return ' '.join(numbers)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "from typing import List\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n    number_map = {\n        'zero': 0,\n        'one': 1,\n        'two': 2,\n        'three': 3,\n        'four': 4,\n        'five': 5,\n        'six': 6,\n        'seven': 7,\n        'eight': 8,\n        'nine': 9\n    }\n    \n    numbers_list = numbers.split()\n    sorted_numbers = sorted(numbers_list, key=lambda x: number_map[x])\n    \n    return ' '.join(sorted_numbers)"
+  }
+ },
+ "HumanEval/22": {
+  "entry_point": "filter_integers",
+  "group": "both",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     [
+      true,
+      false,
+      null,
+      0,
+      -10,
+      "test",
+      [],
+      {},
+      3.14
+     ]
+    ]
+   ],
+   "solution": "from typing import List, Any\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers\n    >>> filter_integers(['a', 3.14, 5])\n    [5]\n    >>> filter_integers([1, 2, 3, 'abc', {}, []])\n    [1, 2, 3]\n    \"\"\"\n    return [x for x in values if isinstance(x, int)]",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     [
+      true,
+      false,
+      null,
+      0,
+      -10,
+      "test",
+      [],
+      {},
+      3.14
+     ]
+    ]
+   ],
+   "solution": "from typing import List, Any\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers\n    >>> filter_integers(['a', 3.14, 5])\n    [5]\n    >>> filter_integers([1, 2, 3, 'abc', {}, []])\n    [1, 2, 3]\n    \"\"\"\n    return [value for value in values if isinstance(value, int)]"
+  }
+ },
+ "HumanEval/26": {
+  "entry_point": "remove_duplicates",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1,
+      2,
+      3,
+      2,
+      4,
+      3,
+      5
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      1,
+      1,
+      2,
+      2,
+      3,
+      3,
+      4,
+      4
+     ]
+    ]
+   ],
+   "solution": "from typing import List\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n    return list(set(numbers))",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1,
+      2,
+      3,
+      2,
+      4,
+      3,
+      5
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      1,
+      1,
+      2,
+      2,
+      3,
+      3,
+      4,
+      4
+     ]
+    ]
+   ],
+   "solution": "from typing import List\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n    seen = set()\n    result = []\n    for num in numbers:\n        if num not in seen:\n            seen.add(num)\n            result.append(num)\n    return result"
+  }
+ },
+ "HumanEval/31": {
+  "entry_point": "is_prime",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     101
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     103
+    ]
+   ],
+   "solution": "def is_prime(n):\n    \"\"\"Return true if a given number is prime, and false otherwise.\n    >>> is_prime(6)\n    False\n    >>> is_prime(101)\n    True\n    >>> is_prime(11)\n    True\n    >>> is_prime(13441)\n    True\n    >>> is_prime(61)\n    True\n    >>> is_prime(4)\n    False\n    >>> is_prime(1)\n    False\n    \"\"\"\n    def prime_helper(n, i):\n        if n == 1:\n            return False\n        elif n == i:\n            return True\n        elif n % i == 0:\n            return False\n        else:\n            return prime_helper(n, i + 1)\n    return prime_helper(n, 2)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def is_prime(n):\n    \"\"\"Return true if a given number is prime, and false otherwise.\n    >>> is_prime(6)\n    False\n    >>> is_prime(101)\n    True\n    >>> is_prime(11)\n    True\n    >>> is_prime(13441)\n    True\n    >>> is_prime(61)\n    True\n    >>> is_prime(4)\n    False\n    >>> is_prime(1)\n    False\n    \"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    return True"
+  }
+ },
+ "HumanEval/32": {
+  "entry_point": "find_zero",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      -10,
+      -2
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      5,
+      10,
+      -3,
+      1
+     ]
+    ]
+   ],
+   "solution": "import math\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x\n    -0.5\n    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3\n    1.0\n    \"\"\"\n    assert len(xs) % 2 == 0\n    assert xs[-1] != 0\n    x = 0\n    while True:\n        if poly(xs, x) == 0:\n            return x\n        x += 1",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      -10,
+      -2
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      5,
+      10,
+      -3,
+      1
+     ]
+    ]
+   ],
+   "solution": "import math\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x\n    -0.5\n    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3\n    1.0\n    \"\"\"\n    if len(xs) % 2 != 0:\n        raise ValueError(\"The number of coefficients must be even.\")\n    \n    largest_coeff = max(xs, key=abs)\n    if largest_coeff == 0:\n        raise ValueError(\"The largest coefficient must be non-zero.\")\n    \n    x = 0\n    while True:\n        if abs(poly(xs, x)) < 1e-10:\n            return x\n        x += 0.01"
+  }
+ },
+ "HumanEval/33": {
+  "entry_point": "sort_third",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      5,
+      3,
+      -5,
+      2,
+      -3,
+      3,
+      9,
+      0,
+      123,
+      1,
+      -10
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      9,
+      12,
+      15,
+      6,
+      3,
+      8,
+      10,
+      23,
+      7
+     ]
+    ]
+   ],
+   "solution": "def sort_third(l: list):\n    \"\"\"This function takes a list l and returns a list l' such that\n    l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal\n    to the values of the corresponding indicies of l, but sorted.\n    >>> sort_third([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_third([5, 6, 3, 4, 8, 9, 2])\n    [2, 6, 3, 4, 8, 9, 5]\n    \"\"\"\n    l_sorted = sorted(l)\n    l_sorted_third = l_sorted[::3]\n    l_sorted_third.sort()\n    l_sorted[::3] = l_sorted_third\n    return l_sorted",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def sort_third(l: list):\n    \"\"\"This function takes a list l and returns a list l' such that\n    l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal\n    to the values of the corresponding indicies of l, but sorted.\n    >>> sort_third([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_third([5, 6, 3, 4, 8, 9, 2])\n    [2, 6, 3, 4, 8, 9, 5]\n    \"\"\"\n    # Extract elements at indices divisible by 3\n    third_elements = [l[i] for i in range(len(l)) if i % 3 == 0]\n    # Sort these elements\n    third_elements_sorted = sorted(third_elements)\n    # Create a new list with sorted third elements\n    l_prime = [third_elements_sorted[i // 3] if i % 3 == 0 else l[i] for i in range(len(l))]\n    return l_prime"
+  }
+ },
+ "HumanEval/37": {
+  "entry_point": "sort_even",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      5,
+      3,
+      -5,
+      2,
+      -3,
+      3,
+      9,
+      0,
+      123,
+      1,
+      -10
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      3,
+      3,
+      2,
+      2,
+      1,
+      1
+     ]
+    ]
+   ],
+   "solution": "def sort_even(l: list):\n    \"\"\"This function takes a list l and returns a list l' such that\n    l' is identical to l in the odd indicies, while its values at the even indicies are equal\n    to the values of the even indicies of l, but sorted.\n    >>> sort_even([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_even([5, 6, 3, 4])\n    [3, 6, 5, 4]\n    \"\"\"\n    l_even = [l[i] for i in range(len(l)) if i % 2 == 0]\n    l_even.sort()\n    l_odd = [l[i] for i in range(len(l)) if i % 2 != 0]\n    l_odd.sort()\n    l_sorted = []\n    for i in range(len(l)):\n        if i % 2 == 0:\n            l_sorted.append(l_even.pop(0))\n        else:\n            l_sorted.append(l_odd.pop(0))\n    return l_sorted",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def sort_even(l: list):\n    \"\"\"This function takes a list l and returns a list l' such that\n    l' is identical to l in the odd indicies, while its values at the even indicies are equal\n    to the values of the even indicies of l, but sorted.\n    >>> sort_even([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_even([5, 6, 3, 4])\n    [3, 6, 5, 4]\n    \"\"\"\n    even_indices = [l[i] for i in range(0, len(l), 2)]\n    even_indices.sort()\n    result = []\n    even_index = 0\n    for i in range(len(l)):\n        if i % 2 == 0:\n            result.append(even_indices[even_index])\n            even_index += 1\n        else:\n            result.append(l[i])\n    return result"
+  }
+ },
+ "HumanEval/39": {
+  "entry_point": "prime_fib",
+  "group": "v3_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def prime_fib(n: int):\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n    >>> prime_fib(1)\n    2\n    >>> prime_fib(2)\n    3\n    >>> prime_fib(3)\n    5\n    >>> prime_fib(4)\n    13\n    >>> prime_fib(5)\n    89\n    \"\"\"\n    if n < 1:\n        return \"Incorrect input\"\n    if n == 1:\n        return 2\n    if n == 2:\n        return 3\n    if n == 3:\n        return 5\n    if n == 4:\n        return 13\n    if n == 5:\n        return 89\n    if n == 6:\n        return 233\n    if n == 7:\n        return 1597\n    if n == 8:\n        return 28657\n    if n == 9:\n        return 514229\n    if n == 10:\n        return 433494437\n    if n == 11:\n        return 2971215073\n    if n == 12:\n        return 99194853094755497\n    if n == 13:\n        return 194717690245679599\n    if n == 14:\n        return 11705536000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     12
+    ]
+   ],
+   "solution": "def is_prime(num: int) -> bool:\n    \"\"\"\n    Check if a number is prime.\n    \"\"\"\n    if num <= 1:\n        return False\n    if num <= 3:\n        return True\n    if num % 2 == 0 or num % 3 == 0:\n        return False\n    i = 5\n    while i * i <= num:\n        if num % i == 0 or num % (i + 2) == 0:\n            return False\n        i += 6\n    return True\ndef fibonacci(n: int) -> int:\n    \"\"\"\n    Generate the n-th Fibonacci number.\n    \"\"\"\n    a, b = 0, 1\n    for _ in range(n):\n        a, b = b, a + b\n    return a\ndef prime_fib(n: int) -> int:\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n    \"\"\"\n    count = 0\n    i = 0\n    while True:\n        fib_num = fibonacci(i)\n        if is_prime(fib_num):\n            count += 1\n            if count == n:\n                return fib_num\n        i += 1"
+  }
+ },
+ "HumanEval/40": {
+  "entry_point": "triples_sum_to_zero",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1,
+      3,
+      -2,
+      1
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      1,
+      1,
+      -2,
+      -2
+     ]
+    ]
+   ],
+   "solution": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three distinct elements in the list that\n    sum to zero, and False otherwise.\n\n    >>> triples_sum_to_zero([1, 3, 5, 0])\n    False\n    >>> triples_sum_to_zero([1, 3, -2, 1])\n    True\n    >>> triples_sum_to_zero([1, 2, 3, 7])\n    False\n    >>> triples_sum_to_zero([2, 4, -5, 3, 9, 7])\n    True\n    >>> triples_sum_to_zero([1])\n    False\n    \"\"\"\n    return len(l) == 3 and all(x == y for x, y in zip(l, l[1:]))",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three distinct elements in the list that\n    sum to zero, and False otherwise.\n\n    >>> triples_sum_to_zero([1, 3, 5, 0])\n    False\n    >>> triples_sum_to_zero([1, 3, -2, 1])\n    True\n    >>> triples_sum_to_zero([1, 2, 3, 7])\n    False\n    >>> triples_sum_to_zero([2, 4, -5, 3, 9, 7])\n    True\n    >>> triples_sum_to_zero([1])\n    False\n    \"\"\"\n    l.sort()\n    n = len(l)\n    for i in range(n - 2):\n        left, right = i + 1, n - 1\n        while left < right:\n            current_sum = l[i] + l[left] + l[right]\n            if current_sum == 0:\n                return True\n            elif current_sum < 0:\n                left += 1\n            else:\n                right -= 1\n    return False"
+  }
+ },
+ "HumanEval/49": {
+  "entry_point": "modp",
+  "group": "base_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     0,
+     1
+    ]
+   ],
+   "solution": "def modp(n: int, p: int):\n    \"\"\"Return 2^n modulo p (be aware of numerics).\n    >>> modp(3, 5)\n    3\n    >>> modp(1101, 101)\n    2\n    >>> modp(0, 101)\n    1\n    >>> modp(3, 11)\n    8\n    >>> modp(100, 101)\n    1\n    \"\"\"\n    if n == 0:\n        return 1\n    elif n % 2 == 0:\n        return modp(n // 2, p) ** 2 % p\n    else:\n        return (modp(n // 2, p) ** 2 * 2) % p",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def modp(n: int, p: int):\n    \"\"\"Return 2^n modulo p (be aware of numerics).\n    >>> modp(3, 5)\n    3\n    >>> modp(1101, 101)\n    2\n    >>> modp(0, 101)\n    1\n    >>> modp(3, 11)\n    8\n    >>> modp(100, 101)\n    1\n    \"\"\"\n    return pow(2, n, p)"
+  }
+ },
+ "HumanEval/54": {
+  "entry_point": "same_chars",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "eabcdzzzz",
+     "dddzzzzzzzddeddabc"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "aaabbbccc",
+     "abbabcbc"
+    ]
+   ],
+   "solution": "def same_chars(s0: str, s1: str):\n    \"\"\"\n    Check if two words have the same characters.\n    >>> same_chars('eabcdzzzz', 'dddzzzzzzzddeddabc')\n    True\n    >>> same_chars('abcd', 'dddddddabc')\n    True\n    >>> same_chars('dddddddabc', 'abcd')\n    True\n    >>> same_chars('eabcd', 'dddddddabc')\n    False\n    >>> same_chars('abcd', 'dddddddabce')\n    False\n    >>> same_chars('eabcdzzzz', 'dddzzzzzzzddddabc')\n    False\n    \"\"\"\n    return sorted(s0) == sorted(s1)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "eabcdzzzz",
+     "dddzzzzzzzddeddabc"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "aaabbbccc",
+     "abbabcbc"
+    ]
+   ],
+   "solution": "def same_chars(s0: str, s1: str):\n    \"\"\"\n    Check if two words have the same characters.\n    >>> same_chars('eabcdzzzz', 'dddzzzzzzzddeddabc')\n    True\n    >>> same_chars('abcd', 'dddddddabc')\n    True\n    >>> same_chars('dddddddabc', 'abcd')\n    True\n    >>> same_chars('eabcd', 'dddddddabc')\n    False\n    >>> same_chars('abcd', 'dddddddabce')\n    False\n    >>> same_chars('eabcdzzzz', 'dddzzzzzzzddddabc')\n    False\n    \"\"\"\n    return sorted(s0) == sorted(s1)"
+  }
+ },
+ "HumanEval/55": {
+  "entry_point": "fib",
+  "group": "base_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     63
+    ]
+   ],
+   "solution": "def fib(n: int):\n    \"\"\"Return n-th Fibonacci number.\n    >>> fib(10)\n    55\n    >>> fib(1)\n    1\n    >>> fib(8)\n    21\n    \"\"\"\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fib(n - 1) + fib(n - 2)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def fib(n: int):\n    \"\"\"Return n-th Fibonacci number.\n    >>> fib(10)\n    55\n    >>> fib(1)\n    1\n    >>> fib(8)\n    21\n    \"\"\"\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        a, b = 0, 1\n        for _ in range(2, n + 1):\n            a, b = b, a + b\n        return b"
+  }
+ },
+ "HumanEval/59": {
+  "entry_point": "largest_prime_factor",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     15
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     100
+    ]
+   ],
+   "solution": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    assert n > 1, 'n must be greater than 1.'\n    assert not is_prime(n), 'n must not be a prime.'\n\n    def is_prime(n: int):\n        \"\"\"Return True if n is a prime number, else False. Assume n > 1.\n        >>> is_prime(2)\n        True\n        >>> is_prime(87)\n        False\n        \"\"\"\n        assert n > 1, 'n must be greater than 1.'\n        for i in range(2, n):\n            if n % i == 0:\n                return False\n        return True\n\n    def prime_factors(n: int):\n        \"\"\"Return a list of prime factors of n. Assume n > 1 and is not a prime.\n        >>> prime_factors(13195)\n        [5, 7, 13, 29]\n        >>> prime_factors(2048)\n        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]\n        \"\"\"\n        assert n > 1, 'n must be greater than 1.'\n        assert not is_prime(n), 'n must not be a prime.'\n        factors = []\n        i = 2\n        while i * i <= n:\n            if n % i:\n                i += 1\n            else:\n                n //= i\n                factors.append(i)\n        if n > 1:\n            factors.append(n)\n        return factors\n\n    return max(prime_factors(n))",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(num):\n        \"\"\"Check if a number is prime.\"\"\"\n        if num <= 1:\n            return False\n        if num <= 3:\n            return True\n        if num % 2 == 0 or num % 3 == 0:\n            return False\n        i = 5\n        while i * i <= num:\n            if num % i == 0 or num % (i + 2) == 0:\n                return False\n            i += 6\n        return True\n\n    largest_factor = 1\n    for i in range(2, n + 1):\n        if n % i == 0 and is_prime(i):\n            largest_factor = i\n    return largest_factor"
+  }
+ },
+ "HumanEval/63": {
+  "entry_point": "fibfib",
+  "group": "base_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     57
+    ]
+   ],
+   "solution": "def fibfib(n: int):\n    \"\"\"The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fibfib(0) == 0\n    fibfib(1) == 0\n    fibfib(2) == 1\n    fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).\n    Please write a function to efficiently compute the n-th element of the fibfib number sequence.\n    >>> fibfib(1)\n    0\n    >>> fibfib(5)\n    4\n    >>> fibfib(8)\n    24\n    \"\"\"\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 0\n    elif n == 2:\n        return 1\n    else:\n        return fibfib(n-1) + fibfib(n-2) + fibfib(n-3)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def fibfib(n: int):\n    \"\"\"The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fibfib(0) == 0\n    fibfib(1) == 0\n    fibfib(2) == 1\n    fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).\n    Please write a function to efficiently compute the n-th element of the fibfib number sequence.\n    >>> fibfib(1)\n    0\n    >>> fibfib(5)\n    4\n    >>> fibfib(8)\n    24\n    \"\"\"\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 0\n    elif n == 2:\n        return 1\n    else:\n        a, b, c = 0, 0, 1\n        for _ in range(3, n + 1):\n            a, b, c = b, c, a + b + c\n        return c"
+  }
+ },
+ "HumanEval/64": {
+  "entry_point": "vowels_count",
+  "group": "base_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     ""
+    ]
+   ],
+   "solution": "def vowels_count(s):\n    \"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    >>> vowels_count(\"abcde\")\n    2\n    >>> vowels_count(\"ACEDY\")\n    3\n    \"\"\"\n    vowels = \"aeiou\"\n    count = 0\n    for char in s:\n        if char.lower() in vowels:\n            count += 1\n    if s[-1].lower() == 'y':\n        count += 1\n    return count",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def vowels_count(s):\n    \"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    >>> vowels_count(\"abcde\")\n    2\n    >>> vowels_count(\"ACEDY\")\n    3\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    count = 0\n    s = s.lower()\n    for char in s:\n        if char in vowels:\n            count += 1\n    if s.endswith('y') or s.endswith('Y'):\n        count += 1\n    return count"
+  }
+ },
+ "HumanEval/69": {
+  "entry_point": "search",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      5,
+      5,
+      5,
+      5,
+      1
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+     ]
+    ]
+   ],
+   "solution": "def search(lst):\n    '''\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than \n    zero, and has a frequency greater than or equal to the value of the integer itself. \n    The frequency of an integer is the number of times it appears in the list.\n    If no such a value exist, return -1.\n    Examples:\n        search([4, 1, 2, 2, 3, 1]) == 2\n        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3\n        search([5, 5, 4, 4, 4]) == -1\n    '''\n    # Your code here\n    return -1",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def search(lst):\n    '''\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than \n    zero, and has a frequency greater than or equal to the value of the integer itself. \n    The frequency of an integer is the number of times it appears in the list.\n    If no such a value exist, return -1.\n    Examples:\n        search([4, 1, 2, 2, 3, 1]) == 2\n        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3\n        search([5, 5, 4, 4, 4]) == -1\n    '''\n    from collections import Counter\n    count = Counter(lst)\n    max_val = -1\n    for num in sorted(count.keys(), reverse=True):\n        if count[num] >= num:\n            max_val = num\n            break\n    return max_val"
+  }
+ },
+ "HumanEval/74": {
+  "entry_point": "total_match",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [],
+     []
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      ""
+     ],
+     [
+      "hello"
+     ]
+    ]
+   ],
+   "solution": "def total_match(lst1, lst2):\n    '''\n    Write a function that accepts two lists of strings and returns the list that has \n    total number of chars in the all strings of the list less than the other list.\n\n    if the two lists have the same number of chars, return the first list.\n\n    Examples\n    total_match([], []) ➞ []\n    total_match(['hi', 'admin'], ['hI', 'Hi']) ➞ ['hI', 'Hi']\n    total_match(['hi', 'admin'], ['hi', 'hi', 'admin', 'project']) ➞ ['hi', 'admin']\n    total_match(['hi', 'admin'], ['hI', 'hi', 'hi']) ➞ ['hI', 'hi', 'hi']\n    total_match(['4'], ['1', '2', '3', '4', '5']) ➞ ['4']\n    '''\n    pass",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def total_match(lst1, lst2):\n    '''\n    Write a function that accepts two lists of strings and returns the list that has \n    total number of chars in the all strings of the list less than the other list.\n\n    if the two lists have the same number of chars, return the first list.\n\n    Examples\n    total_match([], []) ➞ []\n    total_match(['hi', 'admin'], ['hI', 'Hi']) ➞ ['hI', 'Hi']\n    total_match(['hi', 'admin'], ['hi', 'hi', 'admin', 'project']) ➞ ['hi', 'admin']\n    total_match(['hi', 'admin'], ['hI', 'hi', 'hi']) ➞ ['hI', 'hi', 'hi']\n    total_match(['4'], ['1', '2', '3', '4', '5']) ➞ ['4']\n    '''\n    total_chars_lst1 = sum(len(s) for s in lst1)\n    total_chars_lst2 = sum(len(s) for s in lst2)\n    \n    if total_chars_lst1 < total_chars_lst2:\n        return lst1\n    elif total_chars_lst2 < total_chars_lst1:\n        return lst2\n    else:\n        return lst1"
+  }
+ },
+ "HumanEval/75": {
+  "entry_point": "is_multiply_prime",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     5
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     99
+    ]
+   ],
+   "solution": "def is_multiply_prime(a):\n    \"\"\"Write a function that returns true if the given number is the multiplication of 3 prime numbers\n    and false otherwise.\n    Knowing that (a) is less then 100. \n    Example:\n    is_multiply_prime(30) == True\n    30 = 2 * 3 * 5\n    \"\"\"\n    \"\"\"Write a function that returns true if the given number is the multiplication of 3 prime numbers\n    and false otherwise.\n    Knowing that (a) is less then 100. \n    Example:\n    is_multiply_prime(30) == True\n    30 = 2 * 3 * 5\n    \"\"\"\n    if a < 2:\n        return False\n    for i in range(2, int(a ** 0.5) + 1):\n        if a % i == 0:\n            return False\n    return True",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     0
+    ]
+   ],
+   "solution": "def is_multiply_prime(a):\n    \"\"\"Write a function that returns true if the given number is the multiplication of 3 prime numbers\n    and false otherwise.\n    Knowing that (a) is less then 100. \n    Example:\n    is_multiply_prime(30) == True\n    30 = 2 * 3 * 5\n    \"\"\"\n    def is_prime(n):\n        \"\"\"Check if a number is prime.\"\"\"\n        if n <= 1:\n            return False\n        if n <= 3:\n            return True\n        if n % 2 == 0 or n % 3 == 0:\n            return False\n        i = 5\n        while i * i <= n:\n            if n % i == 0 or n % (i + 2) == 0:\n                return False\n            i += 6\n        return True\n\n    primes = [i for i in range(2, 101) if is_prime(i)]\n    prime_factors = []\n\n    for prime in primes:\n        while a % prime == 0:\n            prime_factors.append(prime)\n            a //= prime\n\n    return len(prime_factors) == 3 and a == 1"
+  }
+ },
+ "HumanEval/76": {
+  "entry_point": "is_simple_power",
+  "group": "both",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     -1,
+     0
+    ]
+   ],
+   "solution": "def is_simple_power(x, n):\n    \"\"\"Your task is to write a function that returns true if a number x is a simple\n    power of n and false in other cases.\n    x is a simple power of n if n**int=x\n    For example:\n    is_simple_power(1, 4) => true\n    is_simple_power(2, 2) => true\n    is_simple_power(8, 2) => true\n    is_simple_power(3, 2) => false\n    is_simple_power(3, 1) => false\n    is_simple_power(5, 3) => false\n    \"\"\"\n    if n == 1:\n        return x == 1\n    if x == 1:\n        return True\n    if x % n != 0:\n        return False\n    return is_simple_power(x // n, n)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     -2,
+     -2
+    ]
+   ],
+   "solution": "def is_simple_power(x, n):\n    \"\"\"Your task is to write a function that returns true if a number x is a simple\n    power of n and false in other cases.\n    x is a simple power of n if n**int=x\n    For example:\n    is_simple_power(1, 4) => true\n    is_simple_power(2, 2) => true\n    is_simple_power(8, 2) => true\n    is_simple_power(3, 2) => false\n    is_simple_power(3, 1) => false\n    is_simple_power(5, 3) => false\n    \"\"\"\n    if n == 1:\n        return x == 1\n    power = 1\n    while power < x:\n        power *= n\n    return power == x"
+  }
+ },
+ "HumanEval/77": {
+  "entry_point": "iscube",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     1
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     -8
+    ]
+   ],
+   "solution": "def iscube(a):\n    '''\n    Write a function that takes an integer a and returns True \n    if this ingeger is a cube of some integer number.\n    Note: you may assume the input is always valid.\n    Examples:\n    iscube(1) ==> True\n    iscube(2) ==> False\n    iscube(-1) ==> True\n    iscube(64) ==> True\n    iscube(0) ==> True\n    iscube(180) ==> False\n    '''\n    # Your code\n    return",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def iscube(a):\n    '''\n    Write a function that takes an integer a and returns True \n    if this ingeger is a cube of some integer number.\n    Note: you may assume the input is always valid.\n    Examples:\n    iscube(1) ==> True\n    iscube(2) ==> False\n    iscube(-1) ==> True\n    iscube(64) ==> True\n    iscube(0) ==> True\n    iscube(180) ==> False\n    '''\n    if a == 0:\n        return True\n    a = abs(a)\n    cube_root = round(a ** (1/3))\n    return cube_root ** 3 == a"
+  }
+ },
+ "HumanEval/79": {
+  "entry_point": "decimal_to_binary",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def decimal_to_binary(decimal):\n    \"\"\"You will be given a number in decimal form and your task is to convert it to\n    binary format. The function should return a string, with each character representing a binary\n    number. Each character in the string will be '0' or '1'.\n\n    There will be an extra couple of characters 'db' at the beginning and at the end of the string.\n    The extra characters are there to help with the format.\n\n    Examples:\n    decimal_to_binary(15)   # returns \"db1111db\"\n    decimal_to_binary(32)   # returns \"db100000db\"\n    \"\"\"\nbinary = bin(decimal)[2:]  # Convert decimal to binary and remove the '0b' prefix",
+   "empty_body": true
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def decimal_to_binary(decimal):\n    \"\"\"You will be given a number in decimal form and your task is to convert it to\n    binary format. The function should return a string, with each character representing a binary\n    number. Each character in the string will be '0' or '1'.\n\n    There will be an extra couple of characters 'db' at the beginning and at the end of the string.\n    The extra characters are there to help with the format.\n\n    Examples:\n    decimal_to_binary(15)   # returns \"db1111db\"\n    decimal_to_binary(32)   # returns \"db100000db\"\n    \"\"\"\n    binary_str = bin(decimal)[2:]\n    return f\"db{binary_str}db\""
+  }
+ },
+ "HumanEval/82": {
+  "entry_point": "prime_length",
+  "group": "base_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     "ThiMsYJFEtsgcehuqTkrPdog.xBantidisestablishmentarilaniismLWjpDfmvNaRlKOiVbnZIoaethexBLWjpDfmvNhaRlKOiVbnZIoa."
+    ]
+   ],
+   "solution": "def prime_length(string):\n    \"\"\"Write a function that takes a string and returns True if the string\n    length is a prime number or False otherwise\n    Examples\n    prime_length('Hello') == True\n    prime_length('abcdcba') == True\n    prime_length('kittens') == True\n    prime_length('orange') == False\n    \"\"\"\n    return len(string) in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def is_prime(n):\n    \"\"\"Check if a number is a prime number.\"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    return True\ndef prime_length(string):\n    \"\"\"Determine if the length of the string is a prime number.\"\"\"\n    return is_prime(len(string))"
+  }
+ },
+ "HumanEval/83": {
+  "entry_point": "starts_one_ends",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     2
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     6
+    ]
+   ],
+   "solution": "def starts_one_ends(n):\n    \"\"\"\n    Given a positive integer n, return the count of the numbers of n-digit\n    positive integers that start or end with 1.\n    \"\"\"\n    if n == 1:\n        return 1\n    else:\n        return 2 * 9 ** (n - 1) - 9 ** (n - 2)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def starts_one_ends(n):\n    \"\"\"\n    Given a positive integer n, return the count of the numbers of n-digit\n    positive integers that start or end with 1.\n    \"\"\"\n    if n == 1:\n        return 1\n    else:\n        return 18 * (10 ** (n - 2))"
+  }
+ },
+ "HumanEval/86": {
+  "entry_point": "anti_shuffle",
+  "group": "both",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     "\n\n123 456\n789\n"
+    ]
+   ],
+   "solution": "def anti_shuffle(s):\n    \"\"\"\n    Write a function that takes a string and returns an ordered version of it.\n    Ordered version of string, is a string where all words (separated by space)\n    are replaced by a new word where all the characters arranged in\n    ascending order based on ascii value.\n    Note: You should keep the order of words and blank spaces in the sentence.\n\n    For example:\n    anti_shuffle('Hi') returns 'Hi'\n    anti_shuffle('hello') returns 'ehllo'\n    anti_shuffle('Hello World!!!') returns 'Hello !!!Wdlor'\n    \"\"\"\n    words = s.split()\n    ordered_words = []\n    for word in words:\n        ordered_word = ''.join(sorted(word))\n        ordered_words.append(ordered_word)\n    return ' '.join(ordered_words)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     "\n\n123 456\n789\n"
+    ]
+   ],
+   "solution": "def anti_shuffle(s):\n    \"\"\"\n    Write a function that takes a string and returns an ordered version of it.\n    Ordered version of string, is a string where all words (separated by space)\n    are replaced by a new word where all the characters arranged in\n    ascending order based on ascii value.\n    Note: You should keep the order of words and blank spaces in the sentence.\n\n    For example:\n    anti_shuffle('Hi') returns 'Hi'\n    anti_shuffle('hello') returns 'ehllo'\n    anti_shuffle('Hello World!!!') returns 'Hello !!!Wdlor'\n    \"\"\"\n    words = s.split()\n    ordered_words = [''.join(sorted(word)) for word in words]\n    return ' '.join(ordered_words)"
+  }
+ },
+ "HumanEval/89": {
+  "entry_point": "encrypt",
+  "group": "base_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     "test123"
+    ]
+   ],
+   "solution": "def encrypt(s):\n    \"\"\"Create a function encrypt that takes a string as an argument and\n    returns a string encrypted with the alphabet being rotated. \n    The alphabet should be rotated in a manner such that the letters \n    shift down by two multiplied to two places.\n    For example:\n    encrypt('hi') returns 'lm'\n    encrypt('asdfghjkl') returns 'ewhjklnop'\n    encrypt('gf') returns 'kj'\n    encrypt('et') returns 'ix'\n    \"\"\"\n    alphabet = 'abcdefghijklmnopqrstuvwxyz'\n    encrypted = ''\n    for char in s:\n        index = alphabet.index(char)\n        encrypted += alphabet[(index + 4) % 26]\n    return encrypted",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def encrypt(s):\n    \"\"\"Create a function encrypt that takes a string as an argument and\n    returns a string encrypted with the alphabet being rotated. \n    The alphabet should be rotated in a manner such that the letters \n    shift down by two multiplied to two places.\n    For example:\n    encrypt('hi') returns 'lm'\n    encrypt('asdfghjkl') returns 'ewhjklnop'\n    encrypt('gf') returns 'kj'\n    encrypt('et') returns 'ix'\n    \"\"\"\n    alphabet = \"abcdefghijklmnopqrstuvwxyz\"\n    rotated_alphabet = alphabet[2*2:] + alphabet[:2*2]\n    translation_table = str.maketrans(alphabet, rotated_alphabet)\n    return s.translate(translation_table)"
+  }
+ },
+ "HumanEval/90": {
+  "entry_point": "next_smallest",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1,
+      1
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3
+     ]
+    ]
+   ],
+   "solution": "def next_smallest(lst):\n    \"\"\"\n    You are given a list of integers.\n    Write a function next_smallest() that returns the 2nd smallest element of the list.\n    Return None if there is no such element.\n    \n    next_smallest([1, 2, 3, 4, 5]) == 2\n    next_smallest([5, 1, 4, 3, 2]) == 2\n    next_smallest([]) == None\n    next_smallest([1, 1]) == None\n    \"\"\"\n    if len(lst) < 2:\n        return None\n    else:\n        lst.sort()\n        return lst[1]",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3
+     ]
+    ]
+   ],
+   "solution": "def next_smallest(lst):\n    \"\"\"\n    You are given a list of integers.\n    Write a function next_smallest() that returns the 2nd smallest element of the list.\n    Return None if there is no such element.\n    \n    next_smallest([1, 2, 3, 4, 5]) == 2\n    next_smallest([5, 1, 4, 3, 2]) == 2\n    next_smallest([]) == None\n    next_smallest([1, 1]) == None\n    \"\"\"\n    if len(lst) < 2:\n        return None\n    sorted_lst = sorted(lst)\n    return sorted_lst[1] if sorted_lst[0] != sorted_lst[1] else None"
+  }
+ },
+ "HumanEval/91": {
+  "entry_point": "is_bored",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "Is the sky blue?"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "I forgot my phone in the car. Oh no, now I have to go back and get it."
+    ]
+   ],
+   "solution": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. A boredom is a sentence that starts with the word \"I\".\n    Sentences are delimited by '.', '?' or '!'.\n   \n    For example:\n    >>> is_bored(\"Hello world\")\n    0\n    >>> is_bored(\"The sky is blue. The sun is shining. I love this weather\")\n    1\n    \"\"\"\n    sentences = S.split('.')\n    sentences = [s.strip() for s in sentences]\n    sentences = [s for s in sentences if s]\n    sentences = [s.split('?') for s in sentences]\n    sentences = [s for sublist in sentences for s in sublist]\n    sentences = [s.split('!') for s in sentences]\n    sentences = [s for sublist in sentences for s in sublist]\n    sentences = [s.strip() for s in sentences]\n    sentences = [s for s in sentences if s]\n    sentences = [s.split(' ') for s in sentences]\n    sentences = [s for sublist in sentences for s in sublist]\n    sentences = [s.strip() for s in sentences]\n    sentences = [s for s in sentences if s]\n    sentences = [s for s in sentences if s[0].lower() == 'i']\n    return len(sentences)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "Is the sky blue?"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "In the morning, I like to have a cup of coffee to start my day off right. How about you?"
+    ]
+   ],
+   "solution": "import re\ndef is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. A boredom is a sentence that starts with the word \"I\".\n    Sentences are delimited by '.', '?' or '!'.\n   \n    For example:\n    >>> is_bored(\"Hello world\")\n    0\n    >>> is_bored(\"The sky is blue. The sun is shining. I love this weather\")\n    1\n    \"\"\"\n    sentences = re.split(r'[.?!]\\s*', S)\n    boredom_count = sum(1 for sentence in sentences if sentence.startswith('I'))\n    return boredom_count"
+  }
+ },
+ "HumanEval/93": {
+  "entry_point": "encode",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "Mudasir"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "abcdefghijklmnopqrstuvwxyz"
+    ]
+   ],
+   "solution": "def encode(message):\n    \"\"\"\n    Write a function that takes a message, and encodes in such a \n    way that it swaps case of all letters, replaces all vowels in \n    the message with the letter that appears 2 places ahead of that \n    vowel in the english alphabet. \n    Assume only letters. \n    \n    Examples:\n    >>> encode('test')\n    'TGST'\n    >>> encode('This is a message')\n    'tHKS KS C MGSSCGG'\n    \"\"\"\n    vowels = 'aeiou'\n    encoded_message = ''\n    for char in message:\n        if char.isalpha():\n            if char.isupper():\n                char = char.lower()\n            else:\n                char = char.upper()\n            if char in vowels:\n                char = chr(ord(char) + 2)\n        encoded_message += char\n    return encoded_message",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "TEST"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "abcdefghijklmnopqrstuvwxyz"
+    ]
+   ],
+   "solution": "def encode(message):\n    \"\"\"\n    Write a function that takes a message, and encodes in such a \n    way that it swaps case of all letters, replaces all vowels in \n    the message with the letter that appears 2 places ahead of that \n    vowel in the english alphabet. \n    Assume only letters. \n    \n    Examples:\n    >>> encode('test')\n    'TGST'\n    >>> encode('This is a message')\n    'tHKS KS C MGSSCGG'\n    \"\"\"\n    vowels = 'aeiouAEIOU'\n    encoded_message = ''\n    \n    for char in message:\n        if char.isalpha():\n            if char in vowels:\n                if char.islower():\n                    new_char = chr(((ord(char) - ord('a') + 2) % 26) + ord('a'))\n                else:\n                    new_char = chr(((ord(char) - ord('A') + 2) % 26) + ord('A'))\n            else:\n                new_char = char.swapcase()\n            encoded_message += new_char\n        else:\n            encoded_message += char\n            \n    return encoded_message"
+  }
+ },
+ "HumanEval/94": {
+  "entry_point": "skjkasdkd",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      0,
+      3,
+      2,
+      1,
+      3,
+      5,
+      7,
+      4,
+      5,
+      5,
+      5,
+      2,
+      181,
+      32,
+      4,
+      32,
+      3,
+      2,
+      32,
+      324,
+      4,
+      3
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+     ]
+    ]
+   ],
+   "solution": "def skjkasdkd(lst):\n    \"\"\"You are given a list of integers.\n    You need to find the largest prime value and return the sum of its digits.\n\n    Examples:\n    For lst = [0,3,2,1,3,5,7,4,5,5,5,2,181,32,4,32,3,2,32,324,4,3] the output should be 10\n    For lst = [1,0,1,8,2,4597,2,1,3,40,1,2,1,2,4,2,5,1] the output should be 25\n    For lst = [1,3,1,32,5107,34,83278,109,163,23,2323,32,30,1,9,3] the output should be 13\n    For lst = [0,724,32,71,99,32,6,0,5,91,83,0,5,6] the output should be 11\n    For lst = [0,81,12,3,1,21] the output should be 3\n    For lst = [0,8,1,2,1,7] the output should be 7\n    \"\"\"\n    if len(lst) == 0:\n        return 0\n    if len(lst) == 1:\n        return lst[0]\n    if len(lst) == 2:\n        return lst[0] + lst[1]\n    if len(lst) == 3:\n        return lst[0] + lst[1] + lst[2]\n    if len(lst) == 4:\n        return lst[0] + lst[1] + lst[2] + lst[3]\n    if len(lst) == 5:\n        return lst[0] + lst[1] + lst[2] + lst[3] + lst[4]\n    if len(lst) == 6:\n        return lst[0] + lst[1] + lst[2] + lst[3] + lst[4] + lst[5]\n    if len(lst) == 7:\n        return lst[0] + lst[1] + lst[2] + lst[3] + lst[4] + lst[5] + lst[6]\n    if len(lst) == 8:\n        return lst[0] + lst[1] + lst[2] + lst[3] + lst[4] + lst[5] + lst[6] + lst[7]\n    if len(lst) == 9:\n        return lst[0] + lst[1] + lst[2] + lst[3] + lst[4] + lst[5] + lst[6] + lst[7] + lst[8]\n    if len(lst) == 10:\n        return lst[0] + lst[1] + lst[2] + lst[3] + lst[4] + lst[5] + lst[6] + lst[7] + lst[8] + lst[9]\n    if len(lst) == 11:\n        return lst[0] + lst[1] + lst[2] + lst[3] + lst[4] + lst[5] + lst[6] + lst[7] + lst[8] + lst[9] + lst[10]\n    if len(lst) == 12:\n        return lst[0] + lst[1] + lst[2] + lst[3] + lst[4] + lst[5] + lst[6] + lst[7] + lst[8] + lst[9] + lst[10] + lst[11]\n    if len(lst) == 13:\n        return lst[0] + lst[1] + lst[2] + lst[3] + lst[4] + lst[5] + lst[6] + lst[7] + lst[8] + lst[9] + lst[10] + lst[11] + lst[12]\n    if len(lst) == 14:\n        return lst[0] + lst[1] + lst[2] + lst[3] + lst[4] + lst[5] + lst[6] + lst[7] + lst[8] + lst[9] + lst[10] + lst[11] + lst[12] + lst[13]",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def is_prime(n):\n    \"\"\"Check if a number is prime.\"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    return True\ndef skjkasdkd(lst):\n    \"\"\"Find the largest prime value in the list and return the sum of its digits.\"\"\"\n    largest_prime = 0\n    for num in lst:\n        if is_prime(num) and num > largest_prime:\n            largest_prime = num\n    return sum(int(digit) for digit in str(largest_prime))"
+  }
+ },
+ "HumanEval/95": {
+  "entry_point": "check_dict_case",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\nif not dict:\n        return False",
+   "empty_body": true
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    if not dict:\n        return False\n    \n    keys = list(dict.keys())\n    if not all(isinstance(key, str) for key in keys):\n        return False\n    \n    lower_case = all(key.islower() for key in keys)\n    upper_case = all(key.isupper() for key in keys)\n    \n    return lower_case or upper_case"
+  }
+ },
+ "HumanEval/96": {
+  "entry_point": "count_up_to",
+  "group": "both",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     2
+    ]
+   ],
+   "solution": "def count_up_to(n):\n    \"\"\"Implement a function that takes an non-negative integer and returns an array of the first n\n    integers that are prime numbers and less than n.\n    for example:\n    count_up_to(5) => [2,3]\n    count_up_to(11) => [2,3,5,7]\n    count_up_to(0) => []\n    count_up_to(20) => [2,3,5,7,11,13,17,19]\n    count_up_to(1) => []\n    count_up_to(18) => [2,3,5,7,11,13,17]\n    \"\"\"\n    if n < 2:\n        return []\n    primes = [2]\n    for i in range(3, n, 2):\n        if all(i % p != 0 for p in primes):\n            primes.append(i)\n    return primes",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     5
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     2
+    ]
+   ],
+   "solution": "def is_prime(num):\n    \"\"\"Check if a number is a prime number.\"\"\"\n    if num <= 1:\n        return False\n    if num <= 3:\n        return True\n    if num % 2 == 0 or num % 3 == 0:\n        return False\n    i = 5\n    while i * i <= num:\n        if num % i == 0 or num % (i + 2) == 0:\n            return False\n        i += 6\n    return True\ndef count_up_to(n):\n    \"\"\"Return a list of prime numbers less than n.\"\"\"\n    primes = []\n    num = 2\n    while len(primes) < n:\n        if is_prime(num):\n            primes.append(num)\n        num += 1\n    return primes"
+  }
+ },
+ "HumanEval/97": {
+  "entry_point": "multiply",
+  "group": "base_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     -6,
+     -9
+    ]
+   ],
+   "solution": "def multiply(a, b):\n    \"\"\"Complete the function that takes two integers and returns \n    the product of their unit digits.\n    Assume the input is always valid.\n    Examples:\n    multiply(148, 412) should return 16.\n    multiply(19, 28) should return 72.\n    multiply(2020, 1851) should return 0.\n    multiply(14,-15) should return 20.\n    \"\"\"\n    return (a % 10) * (b % 10)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def multiply(a, b):\n    \"\"\"Complete the function that takes two integers and returns \n    the product of their unit digits.\n    Assume the input is always valid.\n    Examples:\n    multiply(148, 412) should return 16.\n    multiply(19, 28) should return 72.\n    multiply(2020, 1851) should return 0.\n    multiply(14,-15) should return 20.\n    \"\"\"\n    return (abs(a) % 10) * (abs(b) % 10)"
+  }
+ },
+ "HumanEval/100": {
+  "entry_point": "make_a_pile",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     3
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     1
+    ]
+   ],
+   "solution": "def make_a_pile(n):\n    \"\"\"\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has n stones.\n    The number of stones in the next level is:\n        - the next odd number if n is odd.\n        - the next even number if n is even.\n    Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1).\n\n    Examples:\n    >>> make_a_pile(3)\n    [3, 5, 7]\n    \"\"\"\n    pile = []\n    current_stones = n\n    while current_stones > 0:\n        pile.append(current_stones)\n        if current_stones % 2 == 0:\n            current_stones += 2\n        else:\n            current_stones += 1\n    return pile",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     3
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     15
+    ]
+   ],
+   "solution": "def make_a_pile(n):\n    \"\"\"\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has n stones.\n    The number of stones in the next level is:\n        - the next odd number if n is odd.\n        - the next even number if n is even.\n    Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1).\n\n    Examples:\n    >>> make_a_pile(3)\n    [3, 5, 7]\n    \"\"\"\n    pile = [n]\n    current_stones = n\n    for _ in range(1, n):\n        if current_stones % 2 == 0:\n            current_stones += 2\n        else:\n            current_stones += 1\n        pile.append(current_stones)\n    return pile"
+  }
+ },
+ "HumanEval/101": {
+  "entry_point": "words_string",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "Hi, my name is John"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     ",,,,"
+    ]
+   ],
+   "solution": "def words_string(s):\n    \"\"\"\n    You will be given a string of words separated by commas or spaces. Your task is\n    to split the string into words and return an array of the words.\n    \n    For example:\n    words_string(\"Hi, my name is John\") == [\"Hi\", \"my\", \"name\", \"is\", \"John\"]\n    words_string(\"One, two, three, four, five, six\") == [\"One\", \"two\", \"three\", \"four\", \"five\", \"six\"]\n    \"\"\"\nwords = []",
+   "empty_body": true
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "Hi, my name is John"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     ",,,,"
+    ]
+   ],
+   "solution": "def words_string(s):\n    \"\"\"\n    You will be given a string of words separated by commas or spaces. Your task is\n    to split the string into words and return an array of the words.\n    \n    For example:\n    words_string(\"Hi, my name is John\") == [\"Hi\", \"my\", \"name\", \"is\", \"John\"]\n    words_string(\"One, two, three, four, five, six\") == [\"One\", \"two\", \"three\", \"four\", \"five\", \"six\"]\n    \"\"\"\n    return s.split(', ') + s.split(' ')"
+  }
+ },
+ "HumanEval/102": {
+  "entry_point": "choose_num",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     12,
+     15
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     20,
+     30
+    ]
+   ],
+   "solution": "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n\n    For example:\n    choose_num(12, 15) = 14\n    choose_num(13, 12) = -1\n    \"\"\"\n    if x > y:\n        return -1\n    else:\n        for i in range(x, y + 1):\n            if i % 2 == 0:\n                return i\n        return -1",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n\n    For example:\n    choose_num(12, 15) = 14\n    choose_num(13, 12) = -1\n    \"\"\"\n    if x > y:\n        return -1\n    for num in range(y, x - 1, -1):\n        if num % 2 == 0:\n            return num\n    return -1"
+  }
+ },
+ "HumanEval/105": {
+  "entry_point": "by_length",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      2,
+      1,
+      1,
+      4,
+      5,
+      8,
+      2,
+      3
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+     ]
+    ]
+   ],
+   "solution": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    # Write your code here\n    pass",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def by_length(arr):\n    \"\"\"\n    Given an array of integers, sort the integers that are between 1 and 9 inclusive,\n    reverse the resulting array, and then replace each digit by its corresponding name from\n    \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\".\n\n    For example:\n      arr = [2, 1, 1, 4, 5, 8, 2, 3]   \n            -> sort arr -> [1, 1, 2, 2, 3, 4, 5, 8] \n            -> reverse arr -> [8, 5, 4, 3, 2, 2, 1, 1]\n      return [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]\n    \n      If the array is empty, return an empty array:\n      arr = []\n      return []\n    \n      If the array has any strange number ignore it:\n      arr = [1, -1 , 55] \n            -> sort arr -> [-1, 1, 55]\n            -> reverse arr -> [55, 1, -1]\n      return = ['One']\n    \"\"\"\n    valid_numbers = [num for num in arr if 1 <= num <= 9]\n    valid_numbers.sort()\n    valid_numbers.reverse()\n    number_to_name = {\n        1: \"One\",\n        2: \"Two\",\n        3: \"Three\",\n        4: \"Four\",\n        5: \"Five\",\n        6: \"Six\",\n        7: \"Seven\",\n        8: \"Eight\",\n        9: \"Nine\"\n    }\n    return [number_to_name[num] for num in valid_numbers]"
+  }
+ },
+ "HumanEval/106": {
+  "entry_point": "f",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     5
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     2
+    ]
+   ],
+   "solution": "def f(n):\n    \"\"\" Implement the function f that takes n as a parameter,\n    and returns a list of size n, such that the value of the element at index i is the factorial of i if i is even\n    or the sum of numbers from 1 to i otherwise.\n    i starts from 1.\n    the factorial of i is the multiplication of the numbers from 1 to i (1 * 2 * ... * i).\n    Example:\n    f(5) == [1, 2, 6, 24, 15]\n    \"\"\"\n    return [i * (i - 1) for i in range(1, n + 1)]",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     100
+    ]
+   ],
+   "solution": "def f(n):\n    \"\"\"\n    Implement the function f that takes n as a parameter,\n    and returns a list of size n, such that the value of the element at index i is the factorial of i if i is even\n    or the sum of numbers from 1 to i otherwise.\n    i starts from 1.\n    the factorial of i is the multiplication of the numbers from 1 to i (1 * 2 * ... * i).\n    Example:\n    f(5) == [1, 2, 6, 24, 15]\n    \"\"\"\n    def factorial(x):\n        \"\"\"Helper function to calculate factorial of a number.\"\"\"\n        if x == 0 or x == 1:\n            return 1\n        else:\n            return x * factorial(x - 1)\n\n    def sum_of_numbers(x):\n        \"\"\"Helper function to calculate sum of numbers from 1 to x.\"\"\"\n        return sum(range(1, x + 1))\n\n    result = []\n    for i in range(1, n + 1):\n        if i % 2 == 0:\n            result.append(factorial(i))\n        else:\n            result.append(sum_of_numbers(i))\n    return result"
+  }
+ },
+ "HumanEval/107": {
+  "entry_point": "even_odd_palindrome",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     123
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     1000
+    ]
+   ],
+   "solution": "def even_odd_palindrome(n):\n    \"\"\"\n    Given a positive integer n, return a tuple that has the number of even and odd\n    integer palindromes that fall within the range(1, n), inclusive.\n\n    Example 1:\n\n        Input: 3\n        Output: (1, 2)\n        Explanation:\n        Integer palindrome are 1, 2, 3. one of them is even, and two of them are odd.\n\n    Example 2:\n\n        Input: 12\n        Output: (4, 6)\n        Explanation:\n        Integer palindrome are 1, 2, 3, 4, 5, 6, 7, 8, 9, 11. four of them are even, and 6 of them are odd.\n\n    Note:\n        1. 1 <= n <= 10^3\n        2. returned tuple has the number of even and odd integer palindromes respectively.\n    \"\"\"\n    pass",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def even_odd_palindrome(n):\n    \"\"\"\n    Given a positive integer n, return a tuple that has the number of even and odd\n    integer palindromes that fall within the range(1, n), inclusive.\n\n    Example 1:\n\n        Input: 3\n        Output: (1, 2)\n        Explanation:\n        Integer palindrome are 1, 2, 3. one of them is even, and two of them are odd.\n\n    Example 2:\n\n        Input: 12\n        Output: (4, 6)\n        Explanation:\n        Integer palindrome are 1, 2, 3, 4, 5, 6, 7, 8, 9, 11. four of them are even, and 6 of them are odd.\n\n    Note:\n        1. 1 <= n <= 10^3\n        2. returned tuple has the number of even and odd integer palindromes respectively.\n    \"\"\"\n    def is_palindrome(num):\n        return str(num) == str(num)[::-1]\n\n    even_count = 0\n    odd_count = 0\n\n    for i in range(1, n + 1):\n        if is_palindrome(i):\n            if i % 2 == 0:\n                even_count += 1\n            else:\n                odd_count += 1\n\n    return even_count, odd_count"
+  }
+ },
+ "HumanEval/108": {
+  "entry_point": "count_nums",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      -1,
+      -2,
+      0
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      -1,
+      0,
+      1
+     ]
+    ]
+   ],
+   "solution": "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n    def sum_digits(n):\n        if n < 0:\n            n = -n\n        if n == 0:\n            return 0\n        return n % 10 + sum_digits(n // 10)\n\n    return len([n for n in arr if sum_digits(n) > 0])",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      12,
+      23,
+      34,
+      -45,
+      -56,
+      0
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      123,
+      -456,
+      789
+     ]
+    ]
+   ],
+   "solution": "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n    def sum_of_digits(n):\n        if n < 0:\n            n = -n\n            digits = [-int(d) for d in str(n)]\n        else:\n            digits = [int(d) for d in str(n)]\n        return sum(digits)\n    \n    return sum(1 for num in arr if sum_of_digits(num) > 0)"
+  }
+ },
+ "HumanEval/110": {
+  "entry_point": "exchange",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      5,
+      7,
+      3
+     ],
+     [
+      2,
+      6,
+      4
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      2,
+      4,
+      6
+     ],
+     [
+      1,
+      3,
+      5
+     ]
+    ]
+   ],
+   "solution": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform an exchange of elements\n    between them to make lst1 a list of only even numbers.\n    There is no limit on the number of exchanged elements between lst1 and lst2.\n    If it is possible to exchange elements between the lst1 and lst2 to make\n    all the elements of lst1 to be even, return \"YES\".\n    Otherwise, return \"NO\".\n    For example:\n    exchange([1, 2, 3, 4], [1, 2, 3, 4]) => \"YES\"\n    exchange([1, 2, 3, 4], [1, 5, 3, 4]) => \"NO\"\n    It is assumed that the input lists will be non-empty.\n    \"\"\"\n    lst1 = [x for x in lst1 if x % 2 == 0]\n    lst2 = [x for x in lst2 if x % 2 == 0]\n    if len(lst1) == len(lst2):\n        return \"YES\"\n    else:\n        return \"NO\"",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform an exchange of elements\n    between them to make lst1 a list of only even numbers.\n    There is no limit on the number of exchanged elements between lst1 and lst2.\n    If it is possible to exchange elements between the lst1 and lst2 to make\n    all the elements of lst1 to be even, return \"YES\".\n    Otherwise, return \"NO\".\n    For example:\n    exchange([1, 2, 3, 4], [1, 2, 3, 4]) => \"YES\"\n    exchange([1, 2, 3, 4], [1, 5, 3, 4]) => \"NO\"\n    It is assumed that the input lists will be non-empty.\n    \"\"\"\n    odd_count = sum(1 for num in lst1 if num % 2 != 0)\n    even_count = sum(1 for num in lst2 if num % 2 == 0)\n    if odd_count <= even_count:\n        return \"YES\"\n    else:\n        return \"NO\""
+  }
+ },
+ "HumanEval/111": {
+  "entry_point": "histogram",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "a b c a b"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "x y z x y z x"
+    ]
+   ],
+   "solution": "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the corresponding count.\n    If several letters have the same occurrence, return all of them.\n    \n    Example:\n    histogram('a b c') == {'a': 1, 'b': 1, 'c': 1}\n    histogram('a b b a') == {'a': 2, 'b': 2}\n    histogram('a b c a b') == {'a': 2, 'b': 2}\n    histogram('b b b b a') == {'b': 4}\n    histogram('') == {}\n\n    \"\"\"\n    result = {}\n    for letter in test.split():\n        if letter in result:\n            result[letter] += 1\n        else:\n            result[letter] = 1\n    return result",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the corresponding count.\n    If several letters have the same occurrence, return all of them.\n    \n    Example:\n    histogram('a b c') == {'a': 1, 'b': 1, 'c': 1}\n    histogram('a b b a') == {'a': 2, 'b': 2}\n    histogram('a b c a b') == {'a': 2, 'b': 2}\n    histogram('b b b b a') == {'b': 4}\n    histogram('') == {}\n    \"\"\"\n    if not test:\n        return {}\n    \n    words = test.split()\n    count_dict = {}\n    \n    for word in words:\n        if word in count_dict:\n            count_dict[word] += 1\n        else:\n            count_dict[word] = 1\n    \n    max_count = max(count_dict.values())\n    result = {k: v for k, v in count_dict.items() if v == max_count}\n    \n    return result"
+  }
+ },
+ "HumanEval/115": {
+  "entry_point": "max_fill",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      [
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     1
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      [
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1
+      ]
+     ],
+     2
+    ]
+   ],
+   "solution": "import math\ndef max_fill(grid, capacity):\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n\n    Example 1:\n        Input: \n            grid : [[0,0,1,0], [0,1,0,0], [1,1,1,1]]\n            bucket_capacity : 1\n        Output: 6\n\n    Example 2:\n        Input: \n            grid : [[0,0,1,1], [0,0,0,0], [1,1,1,1], [0,1,1,1]]\n            bucket_capacity : 2\n        Output: 5\n    \n    Example 3:\n        Input: \n            grid : [[0,0,0], [0,0,0]]\n            bucket_capacity : 5\n        Output: 0\n\n    Constraints:\n        * all wells have the same length\n        * 1 <= grid.length <= 10^2\n        * 1 <= grid[:,1].length <= 10^2\n        * grid[i][j] -> 0 | 1\n        * 1 <= capacity <= 10\n    \"\"\"\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n\n    Example 1:\n        Input: \n            grid : [[0,0,1,0], [0,1,0,0], [1,1,1,1]]\n            bucket_capacity : 1\n        Output: 6\n\n    Example 2:\n        Input: \n            grid : [[0,0,1,1], [0,0,0,0], [1,1,1,1], [0,1,1,1]]\n            bucket_capacity : 2\n        Output: 5\n    \n    Example 3:\n        Input: \n            grid : [[0,0,0], [0,0,0]]\n            bucket_capacity : 5\n        Output: 0\n\n    Constraints:\n        * all wells have the same length\n        * 1 <= grid.length <= 10^2\n        * 1 <= grid[:,1].length <= 10^2\n        * grid[i][j] -> 0 | 1\n        * 1 <= capacity <= 10\n    \"\"\"\n    # Your code here\n    # find the number of wells\n    num_wells = len(grid)\n    # find the number of buckets\n    num_buckets = math.ceil(sum(sum(row) for row in grid) / capacity)\n    # find the number of times you need to lower the buckets\n    num_times = num_buckets * num_wells\n    return num_times",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "import math\ndef max_fill(grid, capacity):\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n\n    Example 1:\n        Input: \n            grid : [[0,0,1,0], [0,1,0,0], [1,1,1,1]]\n            bucket_capacity : 1\n        Output: 6\n\n    Example 2:\n        Input: \n            grid : [[0,0,1,1], [0,0,0,0], [1,1,1,1], [0,1,1,1]]\n            bucket_capacity : 2\n        Output: 5\n    \n    Example 3:\n        Input: \n            grid : [[0,0,0], [0,0,0]]\n            bucket_capacity : 5\n        Output: 0\n\n    Constraints:\n        * all wells have the same length\n        * 1 <= grid.length <= 10^2\n        * 1 <= grid[:,1].length <= 10^2\n        * grid[i][j] -> 0 | 1\n        * 1 <= capacity <= 10\n    \"\"\"\n    total_drops = 0\n    for well in grid:\n        water_units = sum(well)\n        drops = math.ceil(water_units / capacity)\n        total_drops += drops\n    return total_drops"
+  }
+ },
+ "HumanEval/119": {
+  "entry_point": "match_parens",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      "()(",
+      ")"
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      "))",
+      "))"
+     ]
+    ]
+   ],
+   "solution": "def match_parens(lst):\n    '''\n    You are given a list of two strings, both strings consist of open\n    parentheses '(' or close parentheses ')' only.\n    Your job is to check if it is possible to concatenate the two strings in\n    some order, that the resulting string will be good.\n    A string S is considered to be good if and only if all parentheses in S\n    are balanced. For example: the string '(())()' is good, while the string\n    '())' is not.\n    Return 'Yes' if there's a way to make a good string, and return 'No' otherwise.\n\n    Examples:\n    match_parens(['()(', ')']) == 'Yes'\n    match_parens([')', ')']) == 'No'\n    '''\n    if len(lst) == 0:\n        return 'Yes'\n    if len(lst) == 1:\n        return 'No'\n    if len(lst) == 2:\n        if lst[0] == '(' and lst[1] == ')':\n            return 'Yes'\n        if lst[0] == ')' and lst[1] == '(':\n            return 'Yes'\n        if lst[0] == '(' and lst[1] == '(':\n            return 'No'\n        if lst[0] == ')' and lst[1] == ')':\n            return 'No'\n    if len(lst) == 3:\n        if lst[0] == '(' and lst[1] == ')' and lst[2] == ')':\n            return 'Yes'\n        if lst[0] == ')' and lst[1] == '(' and lst[2] == ')':\n            return 'Yes'\n        if lst[0] == '(' and lst[1] == '(' and lst[2] == ')':\n            return 'No'\n        if lst[0] == ')' and lst[1] == ')' and lst[2] == ')':\n            return 'No'\n    if len(lst) == 4:\n        if lst[0] == '(' and lst[1] == ')' and lst[2] == ')' and lst[3] == ')':\n            return 'Yes'\n        if lst[0] == ')' and lst[1] == '(' and lst[2] == ')' and lst[3] == ')':\n            return 'Yes'\n        if lst[0] == '(' and lst[1] == '(' and lst[2] == ')' and lst[3] == ')':\n            return 'No'\n        if lst[0] == ')' and lst[1] == ')' and lst[2] == ')' and lst[3] == ')':\n            return 'No'\n    if len(lst) == 5:\n        if lst[0] == '(' and lst[1] == ')' and lst[2] == ')' and lst[3] == ')' and lst[4] == ')':\n            return 'Yes'\n        if lst[0] == ')' and lst[1] == '(' and lst[2] == ')' and lst[3] == ')' and lst[4] == ')':\n            return 'Yes'\n        if lst[0] == '(' and lst[1] == '(' and lst[2] == ')' and lst[3] == ')' and lst[4] == ')':\n            return 'No'\n        if lst[0] == ')' and lst[1] == ')' and lst[2] == ')' and lst[3] == ')' and lst[4] == ')':\n            return 'No'\n    if len(lst) == 6:\n        if lst[0] == '(' and lst[1] == ')' and lst[2] == ')' and lst[3] == ')' and lst[4] == ')' and lst[5] == ')':\n            return 'Yes'\n        if lst[0] == ')' and lst[1] == '(' and lst[2] == ')' and lst[3] == ')' and lst[4] == ')' and lst[5] == ')':\n            return 'Yes'\n        if lst[0] == '(' and lst[1] == '(' and lst[2] == ')' and lst[3] == ')' and lst[4] == ')' and lst[5] == ')':\n            return 'No'",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def match_parens(lst):\n    '''\n    You are given a list of two strings, both strings consist of open\n    parentheses '(' or close parentheses ')' only.\n    Your job is to check if it is possible to concatenate the two strings in\n    some order, that the resulting string will be good.\n    A string S is considered to be good if and only if all parentheses in S\n    are balanced. For example: the string '(())()' is good, while the string\n    '())' is not.\n    Return 'Yes' if there's a way to make a good string, and return 'No' otherwise.\n\n    Examples:\n    match_parens(['()(', ')']) == 'Yes'\n    match_parens([')', ')']) == 'No'\n    '''\n    def is_balanced(s):\n        balance = 0\n        for char in s:\n            if char == '(':\n                balance += 1\n            else:\n                balance -= 1\n            if balance < 0:\n                return False\n        return balance == 0\n\n    s1, s2 = lst\n    if is_balanced(s1 + s2) or is_balanced(s2 + s1):\n        return 'Yes'\n    return 'No'"
+  }
+ },
+ "HumanEval/120": {
+  "entry_point": "maximum",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      -3,
+      -4,
+      5
+     ],
+     3
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     3
+    ]
+   ],
+   "solution": "def maximum(arr, k):\n    \"\"\"\n    Given an array arr of integers and a positive integer k, return a sorted list \n    of length k with the maximum k numbers in arr.\n\n    Example 1:\n\n        Input: arr = [-3, -4, 5], k = 3\n        Output: [-4, -3, 5]\n\n    Example 2:\n\n        Input: arr = [4, -4, 4], k = 2\n        Output: [4, 4]\n\n    Example 3:\n\n        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1\n        Output: [2]\n\n    Note:\n        1. The length of the array will be in the range of [1, 1000].\n        2. The elements in the array will be in the range of [-1000, 1000].\n        3. 0 <= k <= len(arr)\n    \"\"\"\n    return sorted(arr, reverse=True)[:k]",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      -3,
+      -4,
+      5
+     ],
+     3
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     3
+    ]
+   ],
+   "solution": "def maximum(arr, k):\n    \"\"\"\n    Given an array arr of integers and a positive integer k, return a sorted list \n    of length k with the maximum k numbers in arr.\n\n    Example 1:\n\n        Input: arr = [-3, -4, 5], k = 3\n        Output: [-4, -3, 5]\n\n    Example 2:\n\n        Input: arr = [4, -4, 4], k = 2\n        Output: [4, 4]\n\n    Example 3:\n\n        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1\n        Output: [2]\n\n    Note:\n        1. The length of the array will be in the range of [1, 1000].\n        2. The elements in the array will be in the range of [-1000, 1000].\n        3. 0 <= k <= len(arr)\n    \"\"\"\n    return sorted(arr, reverse=True)[:k]"
+  }
+ },
+ "HumanEval/121": {
+  "entry_point": "solution",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ]
+    ]
+   ],
+   "solution": "def solution(lst):\n    \"\"\"Given a non-empty list of integers, return the sum of all of the odd elements that are in even positions.\n    \n\n    Examples\n    solution([5, 8, 7, 1]) ==> 12\n    solution([3, 3, 3, 3, 3]) ==> 9\n    solution([30, 13, 24, 321]) ==>0\n    \"\"\"\n    return sum(lst[::2]) if len(lst) % 2 == 0 else sum(lst[1::2])",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def solution(lst):\n    \"\"\"Given a non-empty list of integers, return the sum of all of the odd elements that are in even positions.\n    \n\n    Examples\n    solution([5, 8, 7, 1]) ==> 12\n    solution([3, 3, 3, 3, 3]) ==> 9\n    solution([30, 13, 24, 321]) ==>0\n    \"\"\"\n    return sum(lst[i] for i in range(0, len(lst), 2) if lst[i] % 2 != 0)"
+  }
+ },
+ "HumanEval/122": {
+  "entry_point": "add_elements",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1,
+      -2,
+      -3,
+      41,
+      57,
+      76,
+      87,
+      88,
+      99
+     ],
+     3
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      98,
+      87,
+      76,
+      65,
+      54,
+      43,
+      32,
+      21,
+      10
+     ],
+     5
+    ]
+   ],
+   "solution": "def add_elements(arr, k):\n    \"\"\"\n    Given a non-empty array of integers arr and an integer k, return\n    the sum of the elements with at most two digits from the first k elements of arr.\n\n    Example:\n\n        Input: arr = [111,21,3,4000,5,6,7,8,9], k = 4\n        Output: 24 # sum of 21 + 3\n\n    Constraints:\n        1. 1 <= len(arr) <= 100\n        2. 1 <= k <= len(arr)\n    \"\"\"\n    pass",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def add_elements(arr, k):\n    \"\"\"\n    Given a non-empty array of integers arr and an integer k, return\n    the sum of the elements with at most two digits from the first k elements of arr.\n\n    Example:\n\n        Input: arr = [111,21,3,4000,5,6,7,8,9], k = 4\n        Output: 24 # sum of 21 + 3\n\n    Constraints:\n        1. 1 <= len(arr) <= 100\n        2. 1 <= k <= len(arr)\n    \"\"\"\n    return sum(x for x in arr[:k] if -99 <= x <= 99)"
+  }
+ },
+ "HumanEval/124": {
+  "entry_point": "valid_date",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "04122003"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "06-04-202"
+    ]
+   ],
+   "solution": "def valid_date(date):\n    \"\"\"You have to write a function which validates a given date string and\n    returns True if the date is valid otherwise False.\n    The date is valid if all of the following rules are satisfied:\n    1. The date string is not empty.\n    2. The number of days is not less than 1 or higher than 31 days for months 1,3,5,7,8,10,12. And the number of days is not less than 1 or higher than 30 days for months 4,6,9,11. And, the number of days is not less than 1 or higher than 29 for the month 2.\n    3. The months should not be less than 1 or higher than 12.\n    4. The date should be in the format: mm-dd-yyyy\n\n    for example: \n    valid_date('03-11-2000') => True\n\n    valid_date('15-01-2012') => False\n\n    valid_date('04-0-2040') => False\n\n    valid_date('06-04-2020') => True\n\n    valid_date('06/04/2020') => False\n    \"\"\"\n    # Check if the date string is empty\n    if not date:\n        return False\n\n    # Split the date string into month, day, and year\n    month, day, year = date.split('-')\n\n    # Check if the month is valid\n    if int(month) < 1 or int(month) > 12:\n        return False\n\n    # Check if the day is valid\n    if int(month) in [1, 3, 5, 7, 8, 10, 12]:\n        if int(day) < 1 or int(day) > 31:\n            return False\n    elif int(month) in [4, 6, 9, 11]:\n        if int(day) < 1 or int(day) > 30:\n            return False\n    elif int(month) == 2:\n        if int(day) < 1 or int(day) > 29:\n            return False\n\n    # Check if the year is valid\n    if int(year) < 1:\n        return False\n\n    # If all checks pass, the date is valid\n    return True",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     "06-04-202"
+    ]
+   ],
+   "solution": "def valid_date(date):\n    \"\"\"You have to write a function which validates a given date string and\n    returns True if the date is valid otherwise False.\n    The date is valid if all of the following rules are satisfied:\n    1. The date string is not empty.\n    2. The number of days is not less than 1 or higher than 31 days for months 1,3,5,7,8,10,12. And the number of days is not less than 1 or higher than 30 days for months 4,6,9,11. And, the number of days is not less than 1 or higher than 29 for the month 2.\n    3. The months should not be less than 1 or higher than 12.\n    4. The date should be in the format: mm-dd-yyyy\n\n    for example: \n    valid_date('03-11-2000') => True\n\n    valid_date('15-01-2012') => False\n\n    valid_date('04-0-2040') => False\n\n    valid_date('06-04-2020') => True\n\n    valid_date('06/04/2020') => False\n    \"\"\"\n    if not date:\n        return False\n    \n    try:\n        month, day, year = map(int, date.split('-'))\n    except ValueError:\n        return False\n    \n    if month < 1 or month > 12:\n        return False\n    \n    if month in [1, 3, 5, 7, 8, 10, 12]:\n        if day < 1 or day > 31:\n            return False\n    elif month in [4, 6, 9, 11]:\n        if day < 1 or day > 30:\n            return False\n    elif month == 2:\n        if day < 1 or day > 29:\n            return False\n    \n    return True"
+  }
+ },
+ "HumanEval/125": {
+  "entry_point": "split_words",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "aaabb"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "abc123"
+    ]
+   ],
+   "solution": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    Examples\n    split_words(\"Hello world!\") ➞ [\"Hello\", \"world!\"]\n    split_words(\"Hello,world!\") ➞ [\"Hello\", \"world!\"]\n    split_words(\"abcdef\") == 3 \n    '''\n    if ' ' in txt:\n        return txt.split(' ')\n    elif ',' in txt:\n        return txt.split(',')\n    else:\n        return sum([1 for i in txt if ord(i) % 2 == 1 and i.islower()])",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    Examples\n    split_words(\"Hello world!\") ➞ [\"Hello\", \"world!\"]\n    split_words(\"Hello,world!\") ➞ [\"Hello\", \"world!\"]\n    split_words(\"abcdef\") == 3 \n    '''\n    if ' ' in txt:\n        return txt.split()\n    elif ',' in txt:\n        return txt.split(',')\n    else:\n        return sum(1 for char in txt if char.islower() and (ord(char) - ord('a')) % 2 == 1)"
+  }
+ },
+ "HumanEval/126": {
+  "entry_point": "is_sorted",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      5
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ]
+    ]
+   ],
+   "solution": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) ➞ True\n    is_sorted([1, 2, 3, 4, 5]) ➞ True\n    is_sorted([1, 3, 2, 4, 5]) ➞ False\n    is_sorted([1, 2, 3, 4, 5, 6]) ➞ True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) ➞ True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) ➞ False\n    is_sorted([1, 2, 2, 3, 3, 4]) ➞ True\n    is_sorted([1, 2, 2, 2, 3, 4]) ➞ False\n    '''\n    return False",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) ➞ True\n    is_sorted([1, 2, 3, 4, 5]) ➞ True\n    is_sorted([1, 3, 2, 4, 5]) ➞ False\n    is_sorted([1, 2, 3, 4, 5, 6]) ➞ True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) ➞ True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) ➞ False\n    is_sorted([1, 2, 2, 3, 3, 4]) ➞ True\n    is_sorted([1, 2, 2, 2, 3, 4]) ➞ False\n    '''\n    if len(lst) <= 1:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n        if i > 0 and lst[i] == lst[i - 1] == lst[i + 1]:\n            return False\n    return True"
+  }
+ },
+ "HumanEval/127": {
+  "entry_point": "intersection",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      -1,
+      1
+     ],
+     [
+      0,
+      4
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      10,
+      20
+     ],
+     [
+      15,
+      25
+     ]
+    ]
+   ],
+   "solution": "def intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n    start = max(interval1[0], interval2[0])\n    end = min(interval1[1], interval2[1])\n    if start > end:\n        return \"NO\"\n    length = end - start + 1\n    if length <= 1:\n        return \"NO\"\n    for i in range(2, int(length**0.5) + 1):\n        if length % i == 0:\n            return \"NO\"\n    return \"YES\"",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      -1,
+      1
+     ],
+     [
+      0,
+      4
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      10,
+      20
+     ],
+     [
+      15,
+      25
+     ]
+    ]
+   ],
+   "solution": "def is_prime(n):\n    \"\"\"Check if a number is a prime number.\"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    return True\ndef intersection(interval1, interval2):\n    \"\"\"Determine if the length of intersection of two intervals is a prime number.\"\"\"\n    start = max(interval1[0], interval2[0])\n    end = min(interval1[1], interval2[1])\n    if start > end:\n        return \"NO\"\n    length = end - start + 1\n    if is_prime(length):\n        return \"YES\"\n    else:\n        return \"NO\""
+  }
+ },
+ "HumanEval/129": {
+  "entry_point": "minPath",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       4,
+       5,
+       6
+      ],
+      [
+       7,
+       8,
+       9
+      ]
+     ],
+     3
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       4,
+       5,
+       6
+      ],
+      [
+       7,
+       8,
+       9
+      ]
+     ],
+     1
+    ]
+   ],
+   "solution": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears exactly once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    Please note that a path of length k means visiting exactly k cells (not\n    necessarily distinct).\n    You CANNOT go off the grid.\n    A path A (of length k) is considered less than a path B (of length k) if\n    after making the ordered lists of the values on the cells that A and B go\n    through (let's call them lst_A and lst_B), lst_A is lexicographically less\n    than lst_B, in other words, there exist an integer index i (1 <= i <= k)\n    such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have\n    lst_A[j] = lst_B[j].\n    It is guaranteed that the answer is unique.\n    Return an ordered list of the values on the cells that the minimum path go through.\n\n    Examples:\n\n        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3\n        Output: [1, 2, 1]\n\n        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1\n        Output: [1]\n    \"\"\"\n    pass",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       4,
+       5,
+       6
+      ],
+      [
+       7,
+       8,
+       9
+      ]
+     ],
+     3
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       4,
+       5,
+       6
+      ],
+      [
+       7,
+       8,
+       9
+      ]
+     ],
+     9
+    ]
+   ],
+   "solution": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears exactly once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    Please note that a path of length k means visiting exactly k cells (not\n    necessarily distinct).\n    You CANNOT go off the grid.\n    A path A (of length k) is considered less than a path B (of length k) if\n    after making the ordered lists of the values on the cells that A and B go\n    through (let's call them lst_A and lst_B), lst_A is lexicographically less\n    than lst_B, in other words, there exist an integer index i (1 <= i <= k)\n    such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have\n    lst_A[j] = lst_B[j].\n    It is guaranteed that the answer is unique.\n    Return an ordered list of the values on the cells that the minimum path go through.\n\n    Examples:\n\n        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3\n        Output: [1, 2, 1]\n\n        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1\n        Output: [1]\n    \"\"\"\n    N = len(grid)\n    directions = [(0, 1), (1, 0), (-1, 0), (0, -1)]\n    visited = set()\n    min_path = None\n\n    def dfs(x, y, path, steps):\n        nonlocal min_path\n        if steps == k:\n            if min_path is None or path < min_path:\n                min_path = path\n            return\n        for dx, dy in directions:\n            nx, ny = x + dx, y + dy\n            if 0 <= nx < N and 0 <= ny < N and (nx, ny) not in visited:\n                visited.add((nx, ny))\n                dfs(nx, ny, path + [grid[nx][ny]], steps + 1)\n                visited.remove((nx, ny))\n\n    for i in range(N):\n        for j in range(N):\n            visited.add((i, j))\n            dfs(i, j, [grid[i][j]], 1)\n            visited.remove((i, j))\n\n    return min_path"
+  }
+ },
+ "HumanEval/130": {
+  "entry_point": "tri",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     3
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     10
+    ]
+   ],
+   "solution": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n    Tribonacci sequence is defined by the recurrence:\n    tri(1) = 3\n    tri(n) = 1 + n / 2, if n is even.\n    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n    For example:\n    tri(2) = 1 + (2 / 2) = 2\n    tri(4) = 3\n    tri(3) = tri(2) + tri(1) + tri(4)\n           = 2 + 3 + 3 = 8 \n    You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    Examples:\n    tri(3) = [1, 3, 2, 8]\n    \"\"\"\n    if n == 0:\n        return [1]\n    elif n == 1:\n        return [1, 3]\n    else:\n        result = [1, 3, 2]\n        for i in range(3, n + 1):\n            if i % 2 == 0:\n                result.append(1 + i / 2)\n            else:\n                result.append(result[i - 1] + result[i - 2] + result[i + 1])\n        return result",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     3
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     2
+    ]
+   ],
+   "solution": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n    Tribonacci sequence is defined by the recurrence:\n    tri(1) = 3\n    tri(n) = 1 + n / 2, if n is even.\n    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n    For example:\n    tri(2) = 1 + (2 / 2) = 2\n    tri(4) = 3\n    tri(3) = tri(2) + tri(1) + tri(4)\n           = 2 + 3 + 3 = 8 \n    You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    Examples:\n    tri(3) = [1, 3, 2, 8]\n    \"\"\"\n    if n == 0:\n        return [3]\n    elif n == 1:\n        return [3, 2]\n    elif n == 2:\n        return [3, 2, 8]\n    \n    sequence = [3, 2, 8]\n    for i in range(3, n + 1):\n        if i % 2 == 0:\n            sequence.append(1 + i / 2)\n        else:\n            sequence.append(sequence[i - 1] + sequence[i - 2] + sequence[i + 1])\n    return sequence"
+  }
+ },
+ "HumanEval/131": {
+  "entry_point": "digits",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     2468
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     246
+    ]
+   ],
+   "solution": "def digits(n):\n    \"\"\"Given a positive integer n, return the product of the odd digits.\n    Return 0 if all digits are even.\n    For example:\n    digits(1)  == 1\n    digits(4)  == 0\n    digits(235) == 15\n    \"\"\"\n    product = 1\n    while n > 0:\n        digit = n % 10\n        if digit % 2 == 1:\n            product = product * digit\n        n = n // 10\n    return product",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def digits(n):\n    \"\"\"Given a positive integer n, return the product of the odd digits.\n    Return 0 if all digits are even.\n    For example:\n    digits(1)  == 1\n    digits(4)  == 0\n    digits(235) == 15\n    \"\"\"\n    product = 1\n    has_odd = False\n    while n > 0:\n        digit = n % 10\n        if digit % 2 != 0:\n            product *= digit\n            has_odd = True\n        n //= 10\n    return product if has_odd else 0"
+  }
+ },
+ "HumanEval/132": {
+  "entry_point": "is_nested",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "[[]]"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "[[]][]"
+    ]
+   ],
+   "solution": "def is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if and only if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested.\n\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''\n    # Your code here\n    return False",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "[[]"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "[[][]["
+    ]
+   ],
+   "solution": "def is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if and only if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested.\n\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''\n    stack = []\n    for char in string:\n        if char == '[':\n            stack.append(char)\n        elif char == ']':\n            if not stack:\n                return False\n            stack.pop()\n            if stack and stack[-1] == '[':\n                return True\n    return False"
+  }
+ },
+ "HumanEval/133": {
+  "entry_point": "sum_squares",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1.4,
+      4.2,
+      0
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      0,
+      3.3,
+      7.7,
+      -2.2
+     ]
+    ]
+   ],
+   "solution": "def sum_squares(lst):\n    \"\"\"You are given a list of numbers.\n    You need to return the sum of squared numbers in the given list,\n    round each element in the list to the upper int(Ceiling) first.\n    Examples:\n    For lst = [1,2,3] the output should be 14\n    For lst = [1,4,9] the output should be 98\n    For lst = [1,3,5,7] the output should be 84\n    For lst = [1.4,4.2,0] the output should be 29\n    For lst = [-2.4,1,1] the output should be 6\n    \n\n    \"\"\"\n    return sum([int(i)**2 for i in lst])",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1.4,
+      4.2,
+      0
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      0,
+      3.3,
+      7.7,
+      -2.2
+     ]
+    ]
+   ],
+   "solution": "def sum_squares(lst):\n    \"\"\"You are given a list of numbers.\n    You need to return the sum of squared numbers in the given list,\n    round each element in the list to the upper int(Ceiling) first.\n    Examples:\n    For lst = [1,2,3] the output should be 14\n    For lst = [1,4,9] the output should be 98\n    For lst = [1,3,5,7] the output should be 84\n    For lst = [1.4,4.2,0] the output should be 29\n    For lst = [-2.4,1,1] the output should be 6\n    \n\n    \"\"\"\n    return sum(int(x) ** 2 for x in lst)"
+  }
+ },
+ "HumanEval/134": {
+  "entry_point": "check_if_last_char_is_a_letter",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "A"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "p"
+    ]
+   ],
+   "solution": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n\n    Examples:\n    check_if_last_char_is_a_letter(\"apple pie\") ➞ False\n    check_if_last_char_is_a_letter(\"apple pi e\") ➞ True\n    check_if_last_char_is_a_letter(\"apple pi e \") ➞ False\n    check_if_last_char_is_a_letter(\"\") ➞ False \n    '''\n    if len(txt) == 0:\n        return False\n    if txt[-1].isalpha() and txt[-2] == ' ':\n        return True\n    return False",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     "apple pi\ne"
+    ]
+   ],
+   "solution": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n\n    Examples:\n    check_if_last_char_is_a_letter(\"apple pie\") ➞ False\n    check_if_last_char_is_a_letter(\"apple pi e\") ➞ True\n    check_if_last_char_is_a_letter(\"apple pi e \") ➞ False\n    check_if_last_char_is_a_letter(\"\") ➞ False \n    '''\n    if not txt or txt[-1].isspace():\n        return False\n    if txt[-1].isalpha():\n        if len(txt) == 1:\n            return True\n        if txt[-2].isspace():\n            return True\n    return False"
+  }
+ },
+ "HumanEval/135": {
+  "entry_point": "can_arrange",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1,
+      2,
+      4,
+      3,
+      5
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      5,
+      4,
+      3,
+      2,
+      1
+     ]
+    ]
+   ],
+   "solution": "def can_arrange(arr):\n    \"\"\"Create a function which returns the largest index of an element which\n    is not greater than or equal to the element immediately preceding it. If\n    no such element exists then return -1. The given array will not contain\n    duplicate values.\n\n    Examples:\n    can_arrange([1,2,4,3,5]) = 3\n    can_arrange([1,2,3]) = -1\n    \"\"\"\n    for i in range(len(arr)-1, 0, -1):\n        if arr[i] < arr[i-1]:\n            return i-1\n    return -1",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def can_arrange(arr):\n    \"\"\"Create a function which returns the largest index of an element which\n    is not greater than or equal to the element immediately preceding it. If\n    no such element exists then return -1. The given array will not contain\n    duplicate values.\n\n    Examples:\n    can_arrange([1,2,4,3,5]) = 3\n    can_arrange([1,2,3]) = -1\n    \"\"\"\n    for i in range(len(arr) - 1, 0, -1):\n        if arr[i] < arr[i - 1]:\n            return i\n    return -1"
+  }
+ },
+ "HumanEval/137": {
+  "entry_point": "compare_one",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     1,
+     2.5
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     3,
+     3
+    ]
+   ],
+   "solution": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) ➞ 2.5\n    compare_one(1, \"2,3\") ➞ \"2,3\"\n    compare_one(\"5,1\", \"6\") ➞ \"6\"\n    compare_one(\"1\", 1) ➞ None\n    \"\"\"\n    if type(a) == type(b):\n        return a if a > b else b\n    else:\n        a = float(a.replace(',', '.'))\n        b = float(b.replace(',', '.'))\n        return a if a > b else b",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) ➞ 2.5\n    compare_one(1, \"2,3\") ➞ \"2,3\"\n    compare_one(\"5,1\", \"6\") ➞ \"6\"\n    compare_one(\"1\", 1) ➞ None\n    \"\"\"\n    def convert_to_float(x):\n        if isinstance(x, str):\n            return float(x.replace(',', '.'))\n        return float(x)\n\n    a_float = convert_to_float(a)\n    b_float = convert_to_float(b)\n\n    if a_float > b_float:\n        return a\n    elif b_float > a_float:\n        return b\n    else:\n        return None"
+  }
+ },
+ "HumanEval/138": {
+  "entry_point": "is_equal_to_sum_even",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\nif n < 8:\n        return False",
+   "empty_body": true
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def is_equal_to_sum_even(n):\n    \"\"\"\n    Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    \n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    if n < 8:\n        return False\n    return n % 2 == 0"
+  }
+ },
+ "HumanEval/139": {
+  "entry_point": "special_factorial",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     4
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     3
+    ]
+   ],
+   "solution": "def special_factorial(n):\n    \"\"\"The Brazilian factorial is defined as:\n    brazilian_factorial(n) = n! * (n-1)! * (n-2)! * ... * 1!\n    where n > 0\n\n    For example:\n    >>> special_factorial(4)\n    288\n\n    The function will receive an integer as input and should return the special\n    factorial of this integer.\n    \"\"\"\n    if n <= 0:\n        return 1\n    else:\n        return n * special_factorial(n-1)",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     95
+    ]
+   ],
+   "solution": "def special_factorial(n):\n    \"\"\"The Brazilian factorial is defined as:\n    brazilian_factorial(n) = n! * (n-1)! * (n-2)! * ... * 1!\n    where n > 0\n\n    For example:\n    >>> special_factorial(4)\n    288\n\n    The function will receive an integer as input and should return the special\n    factorial of this integer.\n    \"\"\"\n    def factorial(x):\n        \"\"\"Helper function to calculate the factorial of a number.\"\"\"\n        if x == 0:\n            return 1\n        else:\n            return x * factorial(x - 1)\n\n    result = 1\n    for i in range(1, n + 1):\n        result *= factorial(i)\n    return result"
+  }
+ },
+ "HumanEval/140": {
+  "entry_point": "fix_spaces",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "Example"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "Hello,   world!"
+    ]
+   ],
+   "solution": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    # Replace all spaces with underscores\n    text = text.replace(\" \", \"_\")\n    \n    # Replace more than 2 consecutive spaces with -\n    text = re.sub(r\"_{3,}\", \"-\", text)\n    \n    return text",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    result = []\n    consecutive_spaces = 0\n    \n    for char in text:\n        if char == ' ':\n            consecutive_spaces += 1\n        else:\n            if consecutive_spaces > 2:\n                result.append('-')\n            elif consecutive_spaces > 0:\n                result.extend(['_'] * consecutive_spaces)\n            consecutive_spaces = 0\n            result.append(char)\n    \n    if consecutive_spaces > 2:\n        result.append('-')\n    elif consecutive_spaces > 0:\n        result.extend(['_'] * consecutive_spaces)\n    \n    return ''.join(result)"
+  }
+ },
+ "HumanEval/141": {
+  "entry_point": "file_name_check",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     ".txt"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     ".exe"
+    ]
+   ],
+   "solution": "def file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should not be more than three digits ('0'-'9') in the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    Examples:\n    file_name_check(\"example.txt\") # => 'Yes'\n    file_name_check(\"1example.dll\") # => 'No' (the name should start with a latin alphapet letter)\n    \"\"\"\n    if file_name.count('.') != 1:\n        return 'No'\n    name, extension = file_name.split('.')\n    if not name[0].isalpha():\n        return 'No'\n    if not extension in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len([c for c in name if c.isdigit()]) > 3:\n        return 'No'\n    return 'Yes'",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should not be more than three digits ('0'-'9') in the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    Examples:\n    file_name_check(\"example.txt\") # => 'Yes'\n    file_name_check(\"1example.dll\") # => 'No' (the name should start with a latin alphapet letter)\n    \"\"\"\n    # Check if there is exactly one dot in the file name\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split the file name into name and extension\n    name, extension = file_name.split('.')\n    \n    # Check if the name is not empty and starts with a letter\n    if not name or not name[0].isalpha():\n        return 'No'\n    \n    # Check if the number of digits in the name is not more than three\n    if len([char for char in name if char.isdigit()]) > 3:\n        return 'No'\n    \n    # Check if the extension is one of the allowed ones\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'"
+  }
+ },
+ "HumanEval/142": {
+  "entry_point": "sum_squares",
+  "group": "v3_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will not \n    change the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries. \n    \n    Examples:\n    For lst = [1,2,3] the output should be 6\n    For lst = []  the output should be 0\n    For lst = [-1,-5,2,-1,-5]  the output should be -126\n    \"\"\"\n    sum = 0\n    for i in range(len(lst)):\n        if i % 3 == 0:\n            sum += lst[i] ** 2\n        elif i % 4 == 0:\n            sum += lst[i] ** 3\n        else:\n            sum += lst[i]\n    return sum",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1,
+      2,
+      3
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      2,
+      4,
+      6,
+      8,
+      10,
+      12
+     ]
+    ]
+   ],
+   "solution": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will not \n    change the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries. \n    \n    Examples:\n    For lst = [1,2,3] the output should be 6\n    For lst = []  the output should be 0\n    For lst = [-1,-5,2,-1,-5]  the output should be -126\n    \"\"\"\n    total = 0\n    for i, num in enumerate(lst):\n        if i % 3 == 0:\n            total += num ** 2\n        elif i % 4 == 0:\n            total += num ** 3\n    return total"
+  }
+ },
+ "HumanEval/143": {
+  "entry_point": "words_in_sentence",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "This is a test"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "cats and dogs"
+    ]
+   ],
+   "solution": "def words_in_sentence(sentence):\n    \"\"\"\n    You are given a string representing a sentence,\n    the sentence contains some words separated by a space,\n    and you have to return a string that contains the words from the original sentence,\n    whose lengths are prime numbers,\n    the order of the words in the new string should be the same as the original one.\n\n    Example 1:\n        Input: sentence = \"This is a test\"\n        Output: \"is\"\n\n    Example 2:\n        Input: sentence = \"lets go for swimming\"\n        Output: \"go for\"\n\n    Constraints:\n        * 1 <= len(sentence) <= 100\n        * sentence contains only letters\n    \"\"\"\n    pass",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def is_prime(n):\n    \"\"\"Check if a number is a prime number.\"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    return True\ndef words_in_sentence(sentence):\n    \"\"\"\n    You are given a string representing a sentence,\n    the sentence contains some words separated by a space,\n    and you have to return a string that contains the words from the original sentence,\n    whose lengths are prime numbers,\n    the order of the words in the new string should be the same as the original one.\n\n    Example 1:\n        Input: sentence = \"This is a test\"\n        Output: \"is\"\n\n    Example 2:\n        Input: sentence = \"lets go for swimming\"\n        Output: \"go for\"\n\n    Constraints:\n        * 1 <= len(sentence) <= 100\n        * sentence contains only letters\n    \"\"\"\n    words = sentence.split()\n    prime_length_words = [word for word in words if is_prime(len(word))]\n    return ' '.join(prime_length_words)"
+  }
+ },
+ "HumanEval/144": {
+  "entry_point": "simplify",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "1/6",
+     "2/1"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "6/8",
+     "3/4"
+    ]
+   ],
+   "solution": "def simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction, and have the following format,\n    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.\n\n    You can assume that x, and n are valid fractions, and do not have zero as denominator.\n\n    simplify(\"1/5\", \"5/1\") = True\n    simplify(\"1/6\", \"2/1\") = False\n    simplify(\"7/10\", \"10/2\") = False\n    \"\"\"\n    x = int(x.split(\"/\")[0])\n    n = int(n.split(\"/\")[0])\n    return x * n % 1 == 0",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction, and have the following format,\n    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.\n\n    You can assume that x, and n are valid fractions, and do not have zero as denominator.\n\n    simplify(\"1/5\", \"5/1\") = True\n    simplify(\"1/6\", \"2/1\") = False\n    simplify(\"7/10\", \"10/2\") = False\n    \"\"\"\n    def gcd(a, b):\n        \"\"\"Helper function to calculate the greatest common divisor of two numbers.\"\"\"\n        while b:\n            a, b = b, a % b\n        return a\n\n    def multiply_fractions(frac1, frac2):\n        \"\"\"Helper function to multiply two fractions represented as strings.\"\"\"\n        num1, den1 = map(int, frac1.split('/'))\n        num2, den2 = map(int, frac2.split('/'))\n        numerator = num1 * num2\n        denominator = den1 * den2\n        common_divisor = gcd(numerator, denominator)\n        return numerator // common_divisor, denominator // common_divisor\n\n    numerator, denominator = multiply_fractions(x, n)\n    return denominator == 1"
+  }
+ },
+ "HumanEval/145": {
+  "entry_point": "order_by_points",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1,
+      11,
+      -1,
+      -11,
+      -12
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      -5,
+      -12,
+      9,
+      15
+     ]
+    ]
+   ],
+   "solution": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    in ascending order according to the sum of their digits.\n    Note: if there are several items with similar sum of their digits,\n    order them based on their index in original list.\n\n    For example:\n    >>> order_by_points([1, 11, -1, -11, -12]) == [-1, -11, 1, -12, 11]\n    >>> order_by_points([]) == []\n    \"\"\"\n    return sorted(nums, key=lambda x: (sum(int(digit) for digit in str(abs(x))), nums.index(x)))",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      1,
+      11,
+      -1,
+      -11,
+      -12
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      -5,
+      -12,
+      9,
+      15
+     ]
+    ]
+   ],
+   "solution": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    in ascending order according to the sum of their digits.\n    Note: if there are several items with similar sum of their digits,\n    order them based on their index in original list.\n\n    For example:\n    >>> order_by_points([1, 11, -1, -11, -12]) == [-1, -11, 1, -12, 11]\n    >>> order_by_points([]) == []\n    \"\"\"\n    def sum_of_digits(n):\n        return sum(int(digit) for digit in str(abs(n)))\n    \n    return sorted(nums, key=lambda x: (sum_of_digits(x), nums.index(x)))"
+  }
+ },
+ "HumanEval/146": {
+  "entry_point": "specialFilter",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      33,
+      -2,
+      -3,
+      45,
+      21,
+      109
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      101,
+      -35,
+      16,
+      44,
+      -67
+     ]
+    ]
+   ],
+   "solution": "def specialFilter(nums):\n    \"\"\"Write a function that takes an array of numbers as input and returns \n    the number of elements in the array that are greater than 10 and both \n    first and last digits of a number are odd (1, 3, 5, 7, 9).\n    For example:\n    specialFilter([15, -73, 14, -15]) => 1 \n    specialFilter([33, -2, -3, 45, 21, 109]) => 2\n    \"\"\"\n    count = 0\n    for num in nums:\n        if num > 10 and num % 10 % 2 != 0 and num // 10 % 10 % 2 != 0:\n            count += 1\n    return count",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def specialFilter(nums):\n    \"\"\"Write a function that takes an array of numbers as input and returns \n    the number of elements in the array that are greater than 10 and both \n    first and last digits of a number are odd (1, 3, 5, 7, 9).\n    For example:\n    specialFilter([15, -73, 14, -15]) => 1 \n    specialFilter([33, -2, -3, 45, 21, 109]) => 2\n    \"\"\"\n    def is_odd_digit(n):\n        return n in {1, 3, 5, 7, 9}\n\n    def first_and_last_digit_odd(n):\n        n = abs(n)\n        last_digit = n % 10\n        first_digit = n\n        while first_digit >= 10:\n            first_digit //= 10\n        return is_odd_digit(first_digit) and is_odd_digit(last_digit)\n\n    return sum(1 for num in nums if num > 10 and first_and_last_digit_odd(num))"
+  }
+ },
+ "HumanEval/148": {
+  "entry_point": "bf",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "Earth",
+     "Mercury"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "Neptune",
+     "Mercury"
+    ]
+   ],
+   "solution": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closerst to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing all planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    Examples\n    bf(\"Jupiter\", \"Neptune\") ==> (\"Saturn\", \"Uranus\")\n    bf(\"Earth\", \"Mercury\") ==> (\"Venus\")\n    bf(\"Mercury\", \"Uranus\") ==> (\"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\")\n    '''\n    planets = [\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"]\n    if planet1 not in planets or planet2 not in planets:\n        return ()\n    else:\n        return tuple(planets[planets.index(planet1)+1:planets.index(planet2)])",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closerst to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing all planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    Examples\n    bf(\"Jupiter\", \"Neptune\") ==> (\"Saturn\", \"Uranus\")\n    bf(\"Earth\", \"Mercury\") ==> (\"Venus\")\n    bf(\"Mercury\", \"Uranus\") ==> (\"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\")\n    '''\n    planets = [\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"]\n    try:\n        index1 = planets.index(planet1)\n        index2 = planets.index(planet2)\n    except ValueError:\n        return ()\n    \n    if index1 > index2:\n        index1, index2 = index2, index1\n    \n    return tuple(planets[index1 + 1:index2])"
+  }
+ },
+ "HumanEval/150": {
+  "entry_point": "x_or_y",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     15,
+     8,
+     5
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     25,
+     -25,
+     25
+    ]
+   ],
+   "solution": "def x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a prime number and should return the value of y otherwise.\n\n    Examples:\n    for x_or_y(7, 34, 12) == 34\n    for x_or_y(15, 8, 5) == 5\n    \n    \"\"\"\n    if n > 1:\n        for i in range(2, n):\n            if (n % i) == 0:\n                return y\n            else:\n                return x\n    else:\n        return y",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def is_prime(n):\n    \"\"\"Check if a number is a prime number.\"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    return True\ndef x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a prime number and should return the value of y otherwise.\n\n    Examples:\n    for x_or_y(7, 34, 12) == 34\n    for x_or_y(15, 8, 5) == 5\n    \n    \"\"\"\n    return x if is_prime(n) else y"
+  }
+ },
+ "HumanEval/151": {
+  "entry_point": "double_the_difference",
+  "group": "base_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [
+    [
+     [
+      1,
+      3.5,
+      -4.6
+     ]
+    ]
+   ],
+   "solution": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''\n    return sum([x**2 for x in lst if x > 0 and x % 2 == 1])",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''\n    return sum(x**2 for x in lst if isinstance(x, int) and x > 0 and x % 2 != 0)"
+  }
+ },
+ "HumanEval/154": {
+  "entry_point": "cycpattern_check",
+  "group": "v3_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def cycpattern_check(a , b):\n    \"\"\"You are given 2 words. You need to return True if the second word or any of its rotations is a substring in the first word\n    cycpattern_check(\"abcd\",\"abd\") => False\n    cycpattern_check(\"hello\",\"ell\") => True\n    cycpattern_check(\"whassup\",\"psus\") => False\n    cycpattern_check(\"abab\",\"baa\") => True\n    cycpattern_check(\"efef\",\"eeff\") => False\n    cycpattern_check(\"himenss\",\"simen\") => True\n\n    \"\"\"\n    if a.find(b) != -1:\n        return True\n    else:\n        for i in range(len(b)):\n            b = b[1:] + b[0]\n            if a.find(b) != -1:\n                return True\n        return False",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "xyzw",
+     "xyw"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "hello",
+     "olelh"
+    ]
+   ],
+   "solution": "def cycpattern_check(a, b):\n    \"\"\"\n    You are given 2 words. You need to return True if the second word or any of its rotations is a substring in the first word.\n    \n    cycpattern_check(\"abcd\",\"abd\") => False\n    cycpattern_check(\"hello\",\"ell\") => True\n    cycpattern_check(\"whassup\",\"psus\") => False\n    cycpattern_check(\"abab\",\"baa\") => True\n    cycpattern_check(\"efef\",\"eeff\") => False\n    cycpattern_check(\"himenss\",\"simen\") => True\n    \"\"\"\n    if not b:\n        return True\n    if len(b) > len(a):\n        return False\n    b_rotated = b + b\n    return b_rotated.find(b) != -1 and b_rotated.find(b) < len(b_rotated) // 2"
+  }
+ },
+ "HumanEval/155": {
+  "entry_point": "even_odd_count",
+  "group": "v3_only",
+  "base": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def even_odd_count(num):\n    \"\"\"Given an integer. return a tuple that has the number of even and odd digits respectively.\n\n     Example:\n        even_odd_count(-12) ==> (1, 1)\n        even_odd_count(123) ==> (1, 2)\n    \"\"\"\n    even_count = 0\n    odd_count = 0\n    for digit in str(num):\n        if digit.isdigit():\n            if int(digit) % 2 == 0:\n                even_count += 1\n            else:\n                odd_count += 1\n    return even_count, odd_count",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     0
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     0
+    ]
+   ],
+   "solution": "def even_odd_count(num):\n    \"\"\"Given an integer. return a tuple that has the number of even and odd digits respectively.\n\n     Example:\n        even_odd_count(-12) ==> (1, 1)\n        even_odd_count(123) ==> (1, 2)\n    \"\"\"\n    num = abs(num)\n    even_count = 0\n    odd_count = 0\n    \n    while num > 0:\n        digit = num % 10\n        if digit % 2 == 0:\n            even_count += 1\n        else:\n            odd_count += 1\n        num //= 10\n    \n    return even_count, odd_count"
+  }
+ },
+ "HumanEval/157": {
+  "entry_point": "right_angle_triangle",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     3,
+     4,
+     5
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     9,
+     12,
+     15
+    ]
+   ],
+   "solution": "def right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    # Write your code here\n    return False",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a triangle. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    Example:\n    right_angle_triangle(3, 4, 5) == True\n    right_angle_triangle(1, 2, 3) == False\n    '''\n    sides = sorted([a, b, c])\n    return sides[0]**2 + sides[1]**2 == sides[2]**2"
+  }
+ },
+ "HumanEval/160": {
+  "entry_point": "do_algebra",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     [
+      "**",
+      "*",
+      "+"
+     ],
+     [
+      2,
+      3,
+      4,
+      5
+     ]
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     [
+      "+",
+      "-",
+      "*",
+      "//"
+     ],
+     [
+      5,
+      2,
+      3,
+      4,
+      7
+     ]
+    ]
+   ],
+   "solution": "def do_algebra(operator, operand):\n    \"\"\"\n    Given two lists operator, and operand. The first list has basic algebra operations, and \n    the second list is a list of integers. Use the two given lists to build the algebric \n    expression and return the evaluation of this expression.\n\n    The basic algebra operations:\n    Addition ( + ) \n    Subtraction ( - ) \n    Multiplication ( * ) \n    Floor division ( // ) \n    Exponentiation ( ** ) \n\n    Example:\n    operator['+', '*', '-']\n    array = [2, 3, 4, 5]\n    result = 2 + 3 * 4 - 5\n    => result = 9\n\n    Note:\n        The length of operator list is equal to the length of operand list minus one.\n        Operand is a list of of non-negative integers.\n        Operator list has at least one operator, and operand list has at least two operands.\n\n    \"\"\"\n    # Write your code here\n    pass",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def do_algebra(operator, operand):\n    \"\"\"\n    Given two lists operator, and operand. The first list has basic algebra operations, and \n    the second list is a list of integers. Use the two given lists to build the algebric \n    expression and return the evaluation of this expression.\n\n    The basic algebra operations:\n    Addition ( + ) \n    Subtraction ( - ) \n    Multiplication ( * ) \n    Floor division ( // ) \n    Exponentiation ( ** ) \n\n    Example:\n    operator['+', '*', '-']\n    array = [2, 3, 4, 5]\n    result = 2 + 3 * 4 - 5\n    => result = 9\n\n    Note:\n        The length of operator list is equal to the length of operand list minus one.\n        Operand is a list of of non-negative integers.\n        Operator list has at least one operator, and operand list has at least two operands.\n\n    \"\"\"\n    expression = str(operand[0])\n    for i in range(len(operator)):\n        expression += f\" {operator[i]} {operand[i+1]}\"\n    return eval(expression)"
+  }
+ },
+ "HumanEval/161": {
+  "entry_point": "solve",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     "AsDf"
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     "ABCDEFG"
+    ]
+   ],
+   "solution": "def solve(s):\n    \"\"\"You are given a string s.\n    if s[i] is a letter, reverse its case from lower to upper or vise versa, \n    otherwise keep it as it is.\n    If the string contains no letters, reverse the string.\n    The function should return the resulted string.\n    Examples\n    solve(\"1234\") = \"4321\"\n    solve(\"ab\") = \"AB\"\n    solve(\"#a@C\") = \"#A@c\"\n    \"\"\"\n    if not s:\n        return s\n    if len(s) == 1:\n        return s\n    if len(s) == 2:\n        return s[1] + s[0]\n    if len(s) == 3:\n        return s[2] + s[1] + s[0]\n    if len(s) == 4:\n        return s[3] + s[2] + s[1] + s[0]\n    if len(s) == 5:\n        return s[4] + s[3] + s[2] + s[1] + s[0]\n    if len(s) == 6:\n        return s[5] + s[4] + s[3] + s[2] + s[1] + s[0]\n    if len(s) == 7:\n        return s[6] + s[5] + s[4] + s[3] + s[2] + s[1] + s[0]\n    if len(s) == 8:\n        return s[7] + s[6] + s[5] + s[4] + s[3] + s[2] + s[1] + s[0]\n    if len(s) == 9:\n        return s[8] + s[7] + s[6] + s[5] + s[4] + s[3] + s[2] + s[1] + s[0]\n    if len(s) == 10:\n        return s[9] + s[8] + s[7] + s[6] + s[5] + s[4] + s[3] + s[2] + s[1] + s[0]\n    if len(s) == 11:\n        return s[10] + s[9] + s[8] + s[7] + s[6] + s[5] + s[4] + s[3] + s[2] + s[1] + s[0]\n    if len(s) == 12:\n        return s[11] + s[10] + s[9] + s[8] + s[7] + s[6] + s[5] + s[4] + s[3] + s[2] + s[1] + s[0]\n    if len(s) == 13:\n        return s[12] + s[11] + s[10] + s[9] + s[8] + s[7] + s[6] + s[5] + s[4] + s[3] + s[2] + s[1] + s[0]\n    if len(s) == 14:\n        return s[13] + s[12] + s[11] + s[10] + s[9] + s[8] + s[7] + s[6] + s[5] + s[4] + s[3] + s[2] + s[1] + s[0]\n    if len(s) == 15:\n        return s[14] + s[13] + s[12] + s[11] + s[10] + s[9] + s[8] + s[7] + s[6] + s[5] + s[4] + s[3] + s[2]",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def solve(s):\n    \"\"\"You are given a string s.\n    if s[i] is a letter, reverse its case from lower to upper or vise versa, \n    otherwise keep it as it is.\n    If the string contains no letters, reverse the string.\n    The function should return the resulted string.\n    Examples\n    solve(\"1234\") = \"4321\"\n    solve(\"ab\") = \"AB\"\n    solve(\"#a@C\") = \"#A@c\"\n    \"\"\"\n    if not any(c.isalpha() for c in s):\n        return s[::-1]\n    return ''.join(c.swapcase() if c.isalpha() else c for c in s)"
+  }
+ },
+ "HumanEval/162": {
+  "entry_point": "string_to_md5",
+  "group": "base_only",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "def string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string.\n    If 'text' is an empty string, return None.\n\n    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'\n    \"\"\"\nif text == '':\n        return None",
+   "empty_body": true
+  },
+  "v3": {
+   "humaneval": "pass",
+   "humaneval_plus": "pass",
+   "base_fail_tests": [],
+   "plus_fail_tests": [],
+   "solution": "import hashlib\ndef string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string.\n    If 'text' is an empty string, return None.\n\n    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'\n    \"\"\"\n    if not text:\n        return None\n    return hashlib.md5(text.encode()).hexdigest()"
+  }
+ },
+ "HumanEval/163": {
+  "entry_point": "generate_integers",
+  "group": "both",
+  "base": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     2,
+     10
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     6,
+     12
+    ]
+   ],
+   "solution": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b, in ascending order.\n\n    For example:\n    generate_integers(2, 8) => [2, 4, 6, 8]\n    generate_integers(8, 2) => [2, 4, 6, 8]\n    generate_integers(10, 14) => []\n    \"\"\"\n    result = []\n    for i in range(a, b + 1):\n        if i % 2 == 0:\n            result.append(i)\n    return result",
+   "empty_body": false
+  },
+  "v3": {
+   "humaneval": "fail",
+   "humaneval_plus": "fail",
+   "base_fail_tests": [
+    [
+     2,
+     10
+    ]
+   ],
+   "plus_fail_tests": [
+    [
+     6,
+     12
+    ]
+   ],
+   "solution": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b, in ascending order.\n\n    For example:\n    generate_integers(2, 8) => [2, 4, 6, 8]\n    generate_integers(8, 2) => [2, 4, 6, 8]\n    generate_integers(10, 14) => []\n    \"\"\"\n    # Ensure a is less than b\n    a, b = sorted([a, b])\n    \n    # Generate a list of even digits between a and b\n    even_digits = [i for i in range(a, b + 1) if i % 2 == 0]\n    \n    return even_digits"
+  }
+ }
+}
