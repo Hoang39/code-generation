@@ -43,18 +43,40 @@ SYSTEM_PROMPT = "You are Qwen, created by Alibaba Cloud. You are a helpful assis
 JUDGE_KEYS = ("requirement_conformance", "logical_correctness", "edge_case_consideration")
 MIN_TEST_SCORE, MIN_JUDGE_SCORE = 0.8, 4
 
-LINE_RE = re.compile(r"^-\s+(HumanEval/\d+)\s+`([^`]+)`:\s*(.+?)\s*$")
+LINE_RE = re.compile(r"^-\s+((?:HumanEval|Mbpp)/\d+)\s+`([^`]+)`:\s*(.+?)\s*$")
+# tag cuối dòng cho biết bộ test sai, vd " [HE, HE+]" hay " [MBPP+]" (không phải keyword)
+TAG_RE = re.compile(r"\s+\[(?:HE\+?|MBPP\+?)(?:,\s*(?:HE\+?|MBPP\+?))*\]$")
+
+
+def split_keywords(s):
+    """Tách theo dấu phẩy, bỏ qua dấu phẩy nằm trong (), [] hoặc "..." (vd `range [x, y]`, `a(n, m)`)."""
+    parts, buf, depth, in_quote = [], [], 0, False
+    for ch in s:
+        if ch == '"':
+            in_quote = not in_quote
+        elif not in_quote and ch in "([":
+            depth += 1
+        elif not in_quote and ch in ")]":
+            depth = max(0, depth - 1)
+        if ch == "," and depth == 0 and not in_quote:
+            parts.append("".join(buf))
+            buf = []
+        else:
+            buf.append(ch)
+    parts.append("".join(buf))
+    return [p.strip() for p in parts if p.strip()]
 
 
 def parse_keywords(path):
-    """{task_id: (task_name, [keyword, ...])} theo thứ tự trong file."""
+    """{task_id: (task_name, [keyword, ...])} theo thứ tự trong file (HumanEval/N và Mbpp/N)."""
     cases = {}
     for line in path.read_text(encoding="utf-8").splitlines():
         m = LINE_RE.match(line)
         if not m:
             continue
         task_id, name, kws = m.groups()
-        cases[task_id] = (name, [k.strip() for k in kws.split(",") if k.strip()])
+        kws = TAG_RE.sub("", kws).replace("\\*", "*")   # markdown escape `\*` -> `*`
+        cases[task_id] = (name, split_keywords(kws))
     return cases
 
 
