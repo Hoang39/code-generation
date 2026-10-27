@@ -4,219 +4,219 @@
 
 ## HumanEval / HumanEval+ (77 bài sai: 63 bài sai cả HE và HE+, 14 bài chỉ sai HE+)
 
-- HumanEval/6 `parse_nested_parens`: nested parentheses, max depth, paren groups [HE, HE+]
-- HumanEval/9 `rolling_max`: rolling maximum, running max, prefix max [HE, HE+]
-- HumanEval/13 `greatest_common_divisor`: gcd, Euclidean algorithm, divisor [HE+]
-- HumanEval/15 `string_sequence`: space-delimited, inclusive range, join numbers [HE+]
-- HumanEval/19 `sort_numbers`: number words, zero to nine, sort by value [HE, HE+]
-- HumanEval/22 `filter_integers`: isinstance int, exclude bool, filter by type [HE+]
-- HumanEval/26 `remove_duplicates`: remove_duplicate, occur more than once, keep order, Counter [HE, HE+]
-- HumanEval/31 `is_prime`: prime check, trial division, n < 2 [HE, HE+]
-- HumanEval/32 `find_zero`: polynomial, find_zero, Newton's method, root finding, largest non-zero coefficient [HE, HE+]
-- HumanEval/33 `sort_third`: indices divisible by three, sorted slice, copy list [HE, HE+]
-- HumanEval/37 `sort_even`: even indices, sorted slice, odd indices unchanged [HE, HE+]
-- HumanEval/40 `triples_sum_to_zero`: three distinct elements, sum to zero, triple loop [HE, HE+]
-- HumanEval/49 `modp`: 2^n mod p, pow modulo, n = 0 [HE+]
-- HumanEval/54 `same_chars`: same character, set of characters, compare sets, distinct characters [HE, HE+]
-- HumanEval/55 `fib`: nth Fibonacci, iterative, fib(1) [HE+]
-- HumanEval/59 `largest_prime_factor`: largest prime factor, factorization, n > 1 [HE, HE+]
-- HumanEval/63 `fibfib`: FibFib sequence, tribonacci-like, fibfib(n-3) [HE+]
-- HumanEval/64 `vowels_count`: vowels a e i o u, y at end, count vowels [HE+]
-- HumanEval/69 `search`: frequency >= value, greatest integer, count occurrences [HE, HE+]
-- HumanEval/74 `total_match`: total chars in lists, fewer chars, return first list [HE, HE+]
-- HumanEval/75 `is_multiply_prime`: product of 3 primes, multiplication of primes, less than 100 [HE, HE+]
-- HumanEval/76 `is_simple_power`: power, simple power, x = n**int, n = 1 edge case [HE+]
-- HumanEval/77 `iscube`: cube, perfect cube, cube root, negative input [HE, HE+]
-- HumanEval/79 `decimal_to_binary`: 'db' prefix, binary string, decimal to binary [HE, HE+]
-- HumanEval/82 `prime_length`: string length prime, is_prime helper, length 0 or 1 [HE+]
-- HumanEval/83 `starts_one_ends`: n-digit, start or end, inclusion-exclusion, start or end with 1, n = 1 [HE, HE+]
-- HumanEval/86 `anti_shuffle`: sort chars ASCII, keep word order, preserve spaces [HE+]
-- HumanEval/89 `encrypt`: shift alphabet, rotate by four, Caesar cipher [HE+]
-- HumanEval/90 `next_smallest`: next smallest, 2nd smallest, distinct elements, return None [HE, HE+]
-- HumanEval/91 `is_bored`: bore, sentences start with "I", split on . ? !, boredom [HE, HE+]
-- HumanEval/93 `encode`: swaps, swap case, replace vowels, two places ahead [HE, HE+]
-- HumanEval/94 `skjkasdkd`: largest prime, sum of digits, prime in list [HE, HE+]
-- HumanEval/95 `check_dict_case`: dictionary keys, all lower or upper, empty dict [HE, HE+]
-- HumanEval/96 `count_up_to`: primes less than n, first n primes, sieve [HE+]
-- HumanEval/97 `multiply`: unit digits, product, negative numbers [HE+]
-- HumanEval/100 `make_a_pile`: pile, stones, number of stones, levels, next odd or even [HE, HE+]
-- HumanEval/101 `words_string`: split the string, split on comma or space, replace commas, list of words [HE, HE+]
-- HumanEval/102 `choose_num`: biggest even integer, range [x, y], return -1 [HE, HE+]
-- HumanEval/105 `by_length`: names of digits, one to nine, sort and reverse [HE, HE+]
-- HumanEval/106 `f`: factorial for even i, sum for odd i, list of size n [HE, HE+]
-- HumanEval/107 `even_odd_palindrome`: integer palindromes, range 1 to n, even odd count tuple [HE, HE+]
-- HumanEval/108 `count_nums`: sum of digits, signed digits, negative first digit, sum of digits > 0 [HE, HE+]
-- HumanEval/110 `exchange`: exchange elements, make all even, YES NO [HE, HE+]
-- HumanEval/111 `histogram`: letter frequency, most repetition, dictionary [HE, HE+]
-- HumanEval/115 `max_fill`: rectangular grid, buckets, wells, bucket capacity, ceil [HE, HE+]
-- HumanEval/119 `match_parens`: concatenate two strings, balanced parentheses, order of concatenation [HE, HE+]
-- HumanEval/120 `maximum`: maximum k, sorted list of k, k largest, k = 0 [HE, HE+]
-- HumanEval/121 `solution`: odd elements, even positions, sum [HE, HE+]
-- HumanEval/122 `add_elements`: first k, at most two digits, first k elements, len(str) [HE, HE+]
-- HumanEval/124 `valid_date`: mm-dd-yyyy, days per month, date validation [HE, HE+]
-- HumanEval/125 `split_words`: split, whitespace, comma, odd-order lowercase letters [HE, HE+]
-- HumanEval/126 `is_sorted`: is_sorted, ascending order, duplicates, more than one duplicate [HE, HE+]
-- HumanEval/127 `intersection`: intersection, interval intersection, length of intersection, is prime [HE, HE+]
-- HumanEval/129 `minPath`: minPath, min path, grid path, lexicographically smaller, k cells [HE, HE+]
-- HumanEval/130 `tri`: Tribonacci, recurrence, tri(n+1), even and odd n [HE, HE+]
-- HumanEval/131 `digits`: product of odd digits, return 0 if all even, digit loop [HE, HE+]
-- HumanEval/132 `is_nested`: subsequence of brackets, nested brackets, valid subsequence, square brackets [HE, HE+]
-- HumanEval/133 `sum_squares`: ceiling, round up, sum of squares [HE, HE+]
-- HumanEval/134 `check_if_last_char_is_a_letter`: last character, not part of a word, isalpha [HE, HE+]
-- HumanEval/135 `can_arrange`: largest index, not greater than or equal to preceding, return -1 [HE, HE+]
-- HumanEval/137 `compare_one`: compare, int float string, comma decimal, return None if equal [HE, HE+]
-- HumanEval/138 `is_equal_to_sum_even`: sum of 4 positive even, n >= 8, even number [HE, HE+]
-- HumanEval/139 `special_factorial`: brazilian_factorial, special factorial, n! \* (n-1)!, product of factorials, n!(n-1)!...1!, n > 0 [HE, HE+]
-- HumanEval/140 `fix_spaces`: all consecutive spaces, replace spaces with underscores, more than 2 consecutive, hyphen [HE, HE+]
-- HumanEval/141 `file_name_check`: file's name, valid file name, extension txt exe dll, at most three digits [HE, HE+]
-- HumanEval/143 `words_in_sentence`: prime length words, keep order, split sentence [HE, HE+]
-- HumanEval/144 `simplify`: fraction, x * n whole number, numerator denominator [HE, HE+]
-- HumanEval/145 `order_by_points`: order_by_point, order by point, sum of digits, negative first digit, index order [HE, HE+]
-- HumanEval/146 `specialFilter`: greater than 10, first and last digits odd, count elements [HE, HE+]
-- HumanEval/148 `bf`: planets, between orbits, solar system tuple [HE, HE+]
-- HumanEval/150 `x_or_y`: prime n, return x or y, is_prime [HE, HE+]
-- HumanEval/151 `double_the_difference`: sum of squares, odd numbers, ignore negative or non-integers [HE+]
-- HumanEval/157 `right_angle_triangle`: Pythagorean, three sides, a^2 + b^2 = c^2 [HE, HE+]
-- HumanEval/160 `do_algebra`: algebra operations, operator list, operand list, eval expression [HE, HE+]
-- HumanEval/161 `solve`: reverse case, no letters reverse string, swapcase [HE, HE+]
-- HumanEval/162 `string_to_md5`: md5 hash, hashlib, empty string None [HE, HE+]
-- HumanEval/163 `generate_integers`: even digits, between a and b, ascending order, a > b [HE, HE+]
+- HumanEval/6 `parse_nested_parens`: max depth
+- HumanEval/9 `rolling_max`: running max
+- HumanEval/13 `greatest_common_divisor`: gcd(a, b), highest common factor
+- HumanEval/15 `string_sequence`: space-delimited
+- HumanEval/19 `sort_numbers`: number words, sort by value
+- HumanEval/22 `filter_integers`: exclude bool
+- HumanEval/26 `remove_duplicates`: occur more than once, remove duplicates from a list
+- HumanEval/31 `is_prime`: prime check, trial division
+- HumanEval/32 `find_zero`: find_zero, Newton's method, root finding
+- HumanEval/33 `sort_third`: copy list
+- HumanEval/37 `sort_even`: odd indices unchanged
+- HumanEval/40 `triples_sum_to_zero`: three distinct elements, sum to zero
+- HumanEval/49 `modp`: modp
+- HumanEval/54 `same_chars`: have the same characters, same set of characters
+- HumanEval/55 `fib`: fib(1)
+- HumanEval/59 `largest_prime_factor`: greatest prime factor, largest prime divisor
+- HumanEval/63 `fibfib`: tribonacci-like
+- HumanEval/64 `vowels_count`: count vowels
+- HumanEval/69 `search`: greatest integer, count occurrences
+- HumanEval/74 `total_match`: total match
+- HumanEval/75 `is_multiply_prime`: three prime numbers, product of three
+- HumanEval/76 `is_simple_power`: perfect power, is a power of
+- HumanEval/77 `iscube`: perfect cube, cube root
+- HumanEval/79 `decimal_to_binary`: decimal to binary, to binary string
+- HumanEval/82 `prime_length`: prime length
+- HumanEval/83 `starts_one_ends`: n-digit numbers, n-digit
+- HumanEval/86 `anti_shuffle`: preserve spaces
+- HumanEval/89 `encrypt`: shift alphabet
+- HumanEval/90 `next_smallest`: next smallest, 2nd smallest
+- HumanEval/91 `is_bored`: bore
+- HumanEval/93 `encode`: replace vowels, two places ahead
+- HumanEval/94 `skjkasdkd`: sum of digits
+- HumanEval/95 `check_dict_case`: case of the keys, all keys are strings
+- HumanEval/96 `count_up_to`: first n prime, primes up to
+- HumanEval/97 `multiply`: unit digits, ones digit
+- HumanEval/100 `make_a_pile`: number of stones
+- HumanEval/101 `words_string`: replace commas
+- HumanEval/102 `choose_num`: choose num
+- HumanEval/105 `by_length`: reverse the resulting, digit names
+- HumanEval/106 `f`: list of size n
+- HumanEval/107 `even_odd_palindrome`: integer palindromes, palindromic numbers in
+- HumanEval/108 `count_nums`: sum of digits
+- HumanEval/110 `exchange`: exchange, YES NO
+- HumanEval/111 `histogram`: letter frequency
+- HumanEval/115 `max_fill`: buckets, wells
+- HumanEval/119 `match_parens`: concatenate two strings
+- HumanEval/120 `maximum`: maximum k, sorted list of k, k largest, k = 0
+- HumanEval/121 `solution`: odd elements, even positions
+- HumanEval/122 `add_elements`: first k, at most two digits, first k elements, len(str)
+- HumanEval/124 `valid_date`: mm-dd-yyyy, days per month, date validation
+- HumanEval/125 `split_words`: split_words, split words
+- HumanEval/126 `is_sorted`: is_sorted
+- HumanEval/127 `intersection`: intersection of two intervals, intervals overlap
+- HumanEval/129 `minPath`: lexicographically smaller, k cells
+- HumanEval/130 `tri`: Tribonacci, recurrence
+- HumanEval/131 `digits`: product of odd digits
+- HumanEval/132 `is_nested`: nested brackets, valid subsequence
+- HumanEval/133 `sum_squares`: ceiling, round up
+- HumanEval/134 `check_if_last_char_is_a_letter`: not part of a word, isalpha
+- HumanEval/135 `can_arrange`: largest index
+- HumanEval/137 `compare_one`: compare two, numbers represented as strings
+- HumanEval/138 `is_equal_to_sum_even`: sum_even, sum even
+- HumanEval/139 `special_factorial`: product of factorials
+- HumanEval/140 `fix_spaces`: all consecutive spaces, replace spaces with underscores, more than 2 consecutive
+- HumanEval/141 `file_name_check`: file's name, valid file name, at most three digits
+- HumanEval/143 `words_in_sentence`: split sentence
+- HumanEval/144 `simplify`: numerator denominator
+- HumanEval/145 `order_by_points`: order by point, sum of digits
+- HumanEval/146 `specialFilter`: special filter
+- HumanEval/148 `bf`: planets
+- HumanEval/150 `x_or_y`: x or y
+- HumanEval/151 `double_the_difference`: double the difference
+- HumanEval/157 `right_angle_triangle`: Pythagorean, three sides, a^2 + b^2 = c^2
+- HumanEval/160 `do_algebra`: algebra operations
+- HumanEval/161 `solve`: reverse case, swapcase
+- HumanEval/162 `string_to_md5`: hashlib
+- HumanEval/163 `generate_integers`: even digits, between a and b
 
 ## MBPP / MBPP+ (136 bài sai: 81 bài sai cả MBPP và MBPP+, 55 bài chỉ sai MBPP+)
 
-- Mbpp/6 `differ_At_One_Bit_Pos`: XOR, power of two, negative numbers [MBPP+]
-- Mbpp/16 `text_lowercase_underscore`: lowercase letters joined by underscore, regex, whole string match [MBPP+]
-- Mbpp/20 `is_woodall`: Woodall number, n*2^n - 1, loop [MBPP, MBPP+]
-- Mbpp/56 `check`: one less than twice reverse, reverse number, 2*rev - 1 [MBPP, MBPP+]
-- Mbpp/63 `max_difference`: pairs in tuple list, absolute difference, maximum [MBPP, MBPP+]
-- Mbpp/64 `subject_marks`: sort tuples, second value, key lambda [MBPP, MBPP+]
-- Mbpp/72 `dif_Square`: difference of two squares, n % 4 != 2, representable [MBPP+]
-- Mbpp/74 `is_samepatterns`: pattern sequence, bijection mapping, zip [MBPP+]
-- Mbpp/77 `is_Diff`: divisible by 11, modulo, alternating digit sum [MBPP+]
-- Mbpp/79 `word_len`: word length odd, len % 2, boolean [MBPP, MBPP+]
-- Mbpp/84 `sequence`: Newman-Conway, recursive, P(n) = P(P(n-1)) + P(n-P(n-1)) [MBPP+]
-- Mbpp/92 `is_undulating`: alternating digits, two distinct digits, length >= 3 [MBPP+]
-- Mbpp/99 `decimal_to_binary`: binary string, no prefix, bin() [MBPP+]
-- Mbpp/101 `kth_element`: 1-based index, array index, k-1 [MBPP, MBPP+]
-- Mbpp/102 `snake_to_camel`: snake case, camel case, capitalize after underscore [MBPP, MBPP+]
-- Mbpp/103 `eulerian_num`: Eulerian number, recurrence, a(n, m) [MBPP, MBPP+]
-- Mbpp/109 `odd_Equivalent`: rotate binary string, odd value, count of 1s [MBPP, MBPP+]
-- Mbpp/113 `check_integer`: string to int, isdigit, negative sign [MBPP+]
-- Mbpp/119 `search`: appears only once, sorted array, XOR or binary search [MBPP+]
-- Mbpp/120 `max_product_tuple`: absolute product, pairs of tuples, maximum [MBPP, MBPP+]
-- Mbpp/123 `amicable_numbers_sum`: amicable pairs, sum of divisors, up to limit [MBPP, MBPP+]
-- Mbpp/124 `angle_complex`: complex number, cmath.phase, angle [MBPP, MBPP+]
-- Mbpp/125 `find_length`: sub-string 0s and 1s, max difference, Kadane [MBPP, MBPP+]
-- Mbpp/126 `sum`: common divisors, gcd, sum of divisors [MBPP+]
-- Mbpp/137 `zero_count`: ratio zeroes to non-zeroes, round, array [MBPP, MBPP+]
-- Mbpp/138 `is_Sum_Of_Powers_Of_Two`: sum of non-zero powers of 2, bit count, even number [MBPP, MBPP+]
-- Mbpp/142 `count_samepair`: same position, three lists, zip [MBPP+]
-- Mbpp/160 `find_solution`: ax + by = n, extended Euclid, return None [MBPP+]
-- Mbpp/162 `sum_series`: n + (n-2) + (n-4), loop, stop at <= 0 [MBPP, MBPP+]
-- Mbpp/223 `is_majority`: sorted array, majority element, more than n/2 [MBPP+]
-- Mbpp/227 `min_of_three`: minimum, three numbers, min() [MBPP+]
-- Mbpp/232 `larg_nnum`: n largest items, heapq.nlargest, descending order [MBPP+]
-- Mbpp/235 `even_bit_set_number`: even bits set, bitmask, 1-based bit position [MBPP, MBPP+]
-- Mbpp/237 `check_occurences`: tuple counts, sort tuple, dictionary [MBPP, MBPP+]
-- Mbpp/239 `get_total_number_of_sequences`: sequences length n, element >= twice previous, dp up to m [MBPP, MBPP+]
-- Mbpp/244 `next_Perfect_Square`: perfect square, greater than n, sqrt [MBPP, MBPP+]
-- Mbpp/245 `max_sum`: bitonic subsequence, dp, increasing then decreasing [MBPP, MBPP+]
-- Mbpp/255 `combinations_colors`: combinations with replacement, itertools, color tuples [MBPP, MBPP+]
-- Mbpp/259 `maximize_elements`: tuple of tuples, element-wise max, zip [MBPP, MBPP+]
-- Mbpp/260 `newman_prime`: Newman-Shanks-Williams prime, recurrence, nth [MBPP, MBPP+]
-- Mbpp/264 `dog_age`: dog years, first two years, age formula [MBPP, MBPP+]
-- Mbpp/267 `square_Sum`: first n odd natural numbers, sum of squares, formula [MBPP, MBPP+]
-- Mbpp/268 `find_star_num`: star number, 6n(n-1)+1, nth [MBPP, MBPP+]
-- Mbpp/272 `rear_extract`: last element of each tuple, list of tuples, comprehension [MBPP+]
-- Mbpp/274 `even_binomial_Coeff_Sum`: binomial coefficient, even index, 2^(n-1) [MBPP+]
-- Mbpp/278 `count_first_elements`: elements before tuple, nested tuple, index [MBPP+]
-- Mbpp/279 `is_num_decagonal`: decagonal number, 4n^2 - 3n, nth [MBPP, MBPP+]
-- Mbpp/286 `max_sub_array_sum_repeated`: repeated array k times, Kadane, contiguous sum [MBPP, MBPP+]
-- Mbpp/287 `square_Sum`: first n even natural numbers, sum of squares, formula [MBPP, MBPP+]
-- Mbpp/294 `max_val`: heterogeneous list, filter ints, max [MBPP, MBPP+]
-- Mbpp/299 `max_aggregate`: tuples name score, aggregate by name, max [MBPP, MBPP+]
-- Mbpp/300 `count_binary_seq`: binary sequences length 2n, first n bits equal last n bits, combinations [MBPP, MBPP+]
-- Mbpp/301 `dict_depth`: nested dictionary, depth, recursion [MBPP, MBPP+]
-- Mbpp/305 `start_withp`: words starting with p, two words, split [MBPP, MBPP+]
-- Mbpp/306 `max_sum_increasing_subseq`: prefix until ith index, kth element after i, dp [MBPP, MBPP+]
-- Mbpp/310 `string_to_tuple`: tuple of characters, ignore whitespace, string [MBPP, MBPP+]
-- Mbpp/311 `set_left_most_unset_bit`: leftmost unset bit, bit_length, set bit [MBPP, MBPP+]
-- Mbpp/388 `highest_Power_of_2`: largest power of 2 <= n, bit_length, n = 0 [MBPP, MBPP+]
-- Mbpp/391 `convert_list_dictionary`: nested dictionary, three lists, zip [MBPP+]
-- Mbpp/392 `get_max_sum`: f(n) = max(f(n/2) + f(n/3) + f(n/4) + f(n/5), n), memoization, recursion [MBPP+]
-- Mbpp/397 `median_numbers`: median of three, sorted, middle value [MBPP+]
-- Mbpp/398 `sum_of_digits`: sum of digits per number, list, negative or non-int [MBPP, MBPP+]
-- Mbpp/410 `min_val`: heterogeneous list, filter ints, min [MBPP, MBPP+]
-- Mbpp/415 `max_Product`: pair highest product, negative numbers, array [MBPP, MBPP+]
-- Mbpp/418 `Find_Max`: longest sublist, max length, lambda len [MBPP+]
-- Mbpp/420 `cube_Sum`: first n even natural numbers, sum of cubes, formula [MBPP, MBPP+]
-- Mbpp/427 `change_date_format`: yyyy-mm-dd to dd-mm-yyyy, regex, split [MBPP+]
-- Mbpp/429 `and_tuples`: elementwise and, bitwise, tuples [MBPP, MBPP+]
-- Mbpp/430 `parabola_directrix`: directrix, parabola formula, a b c [MBPP, MBPP+]
-- Mbpp/432 `median_trapezium`: median length, trapezium, (a+b)/2 [MBPP, MBPP+]
-- Mbpp/433 `check_greater`: greater than all elements, array, number [MBPP, MBPP+]
-- Mbpp/435 `last_Digit`: last digit, n % 10, negative [MBPP+]
-- Mbpp/440 `find_adverb_position`: adverb ly, positions, regex [MBPP+]
-- Mbpp/445 `index_multiplication`: index wise, tuple of tuples, zip [MBPP+]
-- Mbpp/446 `count_Occurrence`: count elements of list in tuple, Counter, sum [MBPP+]
-- Mbpp/448 `cal_sum`: Perrin numbers, sum, recurrence [MBPP, MBPP+]
-- Mbpp/454 `text_match_wordz`: word containing z, regex, boolean [MBPP, MBPP+]
-- Mbpp/459 `remove_uppercase`: remove uppercase, regex, substring [MBPP+]
-- Mbpp/462 `combinations_list`: all possible combinations, subsets, powerset order [MBPP, MBPP+]
-- Mbpp/468 `max_product`: increasing subsequence, product, dp [MBPP, MBPP+]
-- Mbpp/472 `check_Consecutive`: consecutive numbers, sorted, difference 1 [MBPP, MBPP+]
-- Mbpp/473 `tuple_intersection`: irrespective of order, set of sorted tuples, tuple list [MBPP, MBPP+]
-- Mbpp/566 `sum_digits`: non-negative integer, digit sum, str [MBPP+]
-- Mbpp/572 `two_unique_nums`: remove duplicates, appears once, Counter [MBPP, MBPP+]
-- Mbpp/573 `unique_product`: unique numbers, product, set [MBPP, MBPP+]
-- Mbpp/576 `is_Sub_Array`: sublist, contiguous, list slicing [MBPP+]
-- Mbpp/577 `last_Digit_Factorial`: last digit of factorial, n >= 5, modulo 10 [MBPP+]
-- Mbpp/581 `surface_Area`: square pyramid, base edge, slant height [MBPP, MBPP+]
-- Mbpp/589 `perfect_squares`: between two numbers, inclusive range, sqrt [MBPP, MBPP+]
-- Mbpp/590 `polar_rect`: polar to rectangular, cmath, complex [MBPP, MBPP+]
-- Mbpp/592 `sum_Of_product`: consecutive binomial coefficients, comb, sum of products [MBPP, MBPP+]
-- Mbpp/593 `removezero_ip`: leading zeros, ip address, regex [MBPP+]
-- Mbpp/597 `find_kth`: two sorted arrays, kth element, merge [MBPP+]
-- Mbpp/598 `armstrong_number`: Armstrong number, digit power, sum of cubes [MBPP+]
-- Mbpp/599 `sum_average`: first n natural numbers, sum and average, tuple [MBPP+]
-- Mbpp/602 `first_repeated_char`: first repeated character, string, return None [MBPP+]
-- Mbpp/603 `get_ludic`: ludic numbers, sieve, <= n [MBPP, MBPP+]
-- Mbpp/605 `prime_num`: prime check, n <= 1, sqrt [MBPP+]
-- Mbpp/607 `find_literals`: regex search, matching substring, start and end index [MBPP+]
-- Mbpp/610 `remove_kth_element`: remove k'th element, 1-based, list [MBPP, MBPP+]
-- Mbpp/615 `average_tuple`: average of each tuple, tuple of tuples, list [MBPP, MBPP+]
-- Mbpp/620 `largest_subset`: pairwise divisible, dp after sort, subset size [MBPP+]
-- Mbpp/622 `get_median`: two sorted lists, same size, median [MBPP, MBPP+]
-- Mbpp/626 `triangle_area`: inscribed in semicircle, radius, negative radius [MBPP, MBPP+]
-- Mbpp/629 `Split`: even numbers, filter, list [MBPP, MBPP+]
-- Mbpp/630 `get_coordinates`: adjacent coordinates, 3x3 neighbors, list of lists [MBPP+]
-- Mbpp/631 `replace_spaces`: whitespace to underscore, vice versa, replace [MBPP, MBPP+]
-- Mbpp/635 `heap_sort`: heapq, sort list, ascending [MBPP, MBPP+]
-- Mbpp/639 `sample_nam`: remove names starting lowercase, sum of lengths, filter [MBPP+]
-- Mbpp/721 `maxAverageOfPath`: square matrix N*N, path right or down, dp max average [MBPP, MBPP+]
-- Mbpp/732 `replace_specialchar`: spaces commas dots, replace with colon, regex [MBPP, MBPP+]
-- Mbpp/735 `toggle_middle_bits`: toggle bits, except first and last, mask [MBPP, MBPP+]
-- Mbpp/739 `find_Index`: smallest triangular number, n digits, index [MBPP, MBPP+]
-- Mbpp/741 `all_Characters_Same`: all characters same, set, empty string [MBPP+]
-- Mbpp/749 `sort_numeric_strings`: numeric sort, strings of numbers, int key [MBPP, MBPP+]
-- Mbpp/752 `jacobsthal_num`: Jacobsthal number, recurrence, nth [MBPP+]
-- Mbpp/754 `extract_index_list`: common elements same index, three lists, zip [MBPP+]
-- Mbpp/755 `second_smallest`: second smallest, distinct, duplicates [MBPP, MBPP+]
-- Mbpp/759 `is_decimal`: decimal with precision 2, regex, string [MBPP+]
-- Mbpp/763 `find_min_diff`: minimum difference, sort, adjacent elements [MBPP, MBPP+]
-- Mbpp/765 `is_polite`: polite number, nth, power of two [MBPP, MBPP+]
-- Mbpp/769 `Diff`: difference between lists, set difference, order [MBPP, MBPP+]
-- Mbpp/771 `check_expression`: balanced brackets, stack, parentheses [MBPP+]
-- Mbpp/772 `remove_length`: remove words of length k, split, join [MBPP, MBPP+]
-- Mbpp/777 `find_sum`: non-repeated elements, sum of unique, Counter [MBPP, MBPP+]
-- Mbpp/780 `find_combinations`: combinations of sums, tuple list, itertools [MBPP, MBPP+]
-- Mbpp/781 `count_divisors`: count of divisors even, perfect square, loop [MBPP+]
-- Mbpp/782 `odd_length_sum`: odd length subarrays, sum of subarrays, formula [MBPP, MBPP+]
-- Mbpp/785 `tuple_str_int`: tuple string, int tuple, parse "(1, 2, 3)" [MBPP+]
-- Mbpp/786 `right_insertion`: bisect_right, sorted insertion point, index [MBPP+]
-- Mbpp/790 `even_position`: even index, even numbers, all() [MBPP+]
-- Mbpp/792 `count_list`: number of lists, nested list, isinstance [MBPP+]
-- Mbpp/794 `text_starta_endb`: 'a' followed by anything ending in 'b', regex, match [MBPP, MBPP+]
-- Mbpp/805 `max_sum_list`: list with highest sum, list of lists, max key [MBPP+]
-- Mbpp/806 `max_run_uppercase`: run of uppercase, consecutive characters, max [MBPP+]
-- Mbpp/809 `check_smaller`: each element smaller, corresponding element, tuples [MBPP+]
+- Mbpp/6 `differ_At_One_Bit_Pos`: power of two
+- Mbpp/16 `text_lowercase_underscore`: sequences of lowercase letters, joined by an underscore
+- Mbpp/20 `is_woodall`: Woodall number
+- Mbpp/56 `check`: reverse number
+- Mbpp/63 `max_difference`: maximum absolute difference, difference between pairs
+- Mbpp/64 `subject_marks`: second value, sort the tuples
+- Mbpp/72 `dif_Square`: difference of two squares, representable
+- Mbpp/74 `is_samepatterns`: pattern sequence, bijection mapping
+- Mbpp/77 `is_Diff`: divisible by 11, alternating digit sum
+- Mbpp/79 `word_len`: length is odd, word length
+- Mbpp/84 `sequence`: Newman-Conway
+- Mbpp/92 `is_undulating`: alternating digits, two distinct digits, length >= 3
+- Mbpp/99 `decimal_to_binary`: no prefix, bin()
+- Mbpp/101 `kth_element`: array index
+- Mbpp/102 `snake_to_camel`: camel case string, to camel case
+- Mbpp/103 `eulerian_num`: eulerian, recurrence
+- Mbpp/109 `odd_Equivalent`: odd value, count of 1s
+- Mbpp/113 `check_integer`: string to int, isdigit
+- Mbpp/119 `search`: appears once, occurs once
+- Mbpp/120 `max_product_tuple`: absolute product, pairs of tuples
+- Mbpp/123 `amicable_numbers_sum`: amicable pairs, sum of divisors
+- Mbpp/124 `angle_complex`: cmath.phase
+- Mbpp/125 `find_length`: max difference, Kadane
+- Mbpp/126 `sum`: common divisors, sum of divisors
+- Mbpp/137 `zero_count`: zeroes, zero count
+- Mbpp/138 `is_Sum_Of_Powers_Of_Two`: bit count
+- Mbpp/142 `count_samepair`: identical pairs, same pairs
+- Mbpp/160 `find_solution`: ax + by = n, extended Euclid, return None
+- Mbpp/162 `sum_series`: sum of the series, series sum
+- Mbpp/223 `is_majority`: majority element, more than n/2
+- Mbpp/227 `min_of_three`: minimum of three, minimum of 3
+- Mbpp/232 `larg_nnum`: heapq.nlargest
+- Mbpp/235 `even_bit_set_number`: even bits, bitmask
+- Mbpp/237 `check_occurences`: sort tuple
+- Mbpp/239 `get_total_number_of_sequences`: twice the previous, greater than or equal to twice
+- Mbpp/244 `next_Perfect_Square`: greater than n
+- Mbpp/245 `max_sum`: bitonic subsequence, increasing then decreasing
+- Mbpp/255 `combinations_colors`: combinations with replacement, color tuples
+- Mbpp/259 `maximize_elements`: tuple of tuples, element-wise max
+- Mbpp/260 `newman_prime`: recurrence
+- Mbpp/264 `dog_age`: dog years, human years
+- Mbpp/267 `square_Sum`: odd natural numbers, first n odd
+- Mbpp/268 `find_star_num`: star number
+- Mbpp/272 `rear_extract`: last element of each tuple
+- Mbpp/274 `even_binomial_Coeff_Sum`: binomial coefficient, even index, 2^(n-1)
+- Mbpp/278 `count_first_elements`: nested tuple
+- Mbpp/279 `is_num_decagonal`: decagon, polygonal
+- Mbpp/286 `max_sub_array_sum_repeated`: Kadane, contiguous sum
+- Mbpp/287 `square_Sum`: first n even natural numbers
+- Mbpp/294 `max_val`: heterogeneous list
+- Mbpp/299 `max_aggregate`: aggregate score, name and score
+- Mbpp/300 `count_binary_seq`: binary sequences, sequences of length 2n
+- Mbpp/301 `dict_depth`: depth of a dictionary, dictionary depth
+- Mbpp/305 `start_withp`: starting with 'p', letter p
+- Mbpp/306 `max_sum_increasing_subseq`: k-th element, ith index
+- Mbpp/310 `string_to_tuple`: tuple of characters, ignore whitespace
+- Mbpp/311 `set_left_most_unset_bit`: unset bit, bit_length
+- Mbpp/388 `highest_Power_of_2`: bit_length
+- Mbpp/391 `convert_list_dictionary`: lists into a dictionary, more than one list
+- Mbpp/392 `get_max_sum`: get_max_sum, recursion with memo
+- Mbpp/397 `median_numbers`: median of three
+- Mbpp/398 `sum_of_digits`: negative or non-int
+- Mbpp/410 `min_val`: heterogeneous list
+- Mbpp/415 `max_Product`: highest product, maximum product of two
+- Mbpp/418 `Find_Max`: longest sublist, max length, lambda len
+- Mbpp/420 `cube_Sum`: first n even natural numbers, sum of cubes
+- Mbpp/427 `change_date_format`: dd-mm-yyyy, convert date
+- Mbpp/429 `and_tuples`: elementwise, bitwise and
+- Mbpp/430 `parabola_directrix`: directrix
+- Mbpp/432 `median_trapezium`: trapezoid, median length
+- Mbpp/433 `check_greater`: greater than all elements
+- Mbpp/435 `last_Digit`: n % 10
+- Mbpp/440 `find_adverb_position`: adverb, adverbs
+- Mbpp/445 `index_multiplication`: tuple of tuples
+- Mbpp/446 `count_Occurrence`: count occurrences of elements, occurrence of elements
+- Mbpp/448 `cal_sum`: perrin, cal_sum
+- Mbpp/454 `text_match_wordz`: word with z, contains z
+- Mbpp/459 `remove_uppercase`: uppercase substring, remove all uppercase
+- Mbpp/462 `combinations_list`: powerset, all possible combinations of the elements
+- Mbpp/468 `max_product`: product of an increasing subsequence, multiplying numbers
+- Mbpp/472 `check_Consecutive`: difference 1
+- Mbpp/473 `tuple_intersection`: irrespective of order, set of sorted tuples, tuple list
+- Mbpp/566 `sum_digits`: digit sum
+- Mbpp/572 `two_unique_nums`: remove duplicates, appears once
+- Mbpp/573 `unique_product`: product of unique
+- Mbpp/576 `is_Sub_Array`: list slicing
+- Mbpp/577 `last_Digit_Factorial`: n >= 5
+- Mbpp/581 `surface_Area`: square pyramid, slant height
+- Mbpp/589 `perfect_squares`: between two numbers
+- Mbpp/590 `polar_rect`: rectangular coordinates, cmath
+- Mbpp/592 `sum_Of_product`: sum of products
+- Mbpp/593 `removezero_ip`: leading zeroes
+- Mbpp/597 `find_kth`: k-th element, kth smallest
+- Mbpp/598 `armstrong_number`: Armstrong number, digit power, sum of cubes
+- Mbpp/599 `sum_average`: first n natural numbers, sum and average
+- Mbpp/602 `first_repeated_char`: first repeated character, return None
+- Mbpp/603 `get_ludic`: lucky numbers
+- Mbpp/605 `prime_num`: prime check
+- Mbpp/607 `find_literals`: regex search, matching substring, start and end index
+- Mbpp/610 `remove_kth_element`: k-th element, 1-based
+- Mbpp/615 `average_tuple`: average of each tuple, tuple of tuples
+- Mbpp/620 `largest_subset`: subset size
+- Mbpp/622 `get_median`: median of two sorted
+- Mbpp/626 `triangle_area`: negative radius
+- Mbpp/629 `Split`: even numbers from a list, only even numbers
+- Mbpp/630 `get_coordinates`: adjacent coordinates
+- Mbpp/631 `replace_spaces`: spaces with underscores, replace spaces
+- Mbpp/635 `heap_sort`: heapq, sort list
+- Mbpp/639 `sample_nam`: sum of lengths
+- Mbpp/721 `maxAverageOfPath`: maximum average, square matrix of size n*n
+- Mbpp/732 `replace_specialchar`: with a colon
+- Mbpp/735 `toggle_middle_bits`: toggle bits
+- Mbpp/739 `find_Index`: smallest triangular number
+- Mbpp/741 `all_Characters_Same`: all characters are the same, all the same character
+- Mbpp/749 `sort_numeric_strings`: numeric sort, strings of numbers, int key
+- Mbpp/752 `jacobsthal_num`: jacobsthal, recurrence
+- Mbpp/754 `extract_index_list`: common index
+- Mbpp/755 `second_smallest`: 2nd smallest, second lowest
+- Mbpp/759 `is_decimal`: precision of 2, decimal with a precision
+- Mbpp/763 `find_min_diff`: minimum difference
+- Mbpp/765 `is_polite`: polite, power of two
+- Mbpp/769 `Diff`: set difference, difference of two lists
+- Mbpp/771 `check_expression`: balanced brackets
+- Mbpp/772 `remove_length`: words of length, remove words
+- Mbpp/777 `find_sum`: non-repeated, sum of unique
+- Mbpp/780 `find_combinations`: tuple list, itertools
+- Mbpp/781 `count_divisors`: count the number of divisors, count of divisors
+- Mbpp/782 `odd_length_sum`: odd-length, sum of subarrays
+- Mbpp/785 `tuple_str_int`: tuple string, int tuple
+- Mbpp/786 `right_insertion`: bisect_right
+- Mbpp/790 `even_position`: even index, all()
+- Mbpp/792 `count_list`: number of lists, isinstance
+- Mbpp/794 `text_starta_endb`: ends with b, ending in b
+- Mbpp/805 `max_sum_list`: max key
+- Mbpp/806 `max_run_uppercase`: maximum run, consecutive uppercase
+- Mbpp/809 `check_smaller`: check if each element, tuple is smaller

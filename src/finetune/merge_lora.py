@@ -1,7 +1,7 @@
 """Merge a LoRA adapter into the fp16/bf16 base model so vLLM / EvalPlus can load it directly.
 
 Usage:
-    python src/merge_lora.py --adapter hoangnh39/qwen2.5-coder-7b-opencode-hq10k-v3 \
+    python src/finetune/merge_lora.py --adapter hoangnh39/qwen2.5-coder-7b-opencode-hq10k-v3 \
         --base Qwen/Qwen2.5-Coder-7B --out merged/v3
 """
 import argparse
@@ -10,7 +10,7 @@ import json
 import torch
 from huggingface_hub import hf_hub_download
 from peft import PeftModel
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
 
 
 def main():
@@ -35,6 +35,11 @@ def main():
         tok.chat_template = AutoTokenizer.from_pretrained(args.base).chat_template
         print("adapter tokenizer had no chat_template; copied from base")
     tok.save_pretrained(args.out)
+
+    # vLLM/EvalPlus lấy token dừng từ generation_config.json: thêm <|im_end|> để model ChatML dừng đúng chỗ
+    gen = GenerationConfig.from_pretrained(args.base)
+    gen.eos_token_id = [tok.convert_tokens_to_ids("<|im_end|>"), tok.eos_token_id]
+    gen.save_pretrained(args.out)
     print("saved to", args.out)
 
 

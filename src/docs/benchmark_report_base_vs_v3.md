@@ -10,7 +10,7 @@
 | Backend / giải mã | EvalPlus + vLLM 0.32.0, **greedy**, **pass@1**, 1 mẫu/bài |
 | Phần cứng / dtype | Kaggle 2× Tesla T4, `--tp 2`, `--dtype float16` (T4 không hỗ trợ bf16) |
 | Prompt | Base: `--force-base-prompt` (completion thuần). v3: chat template mặc định của tokenizer (có system prompt mặc định của Qwen) |
-| Notebook chạy | `run-evalplus-kaggle.ipynb` (HumanEval) và `run-evalplus-mbpp.ipynb` (MBPP): hai notebook chạy riêng, cùng cấu hình (vLLM, greedy, `--tp 2`, float16, base dùng `--force-base-prompt`, v3 dùng chat template). Kết quả chạy trực tiếp khớp với 8 file dữ liệu. |
+| Notebook chạy | `src/evaluate/run-evalplus-kaggle.ipynb` (HumanEval) và `src/evaluate/run-evalplus-mbpp.ipynb` (MBPP): hai notebook chạy riêng, cùng cấu hình (vLLM, greedy, `--tp 2`, float16, base dùng `--force-base-prompt`, v3 dùng chat template). Kết quả chạy trực tiếp khớp với 8 file dữ liệu. |
 | File kết quả | `qwen2.5-coder-7b-base-{eval,mbpp}-results.json(l)`, `hoangnh39-v3-merged-{eval,mbpp}-results.json(l)` |
 
 Cách tính điểm: một bài chỉ được tính đúng ở bản "+" khi vượt qua **cả** test gốc lẫn test mở rộng (đúng quy ước EvalPlus). Điểm trong report khớp log của notebook (MBPP 0.786 / 0.802, MBPP+ 0.640 / 0.680).
