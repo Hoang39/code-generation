@@ -1,14 +1,17 @@
 """Merge a LoRA adapter into the fp16/bf16 base model so vLLM / EvalPlus can load it directly.
 
 Usage:
-    python src/finetune/merge_lora.py --adapter hoangnh39/qwen2.5-coder-7b-opencode-hq10k-v3 \
-        --base Qwen/Qwen2.5-Coder-7B --out merged/v3
+    python src/finetune/merge_lora.py --adapter hoangnh39/qwen2.5-coder-7b-opencode-v4 \
+        --base Qwen/Qwen2.5-Coder-7B --out merged/v4 \
+        --push-to hoangnh39/qwen2.5-coder-7b-opencode-v4-merged      # --push-to tùy chọn: upload lên HF (private)
+
+Adapter v2 có cả embed_tokens/lm_head đã train (modules_to_save); PEFT tự nạp và merge chúng cùng LoRA.
 """
 import argparse
 import json
 
 import torch
-from huggingface_hub import hf_hub_download
+from huggingface_hub import HfApi, hf_hub_download
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
 
@@ -19,6 +22,7 @@ def main():
     ap.add_argument("--base", default="Qwen/Qwen2.5-Coder-7B")
     ap.add_argument("--revision", default=None)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--push-to", help="repo HF (private) để upload model đã merge, vd hoangnh39/qwen2.5-coder-7b-opencode-v4-merged")
     args = ap.parse_args()
 
     # Unsloth adapters often point at a 4-bit base (unsloth/...-bnb-4bit); merging must use the full-precision base.
@@ -41,6 +45,12 @@ def main():
     gen.eos_token_id = [tok.convert_tokens_to_ids("<|im_end|>"), tok.eos_token_id]
     gen.save_pretrained(args.out)
     print("saved to", args.out)
+
+    if args.push_to:
+        api = HfApi()
+        api.create_repo(args.push_to, private=True, exist_ok=True)
+        api.upload_folder(repo_id=args.push_to, folder_path=args.out, commit_message="Merged LoRA adapter into base (bf16)")
+        print("pushed to https://huggingface.co/" + args.push_to)
 
 
 if __name__ == "__main__":
