@@ -15,6 +15,7 @@ Nguồn (--source):
 Bộ lọc (áp dụng cho cả số đếm lẫn file xuất):
     --hq                chỉ xét bài qua bộ lọc chất lượng (average_test_score >= 0.8, 3 điểm LLM judge >= 4),
                         cùng bộ lọc với prepare_opencode_hq_10k.ipynb
+    --min-test-score S  với --hq: ngưỡng average_test_score (mặc định 0.8); 1.0 = chỉ bài qua 100% unit test
     --max-tokens N      bỏ bài có độ dài (input + output, ChatML) từ N token trở lên, vd 1024 giữ bài < 1024 token;
                         đếm bằng tokenizer --tokenizer (mặc định Qwen/Qwen2.5-Coder-7B), chỉ tokenize bài đã khớp keyword
     --max-per-keyword N mỗi keyword giữ tối đa N bài (ưu tiên keyword hiếm trước); bài khớp nhiều keyword chỉ được ghi một lần
@@ -24,6 +25,7 @@ Chạy:
     python3 src/dataset/count_related_problems.py --limit 100000                   # 100K bài đầu của nvidia, chỉ in
     python3 src/dataset/count_related_problems.py --hq --max-tokens 1024 --max-per-keyword 500                      # chỉ in
     python3 src/dataset/count_related_problems.py --hq --max-tokens 1024 --max-per-keyword 500 --out opencode_hq/chatml_v4.jsonl
+    python3 src/dataset/count_related_problems.py --hq --min-test-score 1.0 --max-tokens 1024 --max-per-keyword 500   # chỉ bài qua 100% test
 
 Cài thêm `pyahocorasick` (pip install pyahocorasick) để quét nhanh hơn nhiều khi duyệt cả 5M mẫu;
 không có thư viện này script vẫn chạy bằng vòng lặp thuần Python (chậm hơn). --max-tokens cần `transformers`.
@@ -42,6 +44,7 @@ import json
 import re
 import time
 from collections import Counter
+from functools import partial
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -122,10 +125,10 @@ def _to_float(x):
         return None
 
 
-def is_high_quality(ex):
+def is_high_quality(ex, min_test_score=MIN_TEST_SCORE):
     """Cùng bộ lọc với prepare_opencode_hq_10k.ipynb (average_test_score và llm_judgement là string)."""
     score = _to_float(ex.get("average_test_score"))
-    if score is None or score < MIN_TEST_SCORE:
+    if score is None or score < min_test_score:
         return False
     judgement = ex.get("llm_judgement")
     if isinstance(judgement, str):
@@ -317,6 +320,8 @@ def main():
     ap.add_argument("--limit", type=int, default=0, help="chỉ duyệt N bài đầu (0 = tất cả)")
     ap.add_argument("--whole-word", action="store_true", help="chỉ khớp nguyên từ thay vì substring")
     ap.add_argument("--hq", action="store_true", help="chỉ xét bài qua bộ lọc chất lượng (test score/LLM judge)")
+    ap.add_argument("--min-test-score", type=float, default=MIN_TEST_SCORE,
+                    help=f"với --hq: average_test_score tối thiểu (mặc định {MIN_TEST_SCORE}; 1.0 = chỉ bài qua 100%% unit test)")
     ap.add_argument("--max-tokens", type=int, default=0, help="bỏ bài có từ N token trở lên (0 = không lọc), vd 1024")
     ap.add_argument("--tokenizer", default="Qwen/Qwen2.5-Coder-7B", help="tokenizer để đếm token cho --max-tokens")
     ap.add_argument("--max-per-keyword", type=int, default=0, help="mỗi keyword giữ tối đa N bài (0 = không giới hạn), vd 500")
@@ -330,7 +335,7 @@ def main():
     cases = parse_keywords(args.keywords)
     print(f"{len(cases)} case, {len({k.lower() for _, kws in cases.values() for k in kws})} keyword; nguồn: {args.source}")
     total, kw_count, matches = count_related(cases, iter_texts(args.source, args.limit),
-                                             keep=is_high_quality if args.hq else None, whole_word=args.whole_word)
+                                             keep=partial(is_high_quality, min_test_score=args.min_test_score) if args.hq else None, whole_word=args.whole_word)
     if not total:
         raise SystemExit("Không đọc được bài nào.")
     print(f"Khớp ít nhất 1 keyword: {len(matches):,}/{total:,} bài; đang lọc độ dài token và giới hạn số bài mỗi keyword...")
@@ -339,7 +344,7 @@ def main():
 
     filters = []
     if args.hq:
-        filters.append("chỉ bài qua bộ lọc chất lượng")
+        filters.append(f"chỉ bài qua bộ lọc chất lượng (test score >= {args.min_test_score:g})")
     if args.max_tokens:
         filters.append(f"< {args.max_tokens} token")
     if args.max_per_keyword:
