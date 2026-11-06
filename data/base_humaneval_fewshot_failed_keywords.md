@@ -4,52 +4,52 @@
 
 ## HumanEval / HumanEval+ (77 bài sai: 63 bài sai cả HE và HE+, 14 bài chỉ sai HE+)
 
-- HumanEval/6 `parse_nested_parens`: max depth
+- HumanEval/6 `parse_nested_parens`: nesting depth, maximum nesting depth, nesting level
 - HumanEval/9 `rolling_max`: running max
 - HumanEval/13 `greatest_common_divisor`: gcd(a, b), highest common factor
 - HumanEval/15 `string_sequence`: space-delimited
-- HumanEval/19 `sort_numbers`: number words, sort by value
-- HumanEval/22 `filter_integers`: exclude bool
+- HumanEval/19 `sort_numbers`: number words, sort by value, number word, number names, numbers as words, words for numbers
+- HumanEval/22 `filter_integers`: exclude bool, isinstance(x, int), filter out non, filter_integers
 - HumanEval/26 `remove_duplicates`: occur more than once, remove duplicates from a list
-- HumanEval/31 `is_prime`: prime check, trial division
+- HumanEval/31 `is_prime`: prime check
 - HumanEval/32 `find_zero`: find_zero, Newton's method, root finding
-- HumanEval/33 `sort_third`: copy list
+- HumanEval/33 `sort_third`: every third, divisible by three, indices that are divisible, every 3rd, copy list
 - HumanEval/37 `sort_even`: odd indices unchanged
-- HumanEval/40 `triples_sum_to_zero`: three distinct elements, sum to zero
+- HumanEval/40 `triples_sum_to_zero`: triples, triplets that sum, zero sum, three elements that sum
 - HumanEval/49 `modp`: modp
 - HumanEval/54 `same_chars`: have the same characters, same set of characters
 - HumanEval/55 `fib`: fib(1)
 - HumanEval/59 `largest_prime_factor`: greatest prime factor, largest prime divisor
-- HumanEval/63 `fibfib`: tribonacci-like
+- HumanEval/63 `fibfib`: tribonacci-like, fibonacci-like, fib4, nth tribonacci
 - HumanEval/64 `vowels_count`: count vowels
 - HumanEval/69 `search`: greatest integer, count occurrences
-- HumanEval/74 `total_match`: total match
+- HumanEval/74 `total_match`: fewer characters, list with fewer, total match, less than the other
 - HumanEval/75 `is_multiply_prime`: three prime numbers, product of three
-- HumanEval/76 `is_simple_power`: perfect power, is a power of
+- HumanEval/76 `is_simple_power`: perfect power, integer power, power of another, power of n, is a power of 2
 - HumanEval/77 `iscube`: perfect cube, cube root
 - HumanEval/79 `decimal_to_binary`: decimal to binary, to binary string
 - HumanEval/82 `prime_length`: prime length
-- HumanEval/83 `starts_one_ends`: n-digit numbers, n-digit
+- HumanEval/83 `starts_one_ends`: n-digit numbers, starts with 1, begin or end with, start with 1, end with 1
 - HumanEval/86 `anti_shuffle`: preserve spaces
 - HumanEval/89 `encrypt`: shift alphabet
 - HumanEval/90 `next_smallest`: next smallest, 2nd smallest
 - HumanEval/91 `is_bored`: bore
-- HumanEval/93 `encode`: replace vowels, two places ahead
+- HumanEval/93 `encode`: replaces all vowels, replace all vowels, replace vowels, encode a message
 - HumanEval/94 `skjkasdkd`: sum of digits
 - HumanEval/95 `check_dict_case`: case of the keys, all keys are strings
 - HumanEval/96 `count_up_to`: first n prime, primes up to
 - HumanEval/97 `multiply`: unit digits, ones digit
 - HumanEval/100 `make_a_pile`: number of stones
-- HumanEval/101 `words_string`: replace commas
-- HumanEval/102 `choose_num`: choose num
+- HumanEval/101 `words_string`: commas or spaces, comma or space, commas and spaces, replace commas, split into words
+- HumanEval/102 `choose_num`: largest even integer, choose num, in the range [x, y]
 - HumanEval/105 `by_length`: reverse the resulting, digit names
 - HumanEval/106 `f`: list of size n
 - HumanEval/107 `even_odd_palindrome`: integer palindromes, palindromic numbers in
 - HumanEval/108 `count_nums`: sum of digits
 - HumanEval/110 `exchange`: exchange, YES NO
-- HumanEval/111 `histogram`: letter frequency
+- HumanEval/111 `histogram`: frequency of each letter, count of each letter, letter counts, most frequent letter, letter frequency
 - HumanEval/115 `max_fill`: buckets, wells
-- HumanEval/119 `match_parens`: concatenate two strings
+- HumanEval/119 `match_parens`: good string, parentheses balanced, can concatenate, concatenate two strings
 - HumanEval/120 `maximum`: maximum k, sorted list of k, k largest, k = 0
 - HumanEval/121 `solution`: odd elements, even positions
 - HumanEval/122 `add_elements`: first k, at most two digits, first k elements, len(str)
@@ -59,25 +59,25 @@
 - HumanEval/127 `intersection`: intersection of two intervals, intervals overlap
 - HumanEval/129 `minPath`: lexicographically smaller, k cells
 - HumanEval/130 `tri`: Tribonacci, recurrence
-- HumanEval/131 `digits`: product of odd digits
+- HumanEval/131 `digits`: product of the odd digits, product of odd digits, product of digits, digits of a positive integer, odd digits
 - HumanEval/132 `is_nested`: nested brackets, valid subsequence
 - HumanEval/133 `sum_squares`: ceiling, round up
 - HumanEval/134 `check_if_last_char_is_a_letter`: not part of a word, isalpha
 - HumanEval/135 `can_arrange`: largest index
 - HumanEval/137 `compare_one`: compare two, numbers represented as strings
-- HumanEval/138 `is_equal_to_sum_even`: sum_even, sum even
-- HumanEval/139 `special_factorial`: product of factorials
+- HumanEval/138 `is_equal_to_sum_even`: sum even, sum of four, positive even numbers, exactly four positive even
+- HumanEval/139 `special_factorial`: product of factorials, factorial of n, product of factorial, product of the factorials
 - HumanEval/140 `fix_spaces`: all consecutive spaces, replace spaces with underscores, more than 2 consecutive
 - HumanEval/141 `file_name_check`: file's name, valid file name, at most three digits
-- HumanEval/143 `words_in_sentence`: split sentence
-- HumanEval/144 `simplify`: numerator denominator
+- HumanEval/143 `words_in_sentence`: prime length, length is a prime, prime lengths, words with prime, split sentence, words in a sentence
+- HumanEval/144 `simplify`: simplify the expression, x/y, is a whole number, x * n
 - HumanEval/145 `order_by_points`: order by point, sum of digits
-- HumanEval/146 `specialFilter`: special filter
+- HumanEval/146 `specialFilter`: greater than 10 and, first and last digit, first and last digits, last digit is odd
 - HumanEval/148 `bf`: planets
 - HumanEval/150 `x_or_y`: x or y
-- HumanEval/151 `double_the_difference`: double the difference
-- HumanEval/157 `right_angle_triangle`: Pythagorean, three sides, a^2 + b^2 = c^2
-- HumanEval/160 `do_algebra`: algebra operations
+- HumanEval/151 `double_the_difference`: squares of the odd numbers, sum of the squares of the odd, sum of squares of the odd, double the difference, ignore negative
+- HumanEval/157 `right_angle_triangle`: pythagorean, a^2 + b^2 = c^2, right triangle
+- HumanEval/160 `do_algebra`: algebraic expression, operators and operands, algebra operations, operator list, list of operators
 - HumanEval/161 `solve`: reverse case, swapcase
 - HumanEval/162 `string_to_md5`: hashlib
 - HumanEval/163 `generate_integers`: even digits, between a and b

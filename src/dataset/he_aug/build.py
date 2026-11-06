@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, HERE)
+import userfmt
 SRC_FILE = os.path.join(ROOT, "opencode_hq", "chatml_he_failed_v5.jsonl")
 SYS = "You are Qwen, created by Alibaba Cloud. You are a helpful assistant."
 USER_HEAD = "Please provide a self-contained Python script that solves the following problem in a markdown code block:"
@@ -85,8 +86,7 @@ def check(i_p):
 
 
 def to_text(p):
-    prompt = p["prompt"].rstrip("\n")
-    user = f"{USER_HEAD}\n```\n{prompt}\n```"
+    user = userfmt.build_user(p["prompt"], full_code(p))
     asst = f"```python\n{full_code(p)}\n```"
     return f"<|im_start|>system\n{SYS}<|im_end|>\n<|im_start|>user\n{user}<|im_end|>\n<|im_start|>assistant\n{asst}<|im_end|>"
 
