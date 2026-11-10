@@ -426,8 +426,8 @@ assert min_path_sum([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 10 ** 9 + 1) == 500000001
 add(129, '''def grid_neighbors(grid, value):
     """
     Given an N x N grid (N >= 2) that contains every integer from 1 to N * N exactly once,
-    return the sorted list of values on the cells that share an edge with the cell containing
-    the given value (an empty list if the value is not in the grid).
+    return the sorted values of the cells that share an edge with the cell containing
+    the given value (an empty list if it is not in the grid).
 
     Examples:
 

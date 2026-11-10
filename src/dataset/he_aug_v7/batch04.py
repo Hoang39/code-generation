@@ -1078,8 +1078,7 @@ for h in range(0, 100):
 
 add(124, '''def valid_date_dmy(date):
     """Return True if date is a valid date string dd/mm/yyyy (exactly 2, 2 and 4 digits), otherwise False.
-    The month is 1-12 and the day is 1-31 for months 1,3,5,7,8,10,12, 1-30 for months 4,6,9,11
-    and 1-29 for month 2.
+    The month is 1-12; the day is up to 31, up to 30 for months 4,6,9,11 and up to 29 for month 2.
 
     for example:
     valid_date_dmy('11/03/2000') => True

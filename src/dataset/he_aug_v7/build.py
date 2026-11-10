@@ -20,6 +20,7 @@ import importlib.util
 _spec = importlib.util.spec_from_file_location("userfmt", os.path.join(HERE, "..", "he_aug", "userfmt.py"))
 userfmt = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(userfmt)
+import intros
 SRC_FILE = os.path.join(ROOT, "opencode_hq", "chatml_he_failed_v7.jsonl")
 OUT_FILE = os.path.join(ROOT, "opencode_hq", "chatml_he_failed_v7_aug.jsonl")
 SYS = "You are Qwen, created by Alibaba Cloud. You are a helpful assistant."
@@ -116,8 +117,19 @@ def check(i_p):
     return i, errs
 
 
-def to_text(p):
+def natural_user(p):
+    """userfmt gives the Input/Output/Sample blocks; the opening ("You are tasked with ...") is replaced
+    by the hand-written natural-language intro of intros.py (keyed by function name)."""
     user = userfmt.build_user(p["prompt"], full_code(p))
+    name = defs_of(full_code(p))[-1]
+    head, sep, rest = user.partition("\n\n**Input:**")
+    assert sep, name
+    sig = head.split("`")[1]  # "name(params)" from the generated first line
+    return intros.INTRO[name].replace("{f}", sig) + sep + rest
+
+
+def to_text(p):
+    user = natural_user(p)
     asst = f"```python\n{full_code(p)}\n```"
     return f"<|im_start|>system\n{SYS}<|im_end|>\n<|im_start|>user\n{user}<|im_end|>\n<|im_start|>assistant\n{asst}<|im_end|>"
 
